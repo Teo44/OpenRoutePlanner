@@ -2,18 +2,17 @@
 
 ## What was done
 
-* Repository created
 * Added specifications to documentation
-* Created the Java project
-* Looked into different shortest path algorithms
-* Looked into possible ways to get data for finding shortest paths
+* Looked into different shortest path algorithms to use
+* Started work on a text UI and openstreetmap XML parsing
 
 ## Issues
 
-I don't yet have a  clear plan on how to get openstreetmap data into a form that can be used by the algorithms, but it seems the downloadable XML-files can be interpreted as a graph for pathfinding purposes.
+I'm not sure if openstreetmap's XML files are a good way to get data for the program, but so far it seems like they will do the job.
 
 ## Plan for the next week
 
-Program a way to extract usable data from the openstreetmap XML-files and implement Dijkstra using Java datastructures. 
+* Functional XML parsing
+* Basic Dijkstra implementation
 
-Time spent: 3 hours
+Time spent: 5 hours
