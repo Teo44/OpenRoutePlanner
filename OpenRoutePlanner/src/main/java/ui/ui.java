@@ -18,6 +18,7 @@ public class ui {
         File osmFile =  new File(osmFileName);
         
         nodes = parser.parse(osmFile);
+        //debug
         if (nodes != null)  {
             System.out.println("arraylist not null");
             for (Integer i : nodes) {
