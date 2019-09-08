@@ -4,7 +4,16 @@ public class Node {
     
     double lat;
     double lon;
-    int id;
+    long id;
+    int id2;
+
+    public int getID2() {
+        return id2;
+    }
+
+    public void setID2(int id2) {
+        this.id2 = id2;
+    }
 
     public double getLat() {
         return lat;
@@ -22,18 +31,19 @@ public class Node {
         this.lon = lon;
     }
 
-    public int getId() {
+    public long getID() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setID(int id) {
         this.id = id;
     }
 
-    public Node(int id, double lat, double lon) {
+    public Node(long id, int id2, double lat, double lon) {
         this.lat = lat;
         this.lon = lon;
         this.id = id;
+        this.id2 = id2;
     }
     
     

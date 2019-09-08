@@ -2,6 +2,7 @@ package parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import logic.Arc;
 import logic.Node;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -9,8 +10,8 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class OSMHandler extends DefaultHandler  {
     
-    ArrayList<Integer>[] adList;
-    HashMap<Integer, Node> nodes;
+    ArrayList<Arc>[] adList;
+    HashMap<Long, Node> nodes;
     int nodeCount;
     Node lastNode;
     
@@ -34,30 +35,38 @@ public class OSMHandler extends DefaultHandler  {
             //System.out.println("node id: " + id);
             // check that the node is valid; has an id and a location
             if (id != null && lat != null && lon != null)   {
+                Node node = new Node(Long.parseLong(id), nodeCount, Double.parseDouble(lat), Double.parseDouble(lon));
                 nodeCount += 1;
-                Node node = new Node(Integer.parseInt(id), Double.parseDouble(lat), Double.parseDouble(lon));
-                nodes.put(node.getId(), node);
+                nodes.put(node.getID(), node);
             }
         } else if (qName.equals("way")) {
             // create the adjacency list, all nodes should be before ways in the 
             // OSM XML files, so this works
             if (adList == null)  {
                 adList = new ArrayList[nodeCount];
-            }
-            if (qName.equals("nd")) {
-                System.out.println(attributes.getValue("nd"));
+                for (int i = 0; i < nodeCount; i++) {
+                    adList[i] = new ArrayList<>();
+                }
             }
             String id = attributes.getValue("id");
             //debug print
             //System.out.println("way id: " + id);
-            System.out.println(attributes.getLength());
         } else if (qName.equals("nd"))    {
-            Integer newNode = Integer.parseInt(attributes.getValue("ref"));
+            
+            Node newNode = nodes.get(Long.parseLong(attributes.getValue("ref")));
             if (lastNode != null)   {
-                System.out.println(nodeDistance(lastNode, nodes.get(newNode)));
-                lastNode = nodes.get(newNode);
+                double dist = nodeDistance(lastNode, newNode);
+                long nd1 = lastNode.getID();
+                long nd2 = newNode.getID();
+                int nd1_id2 = lastNode.getID2();
+                int nd2_id2 = newNode.getID2();
+                adList[nd1_id2].add(new Arc(nd1_id2, nd2_id2, dist));
+                adList[nd2_id2].add(new Arc(nd2_id2, nd1_id2, dist));
+                //debug print
+                System.out.println("Distance from node " + nd1 + " to node " + nd2 + ": " + dist + "km");
+                lastNode = newNode;
             } else  {
-                lastNode = nodes.get(newNode);
+                lastNode = newNode;
             }
         }
     }
@@ -66,6 +75,8 @@ public class OSMHandler extends DefaultHandler  {
     public void endElement(String uri, String localName, String qName) throws SAXException {
         if (qName.equals("way"))    {
             lastNode = null;
+            //debug print
+            System.out.println(nodeCount);
         }
     }
     
