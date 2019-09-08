@@ -10,7 +10,9 @@ The goal is to find the shortest/fastest route between two street adresses. A\* 
 
 ## The data
 
-The current plan is to use data from openstreetnmap.org, and calculate shortest paths between real locations. Later on the program may be expanded to find the fastest routes, instead of the shortest, by using the average speeds that different routes allow.
+The current plan is to use data from openstreetmap.org, and calculate shortest paths between real locations. Later on the program may be expanded to find the fastest routes, instead of the shortest, by using the average speeds that different routes allow.
+
+Openstreetmap data can be downloaded in XML format with a specific OSM schema, from which nodes and ways (arcs in the graphs) can be parsed.
 
 ## Performance
 
