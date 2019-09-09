@@ -6,6 +6,15 @@ public class Node {
     double lon;
     long id;
     int id2;
+    double distance;
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
 
     public int getID2() {
         return id2;

@@ -3,6 +3,7 @@ package parser;
 import java.util.ArrayList;
 import java.util.HashMap;
 import logic.Arc;
+import logic.Graph;
 import logic.Node;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -20,8 +21,12 @@ public class OSMHandler extends DefaultHandler  {
     public OSMHandler() {
         nodes = new HashMap<>();
         nodeCount = 0;
-        
         nodeIDList = new ArrayList<>();
+    }
+    
+    public Graph getGraph()    {
+        Graph graph = new Graph(nodes, adList, nodeCount);
+        return graph;
     }
     
     @Override
@@ -75,8 +80,6 @@ public class OSMHandler extends DefaultHandler  {
     public void endElement(String uri, String localName, String qName) throws SAXException {
         if (qName.equals("way"))    {
             lastNode = null;
-            //debug print
-            System.out.println(nodeCount);
         }
     }
     

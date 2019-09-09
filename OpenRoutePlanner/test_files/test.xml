@@ -8,8 +8,8 @@
         <nd ref="321"/>
     </way>
     <way id="2">
-        <nd ref="666"/>
         <nd ref="123"/>
+        <nd ref="666"/>
         <nd ref="321"/>
     </way>
 </root>
