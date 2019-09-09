@@ -22,7 +22,9 @@ public class ui {
     
     public void start() {
         parseOSM();
-        dijkstra();
+        while(true) {
+            dijkstra();
+        }
         
     }
     

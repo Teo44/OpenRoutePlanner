@@ -68,7 +68,7 @@ public class OSMHandler extends DefaultHandler  {
                 adList[nd1_id2].add(new Arc(nd1_id2, nd2_id2, dist));
                 adList[nd2_id2].add(new Arc(nd2_id2, nd1_id2, dist));
                 //debug print
-                System.out.println("Distance from node " + nd1 + " to node " + nd2 + ": " + dist + "km");
+                //System.out.println("Distance from node " + nd1 + " to node " + nd2 + ": " + dist + "km");
                 lastNode = newNode;
             } else  {
                 lastNode = newNode;

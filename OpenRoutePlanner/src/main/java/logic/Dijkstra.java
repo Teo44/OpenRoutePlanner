@@ -1,5 +1,7 @@
 package logic;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
@@ -60,7 +62,9 @@ public class Dijkstra {
         }
         
         //debug
-        System.out.println("shortest distance to node: " + distance[end.getID2()]);        
+        DecimalFormat df = new DecimalFormat("#.###");
+        df.setRoundingMode(RoundingMode.CEILING);
+        System.out.println("Shortest distance to node: " + df.format(distance[end.getID2()]) + "km");        
     }
     
 }
