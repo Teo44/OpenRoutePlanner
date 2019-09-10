@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
+/**
+ * Dijkstra's shortest path algorithm
+ */
 public class Dijkstra {
     
     private PriorityQueue<DijkstraNode> heap;
@@ -30,6 +33,12 @@ public class Dijkstra {
         
     }
     
+    /**
+     * Calculates the shortest path from node 1 (nd1) to node 2 (nd2)
+     * 
+     * @param nd1_id Node 1's ID from the OSM XML file
+     * @param nd2_id Node 2's ID from the OSM XML file
+     */
     public void shortestPath(Long nd1_id, Long nd2_id)  {
         Node start = nodes.get(nd1_id);
         Node end = nodes.get(nd2_id);

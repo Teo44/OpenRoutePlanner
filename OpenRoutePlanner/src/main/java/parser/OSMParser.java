@@ -11,6 +11,13 @@ public class OSMParser {
         
     }
     
+    /**
+     * Parses an OSM XML file into a graph-object that the shortest 
+     * path algorithms can use.
+     * 
+     * @param osm   OSM XML file
+     * @return Map as a graph-object
+     */
     public Graph parse(File osm)  {
         try {
            SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -21,10 +28,6 @@ public class OSMParser {
         } catch (Exception e) {
            e.printStackTrace();
         }
-        
-        
-        
-    
         return null;
     }
     

@@ -24,6 +24,12 @@ public class OSMHandler extends DefaultHandler  {
         nodeIDList = new ArrayList<>();
     }
     
+    /**
+     * Returns the the parsed OSM graph as a Graph-object, which contains
+     * the adjacency list, hash map of nodes and the node count.
+     * 
+     * @return Graph-object
+     */
     public Graph getGraph()    {
         Graph graph = new Graph(nodes, adList, nodeCount);
         return graph;

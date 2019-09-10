@@ -27,7 +27,11 @@ public class ui {
         }
         
     }
-    
+   
+    /**
+     * Prompts the user to enter two nodes, the shortest distance between 
+     * them will be calculated with Dijkstra.
+     */
     public void dijkstra()  {
         dijkstra = new Dijkstra(graph);
         System.out.print("Enter the start node ID: ");
@@ -38,6 +42,9 @@ public class ui {
         
     }
     
+    /**
+     * Prompts the user for an OSM XML file to be parsed into a graph.
+     */
     public void parseOSM()  {
         System.out.print("Enter name/path of OSM file to open: ");
         String osmFileName = scanner.nextLine();
@@ -47,8 +54,6 @@ public class ui {
         System.out.println("Found " + graph.getNodeCount() + " nodes");
         
     }
-    
-    
     
     public void printNodes()    {
         if (nodeIDList != null)  {

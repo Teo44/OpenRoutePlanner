@@ -1,5 +1,8 @@
 package logic;
 
+/**
+ * A comparable node object for Dijkstra
+ */
 public class DijkstraNode implements Comparable<DijkstraNode>{
 
     private double dist;

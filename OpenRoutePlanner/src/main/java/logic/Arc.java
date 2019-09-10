@@ -1,5 +1,9 @@
 package logic;
 
+/**
+ * An arc object for the adjacency list, representing the one way distance 
+ * between two nodes.
+ */
 public class Arc {
     
     int nd1;

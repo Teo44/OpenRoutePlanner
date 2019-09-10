@@ -1,20 +1,16 @@
 package logic;
 
+/**
+ * A node-object for parsing nodes from OSM XML files. Contains the nodes 
+ * real world coordinates, it's ID in the OSM XML file (id) and a running,  
+ * more reasonably sized ID (id2) for the adjacency list etc.
+ */
 public class Node {
     
     double lat;
     double lon;
     long id;
     int id2;
-    double distance;
-
-    public double getDistance() {
-        return distance;
-    }
-
-    public void setDistance(double distance) {
-        this.distance = distance;
-    }
 
     public int getID2() {
         return id2;
@@ -54,7 +50,4 @@ public class Node {
         this.id = id;
         this.id2 = id2;
     }
-    
-    
-    
 }
