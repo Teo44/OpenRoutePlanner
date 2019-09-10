@@ -1,8 +1,10 @@
 package ui;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import logic.Dijkstra;
 import logic.Graph;
 import parser.OSMParser;
@@ -15,6 +17,9 @@ public class ui {
     private File osmFile;
     private Graph graph;
     private Dijkstra dijkstra;
+    private long startTime;
+    private long nanoTime;
+    private long msTime;
     
     public ui() {
          scanner = new Scanner(System.in);
@@ -22,10 +27,27 @@ public class ui {
     
     public void start() {
         parseOSM();
+        
+        System.out.println("Found " + graph.getNodeCount() + " nodes");
+        if (msTime > 1000)  {
+            System.out.println("Parsing took " + msTime / 1000 + " seconds");
+        } else  {
+            System.out.println("Parsing took " + msTime + " milliseconds");
+        }
+        
         while(true) {
             dijkstra();
         }
         
+    }
+    
+    private void startNanoTimer()    {
+        startTime = System.nanoTime();
+    }
+    
+    private void stopNanoTimer()    {
+        nanoTime = System.nanoTime() - startTime;
+        msTime = nanoTime / 1000000;
     }
    
     /**
@@ -50,9 +72,9 @@ public class ui {
         String osmFileName = scanner.nextLine();
         osmFile =  new File(osmFileName);
         parser = new OSMParser();
+        startNanoTimer();
         graph = parser.parse(osmFile);
-        System.out.println("Found " + graph.getNodeCount() + " nodes");
-        
+        stopNanoTimer();
     }
     
     public void printNodes()    {

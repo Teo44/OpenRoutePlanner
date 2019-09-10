@@ -16,6 +16,8 @@ public class OSMHandler extends DefaultHandler  {
     int nodeCount;
     Node lastNode;
     
+    ArrayList<Arc> arcs;
+    
     ArrayList<Integer> nodeIDList;
     
     public OSMHandler() {
@@ -44,7 +46,7 @@ public class OSMHandler extends DefaultHandler  {
             String lon = attributes.getValue("lon");
             //debug print
             //System.out.println("node id: " + id);
-            // check that the node is valid; has an id and a location
+            // check that the node is valid: has an id and a location
             if (id != null && lat != null && lon != null)   {
                 Node node = new Node(Long.parseLong(id), nodeCount, Double.parseDouble(lat), Double.parseDouble(lon));
                 nodeCount += 1;
@@ -59,6 +61,7 @@ public class OSMHandler extends DefaultHandler  {
                     adList[i] = new ArrayList<>();
                 }
             }
+            arcs = new ArrayList<>();
             String id = attributes.getValue("id");
             //debug print
             //System.out.println("way id: " + id);
@@ -71,6 +74,8 @@ public class OSMHandler extends DefaultHandler  {
                 long nd2 = newNode.getID();
                 int nd1_id2 = lastNode.getID2();
                 int nd2_id2 = newNode.getID2();
+//                arcs.add(new Arc(nd1_id2, nd2_id2, dist));
+//                arcs.add(new Arc(nd2_id2, nd1_id2, dist));
                 adList[nd1_id2].add(new Arc(nd1_id2, nd2_id2, dist));
                 adList[nd2_id2].add(new Arc(nd2_id2, nd1_id2, dist));
                 //debug print
@@ -84,8 +89,12 @@ public class OSMHandler extends DefaultHandler  {
     
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
+        // set lastNode to null, so the current way isn't connected to the next one
         if (qName.equals("way"))    {
             lastNode = null;
+//            for (Arc a : arcs)  {
+//                adList[a.getNd1()].add(a);
+//            }
         }
     }
     
