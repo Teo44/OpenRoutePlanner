@@ -92,9 +92,7 @@ public class OSMHandler extends DefaultHandler  {
             }
         } else if (qName.equals("tag")) { // check if the way has an approved tag and should be added to graph
             String k = attributes.getValue("k");
-            if (noTagFiltering) {
-                wayApproved = true;
-            } else  {
+            if (!noTagFiltering) {
                 for (String s : approvedTags)   {
                     if (k.equals(s))  {
                         wayApproved = true;
@@ -107,6 +105,9 @@ public class OSMHandler extends DefaultHandler  {
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         // set lastNode to null, so the current way isn't connected to the next one
+        if (noTagFiltering) {
+            wayApproved = true;
+        }
         if (qName.equals("way"))    {
             lastNode = null;
             if (wayApproved)    {

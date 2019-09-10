@@ -11,7 +11,7 @@ public class ui {
     
     private OSMParser parser;
     private ArrayList<Integer> nodeIDList;
-    private Scanner scanner;
+    final private Scanner scanner;
     private File osmFile;
     private Graph graph;
     private Dijkstra dijkstra;
@@ -91,7 +91,7 @@ public class ui {
     }
     
     /**
-     * Prompts the user for an OSM XML file to be parsed into a graph.
+     * Prompts the user for an OSM XML file's name to be parsed into a graph.
      */
     public void parseOSM()  {
         System.out.print("Enter name/path of OSM file to open: ");
