@@ -14,16 +14,24 @@ public class OSMHandler extends DefaultHandler  {
     ArrayList<Arc>[] adList;
     HashMap<Long, Node> nodes;
     int nodeCount;
+    int arcCount;
     Node lastNode;
     
     ArrayList<Arc> arcs;
+    boolean wayApproved;
+    boolean noTagFiltering;
+    ArrayList<String> approvedTags;
     
     ArrayList<Integer> nodeIDList;
     
-    public OSMHandler() {
+    public OSMHandler(ArrayList<String> approvedTags) {
         nodes = new HashMap<>();
         nodeCount = 0;
         nodeIDList = new ArrayList<>();
+        if (approvedTags.isEmpty()) {
+            noTagFiltering = true;
+        }
+        this.approvedTags = approvedTags;
     }
     
     /**
@@ -33,7 +41,7 @@ public class OSMHandler extends DefaultHandler  {
      * @return Graph-object
      */
     public Graph getGraph()    {
-        Graph graph = new Graph(nodes, adList, nodeCount);
+        Graph graph = new Graph(nodes, adList, nodeCount, arcCount);
         return graph;
     }
     
@@ -74,15 +82,24 @@ public class OSMHandler extends DefaultHandler  {
                 long nd2 = newNode.getID();
                 int nd1_id2 = lastNode.getID2();
                 int nd2_id2 = newNode.getID2();
-//                arcs.add(new Arc(nd1_id2, nd2_id2, dist));
-//                arcs.add(new Arc(nd2_id2, nd1_id2, dist));
-                adList[nd1_id2].add(new Arc(nd1_id2, nd2_id2, dist));
-                adList[nd2_id2].add(new Arc(nd2_id2, nd1_id2, dist));
+                arcs.add(new Arc(nd1_id2, nd2_id2, dist));
+                arcs.add(new Arc(nd2_id2, nd1_id2, dist));
                 //debug print
                 //System.out.println("Distance from node " + nd1 + " to node " + nd2 + ": " + dist + "km");
                 lastNode = newNode;
             } else  {
                 lastNode = newNode;
+            }
+        } else if (qName.equals("tag")) { // check if the way has an approved tag and should be added to graph
+            String k = attributes.getValue("k");
+            if (noTagFiltering) {
+                wayApproved = true;
+            } else  {
+                for (String s : approvedTags)   {
+                    if (k.equals(s))  {
+                        wayApproved = true;
+                    }
+                }
             }
         }
     }
@@ -92,9 +109,13 @@ public class OSMHandler extends DefaultHandler  {
         // set lastNode to null, so the current way isn't connected to the next one
         if (qName.equals("way"))    {
             lastNode = null;
-//            for (Arc a : arcs)  {
-//                adList[a.getNd1()].add(a);
-//            }
+            if (wayApproved)    {
+                arcCount += arcs.size();
+                for (Arc a : arcs)  {
+                    adList[a.getNd1()].add(a);
+                }
+                wayApproved = false;
+            }
         }
     }
     

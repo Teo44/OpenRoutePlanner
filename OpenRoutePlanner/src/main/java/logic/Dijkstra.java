@@ -70,10 +70,14 @@ public class Dijkstra {
             }
         }
         
-        //debug
-        DecimalFormat df = new DecimalFormat("#.###");
-        df.setRoundingMode(RoundingMode.CEILING);
-        System.out.println("Shortest distance to node: " + df.format(distance[end.getID2()]) + "km");        
+        //temporary
+        if (distance[end.getID2()] == Double.MAX_VALUE)   {
+            System.out.println("No route was found");
+        } else  {
+            DecimalFormat df = new DecimalFormat("#.###");
+            df.setRoundingMode(RoundingMode.CEILING);
+            System.out.println("Shortest distance to node: " + df.format(distance[end.getID2()]) + "km");    
+        }
     }
     
 }

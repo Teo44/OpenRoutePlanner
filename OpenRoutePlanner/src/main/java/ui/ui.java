@@ -1,10 +1,8 @@
 package ui;
 
 import java.io.File;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 import logic.Dijkstra;
 import logic.Graph;
 import parser.OSMParser;
@@ -20,15 +18,19 @@ public class ui {
     private long startTime;
     private long nanoTime;
     private long msTime;
+    private ArrayList<String> approvedTags;
     
     public ui() {
          scanner = new Scanner(System.in);
     }
     
     public void start() {
+        
+        askForApprovedWays();
         parseOSM();
         
         System.out.println("Found " + graph.getNodeCount() + " nodes");
+        System.out.println("Found " + graph.getArcCount() + " approved arcs");
         if (msTime > 1000)  {
             System.out.println("Parsing took " + msTime / 1000 + " seconds");
         } else  {
@@ -48,6 +50,30 @@ public class ui {
     private void stopNanoTimer()    {
         nanoTime = System.nanoTime() - startTime;
         msTime = nanoTime / 1000000;
+    }
+    
+    private void askForApprovedWays()   {
+        approvedTags = new ArrayList<>();
+        System.out.print("Filter ways by tags? (Yes/No/Default) ");
+        while (true)    {    
+            String filter = scanner.nextLine();
+            if (filter.equalsIgnoreCase("y"))   {
+                System.out.println("Type \"quit\" to finish.");
+                while(true) {
+                    System.out.print("Add tag: ");
+                    String tag = scanner.nextLine();
+                    if (tag.equalsIgnoreCase("quit"))   {
+                        break;
+                    } 
+                    approvedTags.add(tag);
+                }
+            } else if (filter.equalsIgnoreCase("n")) {
+                break;
+            } else if (filter.equalsIgnoreCase("d"))    {
+                approvedTags.add("highway");
+                break;
+            }
+        }
     }
    
     /**
@@ -73,7 +99,7 @@ public class ui {
         osmFile =  new File(osmFileName);
         parser = new OSMParser();
         startNanoTimer();
-        graph = parser.parse(osmFile);
+        graph = parser.parse(osmFile, approvedTags);
         stopNanoTimer();
     }
     
