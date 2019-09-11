@@ -17,6 +17,8 @@ public class OSMParser {
      * path algorithms can use.
      * 
      * @param osm   OSM XML file
+     * @param approvedTags List of OSM tags to filter out ways (eg. only highways).
+     * Empty list results in no filtering.
      * @return Map as a graph-object
      */
     public Graph parse(File osm, ArrayList<String> approvedTags)  {

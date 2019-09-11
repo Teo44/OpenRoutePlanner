@@ -19,18 +19,9 @@ public class Dijkstra {
     private double distance[];
     
     public Dijkstra(Graph graph) {
-        
-        heap = new PriorityQueue<>();
         this.nodeCount = graph.getNodeCount();
-        visited = new boolean[nodeCount];
-        distance = new double[nodeCount];
         adList = graph.getAdList();
         nodes = graph.getNodes();
-        
-        for (int i = 0; i < nodeCount; i++) {
-            distance[i] = Double.MAX_VALUE;
-        }
-        
     }
     
     /**
@@ -39,12 +30,21 @@ public class Dijkstra {
      * @param nd1_id Node 1's ID from the OSM XML file
      * @param nd2_id Node 2's ID from the OSM XML file
      */
-    public void shortestPath(Long nd1_id, Long nd2_id)  {
+    public Double shortestPath(Long nd1_id, Long nd2_id)  {
+        if (nd1_id.equals(nd2_id))   {
+            return 0d;
+        }
+        
+        heap = new PriorityQueue<>();
+        visited = new boolean[nodeCount];
+        distance = new double[nodeCount];
+        for (int i = 0; i < nodeCount; i++) {
+            distance[i] = Double.MAX_VALUE;
+        }
+        
         Node start = nodes.get(nd1_id);
         Node end = nodes.get(nd2_id);
         DijkstraNode start2 = new DijkstraNode(start.getID2(), 0);
-        
-        
         
         heap.add(start2);
         
@@ -57,12 +57,7 @@ public class Dijkstra {
             for (Arc a : adList[node.getID()]) {
                 Double currentDist = distance[a.getNd2()];
                 Double newDist = node.getDist() + a.getDist();
-                //debug
-//                System.out.println("current dist: " + currentDist);
-//                System.out.println("new dist: " + newDist);
                 if (newDist < currentDist)  {
-                    //debug
-//                    System.out.println("new distance was shorter");
                     distance[a.getNd2()] = newDist;
                     DijkstraNode newNode = new DijkstraNode(a.getNd2(), newDist);
                     heap.add(newNode);
@@ -70,14 +65,7 @@ public class Dijkstra {
             }
         }
         
-        //temporary
-        if (distance[end.getID2()] == Double.MAX_VALUE)   {
-            System.out.println("No route was found");
-        } else  {
-            DecimalFormat df = new DecimalFormat("#.###");
-            df.setRoundingMode(RoundingMode.CEILING);
-            System.out.println("Shortest distance to node: " + df.format(distance[end.getID2()]) + "km");    
-        }
+        return distance[end.getID2()];
     }
     
 }

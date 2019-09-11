@@ -1,6 +1,8 @@
 package ui;
 
 import java.io.File;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 import logic.Dijkstra;
@@ -86,8 +88,14 @@ public class ui {
         long start = Long.parseLong(scanner.nextLine());
         System.out.print("Enter the destination node ID: ");
         long end = Long.parseLong(scanner.nextLine());
-        dijkstra.shortestPath(start, end);
-        
+        Double result = dijkstra.shortestPath(start, end);
+        if (result == Double.MAX_VALUE)   {
+            System.out.println("No route was found");
+        } else  {
+            DecimalFormat df = new DecimalFormat("#.###");
+            df.setRoundingMode(RoundingMode.CEILING);
+            System.out.println("Shortest distance to node: " + df.format(result) + "km");    
+        }
     }
     
     /**
