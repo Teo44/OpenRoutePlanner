@@ -39,8 +39,15 @@ public class ui {
             System.out.println("Parsing took " + msTime + " milliseconds");
         }
         
+        dijkstra = new Dijkstra(graph);
+        
         while(true) {
             dijkstra();
+            if (msTime > 1000)  {
+                System.out.println("Time taken: " + msTime / 1000 + " seconds");
+            } else  {
+                System.out.println("Time taken: " + msTime + " milliseconds");
+            }
         }
         
     }
@@ -83,12 +90,13 @@ public class ui {
      * them will be calculated with Dijkstra.
      */
     public void dijkstra()  {
-        dijkstra = new Dijkstra(graph);
         System.out.print("Enter the start node ID: ");
         long start = Long.parseLong(scanner.nextLine());
         System.out.print("Enter the destination node ID: ");
         long end = Long.parseLong(scanner.nextLine());
+        startNanoTimer();
         Double result = dijkstra.shortestPath(start, end);
+        stopNanoTimer();
         if (result == Double.MAX_VALUE)   {
             System.out.println("No route was found");
         } else  {
