@@ -86,8 +86,8 @@ public class OSMHandler extends DefaultHandler  {
                 int nd2_id2 = newNode.getID2();
                 realNodeID.put(nd1_id2, nd1);
                 realNodeID.put(nd2_id2, nd2);
-                arcs.add(new Arc(nd1_id2, nd2_id2, nd1, nd2, dist));
-                arcs.add(new Arc(nd2_id2, nd1_id2, nd2, nd1, dist));
+                arcs.add(new Arc(nd1_id2, nd2_id2, nd1, nd2, lastNode, newNode, dist));
+                arcs.add(new Arc(nd2_id2, nd1_id2, nd2, nd1, newNode, lastNode, dist));
                 //debug print
                 //System.out.println("Distance from node " + nd1 + " to node " + nd2 + ": " + dist + "km");
                 lastNode = newNode;

@@ -44,9 +44,8 @@ public class Astar {
         Node start = nodes.get(nd1_id);
         Node end = nodes.get(nd2_id);
         
-        // approximation for the longitude to km conversion to use for 
-        // the heuristic
-        lonToKm = 111.320*Math.cos( (start.getLat() + end.getLat()) / 2);
+        // approximation for the longitude to km conversion to use for the heuristic
+        lonToKm = 111.320*Math.cos( (start.getLat() + end.getLat()) / 2 * Math.PI / 180);
         
         DijkstraNode start2 = new DijkstraNode(start.getID2(), 0);
         
@@ -67,7 +66,7 @@ public class Astar {
                 if (newDist < currentDist)  {
                     previousNode[a.getNd2()] = a.getNd1();
                     distance[a.getNd2()] = newDist;
-                    DijkstraNode newNode = new DijkstraNode(a.getNd2(), newDist, newDist + directDistance(a.getNd2_realID()));
+                    DijkstraNode newNode = new DijkstraNode(a.getNd2(), newDist, newDist + directDistance(a.getNode2()));
                     heap.add(newNode);
                 }
             }
@@ -78,12 +77,13 @@ public class Astar {
         return result;
     }
     
-    private double directDistance(Long nd1_id)   {
+    private double directDistance(Node node)   {
         
-        Node nd1 = nodes.get(nd1_id);
+        //Node nd1 = nodes.get(nd1_id);
         
-        double lat1 = nd1.getLat();
-        double lon1 = nd1.getLon();
+        
+        double lat1 = node.getLat();
+        double lon1 = node.getLon();
         
         if ((lat1 == goalLat) && (lon1 == goalLon)) {
             return 0;
