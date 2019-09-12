@@ -4,9 +4,12 @@ import java.io.File;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
+import logic.Astar;
 import logic.Dijkstra;
 import logic.Graph;
+import logic.Result;
 import parser.OSMParser;
 
 public class ui {
@@ -17,10 +20,14 @@ public class ui {
     private File osmFile;
     private Graph graph;
     private Dijkstra dijkstra;
+    private Astar a_star;
     private long startTime;
     private long nanoTime;
     private long msTime;
     private ArrayList<String> approvedTags;
+    
+    private long startNode;
+    private long endNode;
     
     public ui() {
          scanner = new Scanner(System.in);
@@ -39,15 +46,28 @@ public class ui {
             System.out.println("Parsing took " + msTime + " milliseconds");
         }
         
+        System.out.println("");
+        
         dijkstra = new Dijkstra(graph);
+        a_star = new Astar(graph);
         
         while(true) {
-            dijkstra();
+            askForNodes();
+            System.out.println("");
+            dijkstra(startNode, endNode);
             if (msTime > 1000)  {
-                System.out.println("Time taken: " + msTime / 1000 + " seconds");
+                System.out.println("Dijkstra took: " + msTime / 1000 + " seconds");
             } else  {
-                System.out.println("Time taken: " + msTime + " milliseconds");
+                System.out.println("Dijkstra took: " + msTime + " milliseconds");
             }
+            System.out.println("");
+            a_star(startNode, endNode);
+            if (msTime > 1000)  {
+                System.out.println("A* took: " + msTime / 1000 + " seconds");
+            } else  {
+                System.out.println("A* took: " + msTime + " milliseconds");
+            }
+            System.out.println("");
         }
         
     }
@@ -84,26 +104,46 @@ public class ui {
             }
         }
     }
+    
+    private void askForNodes()  {
+        System.out.print("Enter the start node ID: ");
+        startNode = Long.parseLong(scanner.nextLine());
+        System.out.print("Enter the destination node ID: ");
+        endNode = Long.parseLong(scanner.nextLine());
+    }
    
     /**
      * Prompts the user to enter two nodes, the shortest distance between 
      * them will be calculated with Dijkstra.
      */
-    public void dijkstra()  {
-        System.out.print("Enter the start node ID: ");
-        long start = Long.parseLong(scanner.nextLine());
-        System.out.print("Enter the destination node ID: ");
-        long end = Long.parseLong(scanner.nextLine());
+    public void dijkstra(long start, long end)  {
         startNanoTimer();
-        Double result = dijkstra.shortestPath(start, end);
+        Result result = dijkstra.shortestPath(start, end);
         stopNanoTimer();
-        if (result == Double.MAX_VALUE)   {
+        if (result.getDist() == Double.MAX_VALUE)   {
             System.out.println("No route was found");
         } else  {
             DecimalFormat df = new DecimalFormat("#.###");
             df.setRoundingMode(RoundingMode.CEILING);
-            System.out.println("Shortest distance to node: " + df.format(result) + "km");    
+            System.out.println("Shortest distance to node: " + df.format(result.getDist()) + "km");    
         }
+        
+        //printPath(result.getPreviousNode());
+    }
+    
+    public void a_star(long start, long end) {
+        startNanoTimer();
+        Result result = a_star.shortestPath(start, end);
+        stopNanoTimer();
+        if (result.getDist() == Double.MAX_VALUE)   {
+            System.out.println("No route was found");
+        } else  {
+            DecimalFormat df = new DecimalFormat("#.###");
+            df.setRoundingMode(RoundingMode.CEILING);
+            System.out.println("Shortest distance to node: " + df.format(result.getDist()) + "km");    
+        }
+        
+        //printPath(result.getPreviousNode());
     }
     
     /**
@@ -119,7 +159,21 @@ public class ui {
         stopNanoTimer();
     }
     
-    public void printNodes()    {
+    private void printPath(int[] previousNode) {
+        
+        System.out.println("Printing route: ");
+        int prev = graph.getNodes().get(endNode).getID2();
+        int start = graph.getNodes().get(startNode).getID2();
+        HashMap hash = graph.getRealNodeID();
+        
+        while (prev != start) {
+            System.out.println("Node: " + hash.get(previousNode[prev]));
+            prev = previousNode[prev];
+        }
+        
+    }
+    
+    private void printNodes()    {
         if (nodeIDList != null)  {
             System.out.println("arraylist not null");
             for (Integer i : nodeIDList) {

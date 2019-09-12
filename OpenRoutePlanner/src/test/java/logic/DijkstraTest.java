@@ -43,26 +43,26 @@ public class DijkstraTest {
     
     @Test
     public void sameStartAndEndNode()    {
-        assertEquals(0, dijkstra.shortestPath(123l, 123l), 0);
+        assertEquals(0, dijkstra.shortestPath(123l, 123l).getDist(), 0);
     }
     
     @Test
     public void testGraphPath1()    {
-        assertEquals(0.48941663126567214, dijkstra.shortestPath(123l, 321l), 0.00001);
+        assertEquals(0.48941663126567214, dijkstra.shortestPath(123l, 321l).getDist(), 0.00001);
     }
     
     @Test
     public void testGraphPath2()    {
-        assertEquals(0.6386424878158962, dijkstra.shortestPath(321l, 666l), 0.00001);
+        assertEquals(0.6386424878158962, dijkstra.shortestPath(321l, 666l).getDist(), 0.00001);
     }
 
     @Test
     public void testKumpulaPath1()  {
-        assertEquals(1.0597847879291002, dijkstraKumpula.shortestPath(34399420l, 364533819l), 0.00001);
+        assertEquals(1.0597847879291002, dijkstraKumpula.shortestPath(34399420l, 364533819l).getDist(), 0.00001);
     }
     
     @Test
     public void testKumpulaPath2()  {
-        assertEquals(0.09573535075927543, dijkstraKumpula.shortestPath(34399420l, 583267403l), 0.00001);
+        assertEquals(0.09573535075927543, dijkstraKumpula.shortestPath(34399420l, 583267403l).getDist(), 0.00001);
     }
 }

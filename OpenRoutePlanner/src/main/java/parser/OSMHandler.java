@@ -13,6 +13,7 @@ public class OSMHandler extends DefaultHandler  {
     
     ArrayList<Arc>[] adList;
     HashMap<Long, Node> nodes;
+    HashMap<Integer, Long> realNodeID;
     int nodeCount;
     int arcCount;
     Node lastNode;
@@ -26,6 +27,7 @@ public class OSMHandler extends DefaultHandler  {
     
     public OSMHandler(ArrayList<String> approvedTags) {
         nodes = new HashMap<>();
+        realNodeID = new HashMap<>();
         nodeCount = 0;
         nodeIDList = new ArrayList<>();
         if (approvedTags.isEmpty()) {
@@ -41,7 +43,7 @@ public class OSMHandler extends DefaultHandler  {
      * @return Graph-object
      */
     public Graph getGraph()    {
-        Graph graph = new Graph(nodes, adList, nodeCount, arcCount);
+        Graph graph = new Graph(nodes, realNodeID, adList, nodeCount, arcCount);
         return graph;
     }
     
@@ -82,8 +84,10 @@ public class OSMHandler extends DefaultHandler  {
                 long nd2 = newNode.getID();
                 int nd1_id2 = lastNode.getID2();
                 int nd2_id2 = newNode.getID2();
-                arcs.add(new Arc(nd1_id2, nd2_id2, dist));
-                arcs.add(new Arc(nd2_id2, nd1_id2, dist));
+                realNodeID.put(nd1_id2, nd1);
+                realNodeID.put(nd2_id2, nd2);
+                arcs.add(new Arc(nd1_id2, nd2_id2, nd1, nd2, dist));
+                arcs.add(new Arc(nd2_id2, nd1_id2, nd2, nd1, dist));
                 //debug print
                 //System.out.println("Distance from node " + nd1 + " to node " + nd2 + ": " + dist + "km");
                 lastNode = newNode;

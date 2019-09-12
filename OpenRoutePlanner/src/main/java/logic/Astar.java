@@ -1,37 +1,31 @@
 package logic;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
-/**
- * Dijkstra's shortest path algorithm
- */
-public class Dijkstra {
-    
+public class Astar {
+
     private PriorityQueue<DijkstraNode> heap;
     private boolean[] visited;
     private int nodeCount;
     private ArrayList<Arc>[] adList;
     private HashMap<Long, Node> nodes;
+    private HashMap<Integer, Long> realNodeID;
     private double distance[];
     private int[] previousNode;
     
-    public Dijkstra(Graph graph) {
+    private double goalLat;
+    private double goalLon;
+    
+    public Astar(Graph graph)   {
         this.nodeCount = graph.getNodeCount();
         adList = graph.getAdList();
         nodes = graph.getNodes();
+        realNodeID = graph.getRealNodeID();
     }
     
-    /**
-     * Calculates the shortest path from node 1 (nd1) to node 2 (nd2)
-     * 
-     * @param nd1_id Node 1's ID from the OSM XML file
-     * @param nd2_id Node 2's ID from the OSM XML file
-     */
-    public Result shortestPath(Long nd1_id, Long nd2_id)  {
+    public Result shortestPath(Long nd1_id, Long nd2_id)    {
         if (nd1_id.equals(nd2_id))   {
             return new Result(distance, previousNode, 0l);
         }
@@ -48,6 +42,9 @@ public class Dijkstra {
         Node end = nodes.get(nd2_id);
         DijkstraNode start2 = new DijkstraNode(start.getID2(), 0);
         
+        goalLat = end.getLat();
+        goalLon = end.getLon();
+        
         heap.add(start2);
         
         while(!heap.isEmpty())  {
@@ -61,10 +58,8 @@ public class Dijkstra {
                 Double newDist = node.getDist() + a.getDist();
                 if (newDist < currentDist)  {
                     previousNode[a.getNd2()] = a.getNd1();
-                    //debug
-                    //System.out.println("Set node " + a.getNd1() + " as previous node of " + a.getNd2());
                     distance[a.getNd2()] = newDist;
-                    DijkstraNode newNode = new DijkstraNode(a.getNd2(), newDist);
+                    DijkstraNode newNode = new DijkstraNode(a.getNd2(), newDist, newDist + directDistance(a.getNd2_realID()));
                     heap.add(newNode);
                 }
             }
@@ -75,4 +70,23 @@ public class Dijkstra {
         return result;
     }
     
+    private double directDistance(Long nd1_id)   {
+        
+        Node nd1 = nodes.get(nd1_id);
+        
+        double lat1 = nd1.getLat();
+        double lon1 = nd1.getLon();
+        
+        if ((lat1 == goalLat) && (lon1 == goalLon)) {
+            return 0;
+        } else {
+            double theta = lon1 - goalLon;
+            double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(goalLat)) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(goalLat)) * Math.cos(Math.toRadians(theta));
+            dist = Math.acos(dist);
+            dist = Math.toDegrees(dist);
+            dist = dist * 60 * 1.1515;
+            dist = dist * 1.609344;
+            return (dist);
+        }
+    }
 }

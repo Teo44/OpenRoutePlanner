@@ -10,14 +10,24 @@ public class Graph {
     
     private ArrayList<Arc>[] adList;
     private HashMap<Long, Node> nodes;
+    private HashMap<Integer, Long> realNodeID;
     private int nodeCount;
     private int arcCount;
     
-    public Graph(HashMap<Long, Node> nodes, ArrayList<Arc>[] adList, int nodeCount, int arcCount)  {
+    public Graph(HashMap<Long, Node> nodes, HashMap<Integer, Long> realNodeID, ArrayList<Arc>[] adList, int nodeCount, int arcCount)  {
         this.adList = adList;
         this.nodes = nodes;
+        this.realNodeID = realNodeID;
         this.nodeCount = nodeCount;
         this.arcCount = arcCount;
+    }
+
+    public HashMap<Integer, Long> getRealNodeID() {
+        return realNodeID;
+    }
+
+    public void setRealNodeID(HashMap<Integer, Long> realNodeID) {
+        this.realNodeID = realNodeID;
     }
 
     public int getArcCount() {
