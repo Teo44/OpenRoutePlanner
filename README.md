@@ -1,6 +1,6 @@
 # OpenRoutePlanner
 
-Finding the shortest routest using open map data and algorithms. A university course project.
+Finding the shortest routes using open map data and algorithms. A university course project.
 
 ## Documentation
 
