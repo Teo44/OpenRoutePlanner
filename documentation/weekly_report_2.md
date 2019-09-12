@@ -4,8 +4,10 @@
 
 * OSM XML file parsing to graphs
 * Basic Dijkstra's algorithm using Java data structures
+* Started working on A*, currently little broken and slower 
+than Dijkstra due to slow heuristic calculations
 * Text UI, user can define the file to parse, the type of ways 
-to include and calculate shortest distances between nodes.
+to include and calculate shortest distance and route between nodes.
 * Unit testing for the parser and Dijkstra
 
 ## Issues
@@ -14,6 +16,7 @@ Jacoco keeps giving "Skipping JaCoCo execution due to missing execution data fil
 error, can't figure it out.
 
 ## Plan for next week
-* Add A* 
-* Find the shortest route between nodes, not just distance
+* Fix and finish A*
+* Start working on IDA*
 * Start replacing Java's datastructures with own implementations
+* Betterments to the UI?
