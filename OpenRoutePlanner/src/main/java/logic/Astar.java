@@ -15,6 +15,8 @@ public class Astar {
     private double distance[];
     private int[] previousNode;
     
+    private double latToKm;
+    private double lonToKm;
     private double goalLat;
     private double goalLon;
     
@@ -23,6 +25,7 @@ public class Astar {
         adList = graph.getAdList();
         nodes = graph.getNodes();
         realNodeID = graph.getRealNodeID();
+        latToKm = 110.574;
     }
     
     public Result shortestPath(Long nd1_id, Long nd2_id)    {
@@ -40,6 +43,11 @@ public class Astar {
         
         Node start = nodes.get(nd1_id);
         Node end = nodes.get(nd2_id);
+        
+        // approximation for the longitude to km conversion to use for 
+        // the heuristic
+        lonToKm = 111.320*Math.cos( (start.getLat() + end.getLat()) / 2);
+        
         DijkstraNode start2 = new DijkstraNode(start.getID2(), 0);
         
         goalLat = end.getLat();
@@ -79,14 +87,12 @@ public class Astar {
         
         if ((lat1 == goalLat) && (lon1 == goalLon)) {
             return 0;
-        } else {
-            double theta = lon1 - goalLon;
-            double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(goalLat)) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(goalLat)) * Math.cos(Math.toRadians(theta));
-            dist = Math.acos(dist);
-            dist = Math.toDegrees(dist);
-            dist = dist * 60 * 1.1515;
-            dist = dist * 1.609344;
-            return (dist);
         }
+        double latKm = (lat1 - goalLat) * latToKm;
+        double lonKm = (lon1 - goalLon) * lonToKm;
+        
+        double dist = Math.sqrt(latKm * latKm + lonKm * lonKm);
+        
+        return dist;
     }
 }
