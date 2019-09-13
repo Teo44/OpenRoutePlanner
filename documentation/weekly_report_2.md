@@ -30,3 +30,5 @@ redo the parsing differently.
 * Start replacing Java's datastructures with own implementations
 * General cleanup of the code
 * Betterments to the UI?
+
+Work hours: 11
