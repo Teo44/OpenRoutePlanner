@@ -15,8 +15,13 @@ to include and calculate shortest distance and route between nodes.
 Jacoco keeps giving "Skipping JaCoCo execution due to missing execution data file." 
 error, can't figure it out.
 
+A* seems to only be faster than Dijkstra on the first run, then presumably 
+some optimisations or caching make Dijkstra faster. Either A* needs more 
+optimisation or the graph needs to be larger. 
+
 ## Plan for next week
 * Fix and finish A*
 * Start working on IDA*
 * Start replacing Java's datastructures with own implementations
+* General cleanup of the code
 * Betterments to the UI?

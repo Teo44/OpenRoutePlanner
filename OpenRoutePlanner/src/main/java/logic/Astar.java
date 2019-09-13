@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
+/**
+ * A*  shortest path algorithm with direct distance from n to target node 
+ * as the heuristic.
+ */
 public class Astar {
 
     private PriorityQueue<DijkstraNode> heap;
@@ -20,6 +24,9 @@ public class Astar {
     private double goalLat;
     private double goalLon;
     
+    /**
+     * @param graph The graph to pathfind in
+     */
     public Astar(Graph graph)   {
         this.nodeCount = graph.getNodeCount();
         adList = graph.getAdList();
@@ -28,6 +35,14 @@ public class Astar {
         latToKm = 110.574;
     }
     
+    /**
+     * Returns the shortest route between nodes nd1 and nd2
+     * @param nd1_id Node 1's ID from the OSM XML file
+     * @param nd2_id Node 2s ID from the OSM XML file
+     * @return A result object containing the results of the search
+     * 
+     * @see logic.Result
+     */
     public Result shortestPath(Long nd1_id, Long nd2_id)    {
         if (nd1_id.equals(nd2_id))   {
             return new Result(distance, previousNode, 0l);
@@ -44,7 +59,10 @@ public class Astar {
         Node start = nodes.get(nd1_id);
         Node end = nodes.get(nd2_id);
         
-        // approximation for the longitude to km conversion to use for the heuristic
+        // Approximation for the longitude to km conversion to use for the heuristic
+        // Longitude to km ratio differs a lot from the equator to the poles, so we take
+        // the average between the start and end points latitude, and use that for the conversion 
+        // to speed up the heuristics calculation.
         lonToKm = 111.320*Math.cos( (start.getLat() + end.getLat()) / 2 * Math.PI / 180);
         
         DijkstraNode start2 = new DijkstraNode(start.getID2(), 0);
@@ -58,6 +76,10 @@ public class Astar {
             DijkstraNode node = heap.poll();
             if (visited[node.getID()])   {
                 continue;
+            }
+            // Make this optional for testing the differences?
+            if (node.getID() == start.getID())  {
+                break;
             }
             visited[node.getID()] = true;
             for (Arc a : adList[node.getID()]) {
@@ -77,11 +99,13 @@ public class Astar {
         return result;
     }
     
+    /**
+     * The heuristic function. Calculates the direct distance from the given node 
+     * to the target node of the search, using predefined coordinate to km conversions.
+     * @param node The current node.
+     * @return The direct distance to the target.
+     */
     private double directDistance(Node node)   {
-        
-        //Node nd1 = nodes.get(nd1_id);
-        
-        
         double lat1 = node.getLat();
         double lon1 = node.getLon();
         

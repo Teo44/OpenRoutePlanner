@@ -1,18 +1,24 @@
 package logic;
 
+/**
+ * An object for returning the results of pathfinding algorithms.
+ */
 public class Result {
     
     private double distance[];
     private int[] previousNode;
     private double dist;
 
+    /**
+     * @param distance The shortest distances from the start node to all the traversed nodes.
+     * @param previousNode The previous node of each node on the route, to find the path
+     * @param dist The shortest distance to the target node.
+     */
     public Result(double[] distance, int[] previousNode, double dist) {
         this.distance = distance;
         this.previousNode = previousNode;
         this.dist = dist;
     }
-
-    
     
     public double[] getDistance() {
         return distance;

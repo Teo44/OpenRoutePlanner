@@ -19,6 +19,9 @@ public class Dijkstra {
     private double distance[];
     private int[] previousNode;
     
+    /**
+     * @param graph The graph to pathfind in
+     */
     public Dijkstra(Graph graph) {
         this.nodeCount = graph.getNodeCount();
         adList = graph.getAdList();
@@ -30,6 +33,9 @@ public class Dijkstra {
      * 
      * @param nd1_id Node 1's ID from the OSM XML file
      * @param nd2_id Node 2's ID from the OSM XML file
+     * @return A result object containing the results of the search
+     * 
+     * @see logic.Result
      */
     public Result shortestPath(Long nd1_id, Long nd2_id)  {
         if (nd1_id.equals(nd2_id))   {
@@ -55,14 +61,16 @@ public class Dijkstra {
             if (visited[node.getID()])   {
                 continue;
             }
+            //make this optional for testing?
+            if (node.getID() == start.getID())  {
+                break;
+            }
             visited[node.getID()] = true;
             for (Arc a : adList[node.getID()]) {
                 Double currentDist = distance[a.getNd2()];
                 Double newDist = node.getDist() + a.getDist();
                 if (newDist < currentDist)  {
                     previousNode[a.getNd2()] = a.getNd1();
-                    //debug
-                    //System.out.println("Set node " + a.getNd1() + " as previous node of " + a.getNd2());
                     distance[a.getNd2()] = newDist;
                     DijkstraNode newNode = new DijkstraNode(a.getNd2(), newDist);
                     heap.add(newNode);
@@ -70,8 +78,7 @@ public class Dijkstra {
             }
         }
         
-        Result result = new Result(distance, previousNode, distance[end.getID2()]); 
-        
+        Result result = new Result(distance, previousNode, distance[end.getID2()]);
         return result;
     }
     
