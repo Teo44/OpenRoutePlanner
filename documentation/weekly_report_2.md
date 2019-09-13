@@ -19,6 +19,11 @@ A* seems to only be faster than Dijkstra on the first run, then presumably
 some optimisations or caching make Dijkstra faster. Either A* needs more 
 optimisation or the graph needs to be larger. 
 
+The XML-parser is too inefficient to parse larger files, somewhere between 
+500Mb and 4.7Gb the parsing will fail due to Java garbage collection taking 
+up most of the CPU time. Haven't managed to fix this yet, might have to 
+redo the parsing differently.
+
 ## Plan for next week
 * Fix and finish A*
 * Start working on IDA*
