@@ -66,13 +66,15 @@ public class OSMHandler extends DefaultHandler  {
             // create the adjacency list, all nodes should be before ways in the 
             // OSM XML files, so this works
             if (adList == null)  {
+                //debug
+                System.out.println("Created adjacency list with " + nodeCount + " nodes");
                 adList = new ArrayList[nodeCount];
                 for (int i = 0; i < nodeCount; i++) {
                     adList[i] = new ArrayList<>();
                 }
             }
             arcs = new ArrayList<>();
-            String id = attributes.getValue("id");
+            //String id = attributes.getValue("id");
             //debug print
             //System.out.println("way id: " + id);
         } else if (qName.equals("nd"))    {

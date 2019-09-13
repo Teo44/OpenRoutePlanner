@@ -15,7 +15,6 @@ public class Astar {
     private int nodeCount;
     private ArrayList<Arc>[] adList;
     private HashMap<Long, Node> nodes;
-    private HashMap<Integer, Long> realNodeID;
     private double distance[];
     private int[] previousNode;
     
@@ -31,7 +30,6 @@ public class Astar {
         this.nodeCount = graph.getNodeCount();
         adList = graph.getAdList();
         nodes = graph.getNodes();
-        realNodeID = graph.getRealNodeID();
         latToKm = 110.574;
     }
     
