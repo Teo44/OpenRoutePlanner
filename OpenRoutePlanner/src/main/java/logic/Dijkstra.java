@@ -62,7 +62,7 @@ public class Dijkstra {
                 continue;
             }
             //make this optional for testing?
-            if (node.getID() == start.getID())  {
+            if (node.getID() == end.getID())  {
                 break;
             }
             visited[node.getID()] = true;

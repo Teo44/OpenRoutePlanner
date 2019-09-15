@@ -9,6 +9,7 @@ import java.util.Scanner;
 import logic.Astar;
 import logic.Dijkstra;
 import logic.Graph;
+import logic.RandomGraphGenerator;
 import logic.Result;
 import parser.OSMParser;
 
@@ -35,13 +36,24 @@ public class ui {
     
     public void start() {
         
-        askForApprovedWays();
-        parseOSM();
+        
+        System.out.println("Parse an OSM or generate a random graph? ([O]SM/[R]andom)");
+        while(true) {
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("o"))    {
+                askForApprovedWays();
+                parseOSM();
+                break;
+            } else if (input.equalsIgnoreCase("r")) {
+                randomGraph();
+                break;
+            }
+        }
         
         System.out.println("Found " + graph.getNodeCount() + " nodes");
         System.out.println("Found " + graph.getArcCount() + " approved arcs");
         if (msTime > 1000)  {
-            System.out.println("Parsing took " + msTime / 1000 + " seconds");
+            System.out.println("Parsing took " + msTime / 1000 +  "seconds");
         } else  {
             System.out.println("Parsing took " + msTime + " milliseconds");
         }
@@ -56,14 +68,14 @@ public class ui {
             System.out.println("");
             dijkstra(startNode, endNode);
             if (msTime > 1000)  {
-                System.out.println("Dijkstra took: " + msTime / 1000 + " seconds");
+                System.out.println("Dijkstra took: " + msTime / 1000 + "." + msTime % 1000 + " seconds");
             } else  {
                 System.out.println("Dijkstra took: " + msTime + " milliseconds");
             }
             System.out.println("");
             a_star(startNode, endNode);
             if (msTime > 1000)  {
-                System.out.println("A* took: " + msTime / 1000 + " seconds");
+                System.out.println("A* took: " + msTime / 1000 + "." + msTime % 1000 + " seconds");
             } else  {
                 System.out.println("A* took: " + msTime + " milliseconds");
             }
@@ -83,7 +95,7 @@ public class ui {
     
     private void askForApprovedWays()   {
         approvedTags = new ArrayList<>();
-        System.out.print("Filter ways by tags? (Yes/No/Default) ");
+        System.out.print("Filter ways by tags? ([Y]es/[N]o/[D]efault) ");
         while (true)    {    
             String filter = scanner.nextLine();
             if (filter.equalsIgnoreCase("y"))   {
@@ -156,6 +168,21 @@ public class ui {
         parser = new OSMParser();
         startNanoTimer();
         graph = parser.parse(osmFile, approvedTags);
+        stopNanoTimer();
+    }
+    
+    private void randomGraph()  {
+        System.out.print("Enter amount of nodes to generate: ");
+        int nodeAmount = Integer.parseInt(scanner.nextLine());
+        System.out.print("Enter amount of arcs per node: ");
+        int arcAmount = Integer.parseInt(scanner.nextLine());
+        System.out.println("Enter max difference in latitude between nodes: (1-180)");
+        int maxLatDiff = Integer.parseInt(scanner.nextLine());
+        System.out.println("Enter max difference in longitude between nodes: (1-360)");
+        int maxLonDiff = Integer.parseInt(scanner.nextLine());
+        RandomGraphGenerator generator = new RandomGraphGenerator();
+        startNanoTimer();
+        graph = generator.generateGraph(nodeAmount, arcAmount, maxLatDiff, maxLonDiff);
         stopNanoTimer();
     }
     

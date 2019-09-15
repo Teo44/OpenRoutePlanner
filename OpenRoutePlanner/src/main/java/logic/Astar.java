@@ -76,7 +76,7 @@ public class Astar {
                 continue;
             }
             // Make this optional for testing the differences?
-            if (node.getID() == start.getID())  {
+            if (node.getID() == end.getID())  {
                 break;
             }
             visited[node.getID()] = true;
