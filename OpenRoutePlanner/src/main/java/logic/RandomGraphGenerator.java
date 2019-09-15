@@ -3,13 +3,14 @@ package logic;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomGraphGenerator {
 
     public RandomGraphGenerator() {
     }
     
-    public Graph generateGraph(int nodeCount, int arcsPerNode, int maxLatDiff, int maxLonDiff)  {
+    public Graph generateGraph(int nodeCount, int arcsPerNode, int maxLatDiff, int maxLonDiff, boolean connected)  {
         ArrayList<Arc>[] adList = new ArrayList[nodeCount];
         Random r = new Random();
         HashMap<Long, Node> nodes = new HashMap<>();
@@ -44,14 +45,28 @@ public class RandomGraphGenerator {
             }
         }
         
-        // makes sure the graph is connected by connecting all consecutive nodes
-        for (int i = 0; i < nodeCount - 1; i++) {
-            Node node2 = nodes.get((long) i+1);
-            Node node1 = nodes.get((long) i);
-            double dist = nodeDistance(node1, node2);
-            adList[i].add(new Arc(node1.getID2(), node2.getID2(), node1.getID(), node2.getID(), node1, node2, dist));
-            adList[i+1].add(new Arc(node2.getID2(), node1.getID2(), node2.getID(), node1.getID(), node2, node1, dist));
-            arcCount += 2;
+        // makes sure the graph is connected by connecting all nodes in a random order
+        if (connected)  {
+            int[] randomNodes = new int[nodeCount];
+            for (int i = 0; i < nodeCount; i++) {
+                randomNodes[i] = i;
+            }
+            Random rnd = ThreadLocalRandom.current();
+            for (int i = nodeCount - 1; i > 0; i--)
+            {
+              int index = rnd.nextInt(i + 1);
+              int a = randomNodes[index];
+              randomNodes[index] = randomNodes[i];
+              randomNodes[i] = a;
+            }
+            for (int i = 0; i < nodeCount - 1; i++) {
+                Node node2 = nodes.get((long) randomNodes[i]);
+                Node node1 = nodes.get((long) randomNodes[i+1]);
+                double dist = nodeDistance(node1, node2);
+                adList[i].add(new Arc(node1.getID2(), node2.getID2(), node1.getID(), node2.getID(), node1, node2, dist));
+                adList[i+1].add(new Arc(node2.getID2(), node1.getID2(), node2.getID(), node1.getID(), node2, node1, dist));
+                arcCount += 2;
+            }
         }
         
         Graph graph = new Graph(nodes, realNodeID, adList, nodeCount, arcCount);

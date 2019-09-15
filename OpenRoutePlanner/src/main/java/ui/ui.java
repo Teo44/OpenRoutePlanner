@@ -37,7 +37,7 @@ public class ui {
     public void start() {
         
         
-        System.out.println("Parse an OSM or generate a random graph? ([O]SM/[R]andom)");
+        System.out.println("Parse an OSM or generate a random graph? [O]SM/[R]andom");
         while(true) {
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("o"))    {
@@ -95,7 +95,7 @@ public class ui {
     
     private void askForApprovedWays()   {
         approvedTags = new ArrayList<>();
-        System.out.print("Filter ways by tags? ([Y]es/[N]o/[D]efault) ");
+        System.out.print("Filter ways by tags? [Y]es/[N]o/[D]efault (highway)");
         while (true)    {    
             String filter = scanner.nextLine();
             if (filter.equalsIgnoreCase("y"))   {
@@ -180,9 +180,22 @@ public class ui {
         int maxLatDiff = Integer.parseInt(scanner.nextLine());
         System.out.println("Enter max difference in longitude between nodes: (1-360)");
         int maxLonDiff = Integer.parseInt(scanner.nextLine());
+        System.out.println("Make sure graph is connected? [Y]es/[N]o");
+        boolean connected;
+        while (true)    {
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("y"))    {
+                connected = true;
+                break;
+            } else if (input.equalsIgnoreCase("n")) {
+                connected = false;
+                break;
+            }
+        }
+        
         RandomGraphGenerator generator = new RandomGraphGenerator();
         startNanoTimer();
-        graph = generator.generateGraph(nodeAmount, arcAmount, maxLatDiff, maxLonDiff);
+        graph = generator.generateGraph(nodeAmount, arcAmount, maxLatDiff, maxLonDiff, connected);
         stopNanoTimer();
     }
     
