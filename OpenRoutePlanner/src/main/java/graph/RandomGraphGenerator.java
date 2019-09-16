@@ -5,11 +5,22 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Class for generating random graphs, with options to choose the amount of nodes, amount of 
+ * arcs generated per node, the maximum difference in latitude and longitude and whether to make sure
+ * the graph is connected.
+ */
 public class RandomGraphGenerator {
-
-    public RandomGraphGenerator() {
-    }
     
+    /**
+     * @param nodeCount Amount of nodes to generate
+     * @param arcsPerNode Amount of arcs to generate per node
+     * @param maxLatDiff The maximum difference in latitude between the nodes
+     * @param maxLonDiff The maximum difference in longitude between the nodes
+     * @param connected If true, all the nodes will be connected in random order to make sure 
+     * the graph is connected.
+     * @return A graph-object representation of the generated graph
+     */
     public Graph generateGraph(int nodeCount, int arcsPerNode, int maxLatDiff, int maxLonDiff, boolean connected)  {
         ArrayList<Arc>[] adList = new ArrayList[nodeCount];
         Random r = new Random();
@@ -45,7 +56,7 @@ public class RandomGraphGenerator {
             }
         }
         
-        // makes sure the graph is connected by connecting all nodes in a random order
+        // Makesure the graph is connected by connecting all nodes in a random order
         if (connected)  {
             int[] randomNodes = new int[nodeCount];
             for (int i = 0; i < nodeCount; i++) {
