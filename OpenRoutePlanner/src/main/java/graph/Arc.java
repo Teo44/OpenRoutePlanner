@@ -1,7 +1,5 @@
 package graph;
 
-import graph.Node;
-
 /**
  * An arc object for the adjacency list, representing the one way distance 
  * between two nodes.
