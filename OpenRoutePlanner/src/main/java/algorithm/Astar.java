@@ -1,5 +1,6 @@
 package algorithm;
 
+import data_structure.BinaryHeap;
 import graph.Arc;
 import graph.Node;
 import graph.Graph;
@@ -13,7 +14,8 @@ import java.util.PriorityQueue;
  */
 public class Astar {
 
-    private PriorityQueue<DijkstraNode> heap;
+    //private PriorityQueue<DijkstraNode> heap;
+    private BinaryHeap heap;
     private boolean[] visited;
     private int nodeCount;
     private ArrayList<Arc>[] adList;
@@ -49,7 +51,8 @@ public class Astar {
             return new Result(distance, previousNode, 0l);
         }
         
-        heap = new PriorityQueue<>();
+//        heap = new PriorityQueue<>();
+        heap = new BinaryHeap();
         visited = new boolean[nodeCount];
         distance = new double[nodeCount];
         for (int i = 0; i < nodeCount; i++) {
