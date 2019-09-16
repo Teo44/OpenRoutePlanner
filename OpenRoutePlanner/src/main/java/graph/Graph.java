@@ -14,6 +14,13 @@ public class Graph {
     private int nodeCount;
     private int arcCount;
     
+    /**
+     * @param nodes Hashmap with ID of node as key, node-object as value
+     * @param realNodeID Hashmap with the running ID of nodes as key, real ID as value
+     * @param adList Adjacency list for the nodes, index is the running ID of the node
+     * @param nodeCount Amount of nodes in the graph
+     * @param arcCount  Amount of arcs in the graph
+     */
     public Graph(HashMap<Long, Node> nodes, HashMap<Integer, Long> realNodeID, ArrayList<Arc>[] adList, int nodeCount, int arcCount)  {
         this.adList = adList;
         this.nodes = nodes;

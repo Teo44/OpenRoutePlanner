@@ -6,14 +6,12 @@ import graph.Node;
 import graph.Graph;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.PriorityQueue;
 
 /**
  * Dijkstra's shortest path algorithm
  */
 public class Dijkstra {
     
-//    private PriorityQueue<DijkstraNode> heap;
     private BinaryHeap heap;
     private boolean[] visited;
     private int nodeCount;
@@ -45,7 +43,6 @@ public class Dijkstra {
             return new Result(distance, previousNode, 0l);
         }
         
-//        heap = new PriorityQueue<>();
         heap = new BinaryHeap();
         visited = new boolean[nodeCount];
         distance = new double[nodeCount];
@@ -62,8 +59,6 @@ public class Dijkstra {
         
         while(!heap.isEmpty())  {
             DijkstraNode node = heap.poll();
-            //debug
-//            System.out.println("[dijkstra] polled node " + node.getID() + " with dist of " + node.getDist());
             if (visited[node.getID()])   {
                 continue;
             }

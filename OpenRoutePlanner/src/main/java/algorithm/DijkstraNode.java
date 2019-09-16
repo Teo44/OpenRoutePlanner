@@ -1,7 +1,7 @@
 package algorithm;
 
 /**
- * A comparable node object for Dijkstra
+ * A comparable node object for the path finding algorithms to use
  */
 public class DijkstraNode implements Comparable<DijkstraNode>{
 

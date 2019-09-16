@@ -6,7 +6,6 @@ import graph.Node;
 import graph.Graph;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.PriorityQueue;
 
 /**
  * A*  shortest path algorithm with direct distance from n to target node 
@@ -51,7 +50,6 @@ public class Astar {
             return new Result(distance, previousNode, 0l);
         }
         
-//        heap = new PriorityQueue<>();
         heap = new BinaryHeap();
         visited = new boolean[nodeCount];
         distance = new double[nodeCount];
@@ -63,10 +61,12 @@ public class Astar {
         Node start = nodes.get(nd1_id);
         Node end = nodes.get(nd2_id);
         
-        // Approximation for the longitude to km conversion to use for the heuristic
-        // Longitude to km ratio differs a lot from the equator to the poles, so we take
-        // the average between the start and end points latitude, and use that for the conversion 
-        // to speed up the heuristics calculation.
+       /** 
+        *Approximation for the longitude to km conversion to use for the heuristic
+        * Longitude to km ratio differs a lot from the equator to the poles, so we take
+        * the average between the start and end points latitude, and use that for the conversion 
+        * to speed up the heuristics calculation.
+        */
         lonToKm = 111.320*Math.cos( (start.getLat() + end.getLat()) / 2 * Math.PI / 180);
         
         DijkstraNode start2 = new DijkstraNode(start.getID2(), 0);
