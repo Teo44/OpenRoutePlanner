@@ -1,4 +1,4 @@
-package logic;
+package algorithm;
 
 /**
  * A comparable node object for Dijkstra

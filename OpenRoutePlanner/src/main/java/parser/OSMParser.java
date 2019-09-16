@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import logic.Graph;
+import graph.Graph;
 
 public class OSMParser {
     

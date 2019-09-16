@@ -1,5 +1,8 @@
-package logic;
+package algorithm;
 
+import graph.Arc;
+import graph.Node;
+import graph.Graph;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -35,7 +38,7 @@ public class Dijkstra {
      * @param nd2_id Node 2's ID from the OSM XML file
      * @return A result object containing the results of the search
      * 
-     * @see logic.Result
+     * @see algorithm.Result
      */
     public Result shortestPath(Long nd1_id, Long nd2_id)  {
         if (nd1_id.equals(nd2_id))   {

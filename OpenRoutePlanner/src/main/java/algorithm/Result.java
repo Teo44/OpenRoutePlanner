@@ -1,4 +1,4 @@
-package logic;
+package algorithm;
 
 /**
  * An object for returning the results of pathfinding algorithms.

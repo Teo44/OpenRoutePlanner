@@ -6,11 +6,11 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-import logic.Astar;
-import logic.Dijkstra;
-import logic.Graph;
-import logic.RandomGraphGenerator;
-import logic.Result;
+import algorithm.Astar;
+import algorithm.Dijkstra;
+import graph.Graph;
+import graph.RandomGraphGenerator;
+import algorithm.Result;
 import parser.OSMParser;
 
 public class ui {

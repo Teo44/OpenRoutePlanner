@@ -1,4 +1,4 @@
-package logic;
+package graph;
 
 /**
  * A node-object for parsing nodes from OSM XML files. Contains the nodes 

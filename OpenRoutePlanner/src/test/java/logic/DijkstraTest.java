@@ -1,5 +1,9 @@
 package logic;
 
+import algorithm.Dijkstra;
+import graph.Arc;
+import graph.Node;
+import graph.Graph;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;

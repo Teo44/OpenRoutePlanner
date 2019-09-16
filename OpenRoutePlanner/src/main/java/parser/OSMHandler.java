@@ -2,9 +2,9 @@ package parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import logic.Arc;
-import logic.Graph;
-import logic.Node;
+import graph.Arc;
+import graph.Graph;
+import graph.Node;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
