@@ -2,28 +2,40 @@ package data_structure;
 
 import algorithm.DijkstraNode;
 
+/**
+ *  SImple minimum priority queue implemented with a binary heap
+ */
 public class BinaryHeap {
 
     DijkstraNode[] tree;
     int index;
     int size;
     
+    /**
+     *  Create a new binary heap.
+     * @param size  Define the starting size of the heap
+     */
     public BinaryHeap(int size)   {
         tree = new DijkstraNode[size];
         index = 1;
         this.size = size;
     }
     
+    /**
+     *  Create the heap with the default size of 10
+     */
     public BinaryHeap() {
         tree = new DijkstraNode[10];
         index = 1;
         size = 10;
     }
     
+    /**
+     * Adds a node to the heap
+     * @param n DijkstraNode-object
+     */
     public void add(DijkstraNode n)  {
-        // if the array is full, copy all nodes to new array of twice the size
-        //debug
-//        System.out.println("Added node " + n.getID() + " with dist of " + n.getDist() + " to index " + index);
+        // if the array is full, copy all nodes to a new array of twice the size
         if (size <= index)   {
             DijkstraNode[] newTree = new DijkstraNode[tree.length * 2];
             for (int i = 1; i < tree.length; i++)   {
@@ -40,13 +52,9 @@ public class BinaryHeap {
             return;
         }
         int compIndex = newIndex / 2;
-        
         // move the new node up until the heap is a sorted again
         while (tree[compIndex].compareTo(tree[newIndex]) > 0)   {
-            //swap
-            DijkstraNode x = tree[compIndex];
-            tree[compIndex] = tree[newIndex];
-            tree[newIndex] = x;
+            swap(compIndex, newIndex);
             newIndex = compIndex;
             compIndex = newIndex / 2;
             if (compIndex < 1)  {
@@ -55,19 +63,25 @@ public class BinaryHeap {
         }
     }
     
+    /**
+     *  Get the smallest node in the heap and remove it.
+     * @return DijkstraNode-object
+     */
     public DijkstraNode poll()  {
         if (index == 1)  {
             return null;
         }
+        // save the first node to be returned
         DijkstraNode n = tree[1];
+        // move the last node to the top of the heap
         tree[1] = tree[index - 1];
         index -= 1;
         if (index  == 1)  {
             return n;
         }
         
-        // compare the moved node to its children, swap with the smaller children, if exists
-        
+        // compare the moved node to its children, swap with the smallest of it's children.
+        // repeat until it has no smaller nodes as children.
         int compIndex = 1;
         int child1 = 2;
         int child2 = 3;
@@ -110,14 +124,15 @@ public class BinaryHeap {
     }
     
     private void swap(int i, int j) {
-        //debug
-//        System.out.println("swapped nodes at index " + i + " and " + j);
-//        System.out.println("with values " + tree[i].getDist() + " and " + tree[j].getDist());
         DijkstraNode x = tree[i];
         tree[i] = tree[j];
         tree[j] = x;
     }
     
+    /**
+     * Get the smallest node in the heap, don't remove it from the heap.
+     * @return 
+     */
     public DijkstraNode peek()  {
         if (size == 0)  {
             return null;
@@ -125,6 +140,9 @@ public class BinaryHeap {
         return tree[1];
     }
     
+    /**
+     * @return true if the heap is empty, false otherwise
+     */
     public boolean isEmpty()    {
         return (index == 1);
     }
