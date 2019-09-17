@@ -69,9 +69,14 @@ public class OSMHandler extends DefaultHandler  {
                 //debug
                 System.out.println("Created adjacency list with " + nodeCount + " nodes");
                 adList = new ArrayList[nodeCount];
+                System.out.println("1");
                 for (int i = 0; i < nodeCount; i++) {
                     adList[i] = new ArrayList<>();
+                    if (i % 100000 == 0)    {
+                        System.out.println(nodeCount - i);
+                    }
                 }
+                System.out.println("2");
             }
             arcs = new ArrayList<>();
             //String id = attributes.getValue("id");
