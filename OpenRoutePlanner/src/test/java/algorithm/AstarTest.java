@@ -1,6 +1,5 @@
-package logic;
+package algorithm;
 
-import algorithm.Dijkstra;
 import graph.Arc;
 import graph.Node;
 import graph.Graph;
@@ -8,12 +7,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import parser.OSMParser;
 
-public class DijkstraTest {
+public class AstarTest {
     
     static OSMParser parser;
     static File test;
@@ -24,8 +22,8 @@ public class DijkstraTest {
     static Graph kumpula;
     static HashMap<Long, Node> nodes;
     static ArrayList<Arc>[] arcs;
-    static Dijkstra dijkstra;
-    static Dijkstra dijkstraKumpula;
+    static Astar a_star;
+    static Astar a_starKumpula;
 
     @BeforeClass
     public static void setUp()  {
@@ -41,32 +39,32 @@ public class DijkstraTest {
     
     @BeforeClass
     public static void before()    {
-        dijkstra = new Dijkstra(graph);
-        dijkstraKumpula = new Dijkstra(kumpula);
+        a_star = new Astar(graph);
+        a_starKumpula = new Astar(kumpula);
     }
     
     @Test
     public void sameStartAndEndNode()    {
-        assertEquals(0, dijkstra.shortestPath(123l, 123l).getDist(), 0);
+        assertEquals(0, a_star.shortestPath(123l, 123l).getDist(), 0);
     }
     
     @Test
     public void testGraphPath1()    {
-        assertEquals(0.48941663126567214, dijkstra.shortestPath(123l, 321l).getDist(), 0.00001);
+        assertEquals(0.48941663126567214, a_star.shortestPath(123l, 321l).getDist(), 0.00001);
     }
     
     @Test
     public void testGraphPath2()    {
-        assertEquals(0.6386424878158962, dijkstra.shortestPath(321l, 666l).getDist(), 0.00001);
+        assertEquals(0.6386424878158962, a_star.shortestPath(321l, 666l).getDist(), 0.00001);
     }
 
     @Test
     public void testKumpulaPath1()  {
-        assertEquals(1.0597847879291002, dijkstraKumpula.shortestPath(34399420l, 364533819l).getDist(), 0.00001);
+        assertEquals(1.0597847879291002, a_starKumpula.shortestPath(34399420l, 364533819l).getDist(), 0.00001);
     }
     
     @Test
     public void testKumpulaPath2()  {
-        assertEquals(0.09573535075927543, dijkstraKumpula.shortestPath(34399420l, 583267403l).getDist(), 0.00001);
+        assertEquals(0.09573535075927543, a_starKumpula.shortestPath(34399420l, 583267403l).getDist(), 0.00001);
     }
 }

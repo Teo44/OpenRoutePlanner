@@ -56,7 +56,7 @@ public class RandomGraphGenerator {
             }
         }
         
-        // Makesure the graph is connected by connecting all nodes in a random order
+        // Make sure the graph is connected by connecting all nodes in a random order
         if (connected)  {
             int[] randomNodes = new int[nodeCount];
             for (int i = 0; i < nodeCount; i++) {
@@ -74,8 +74,8 @@ public class RandomGraphGenerator {
                 Node node2 = nodes.get((long) randomNodes[i]);
                 Node node1 = nodes.get((long) randomNodes[i+1]);
                 double dist = nodeDistance(node1, node2);
-                adList[i].add(new Arc(node1.getID2(), node2.getID2(), node1.getID(), node2.getID(), node1, node2, dist));
-                adList[i+1].add(new Arc(node2.getID2(), node1.getID2(), node2.getID(), node1.getID(), node2, node1, dist));
+                adList[i + 1].add(new Arc(node1.getID2(), node2.getID2(), node1.getID(), node2.getID(), node1, node2, dist));
+                adList[i].add(new Arc(node2.getID2(), node1.getID2(), node2.getID(), node1.getID(), node2, node1, dist));
                 arcCount += 2;
             }
         }

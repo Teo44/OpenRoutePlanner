@@ -134,7 +134,7 @@ public class BinaryHeap {
      * @return 
      */
     public DijkstraNode peek()  {
-        if (size == 0)  {
+        if (index == 1)  {
             return null;
         }
         return tree[1];
