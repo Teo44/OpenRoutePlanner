@@ -4,7 +4,7 @@ import data_structure.BinaryHeap;
 import graph.Arc;
 import graph.Node;
 import graph.Graph;
-import java.util.ArrayList;
+import data_structure.ArrayList;
 import java.util.HashMap;
 
 /**

@@ -1,6 +1,6 @@
 package parser;
 
-import java.util.ArrayList;
+import data_structure.ArrayList;
 import java.util.HashMap;
 import graph.Arc;
 import graph.Graph;

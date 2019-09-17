@@ -1,7 +1,7 @@
 package parser;
 
 import java.io.File;
-import java.util.ArrayList;
+import data_structure.ArrayList;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import graph.Graph;
