@@ -54,8 +54,6 @@ public class OSMHandler extends DefaultHandler  {
             String id = attributes.getValue("id");
             String lat = attributes.getValue("lat");
             String lon = attributes.getValue("lon");
-            //debug print
-            //System.out.println("node id: " + id);
             // check that the node is valid: has an id and a location
             if (id != null && lat != null && lon != null)   {
                 Node node = new Node(Long.parseLong(id), nodeCount, Double.parseDouble(lat), Double.parseDouble(lon));
@@ -69,19 +67,11 @@ public class OSMHandler extends DefaultHandler  {
                 //debug
                 System.out.println("Created adjacency list with " + nodeCount + " nodes");
                 adList = new ArrayList[nodeCount];
-                System.out.println("1");
                 for (int i = 0; i < nodeCount; i++) {
                     adList[i] = new ArrayList<>();
-                    if (i % 100000 == 0)    {
-                        System.out.println(nodeCount - i);
-                    }
                 }
-                System.out.println("2");
             }
             arcs = new ArrayList<>();
-            //String id = attributes.getValue("id");
-            //debug print
-            //System.out.println("way id: " + id);
         } else if (qName.equals("nd"))    {
             
             Node newNode = nodes.get(Long.parseLong(attributes.getValue("ref")));
@@ -95,8 +85,6 @@ public class OSMHandler extends DefaultHandler  {
                 realNodeID.put(nd2_id2, nd2);
                 arcs.add(new Arc(lastNode, newNode, dist));
                 arcs.add(new Arc(newNode, lastNode, dist));
-                //debug print
-                //System.out.println("Distance from node " + nd1 + " to node " + nd2 + ": " + dist + "km");
                 lastNode = newNode;
             } else  {
                 lastNode = newNode;
