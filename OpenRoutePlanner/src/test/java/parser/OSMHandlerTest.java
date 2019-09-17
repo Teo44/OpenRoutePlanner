@@ -71,13 +71,13 @@ public class OSMHandlerTest {
     @Test
     public void arcsCorrect1()  {
         arcs = graph.getAdList();
-        assertTrue(arcs[0].get(0).getNd2() == 1);
+        assertTrue(arcs[0].get(0).getNode2().getID2() == 1);
     }
     
     @Test
     public void arcsCorrect2()  {
         arcs = graph.getAdList();
-        assertTrue(arcs[0].get(1).getNd2() == 2);
+        assertTrue(arcs[0].get(1).getNode2().getID2() == 2);
     }
     
     @Test
@@ -85,7 +85,7 @@ public class OSMHandlerTest {
         arcs = kumpula.getAdList();
         nodes = kumpula.getNodes();
         Node nd1 = nodes.get(469651581l);
-        assertTrue(arcs[nd1.getID2()].get(0).getNd2() == 2911);
+        assertTrue(arcs[nd1.getID2()].get(0).getNode2().getID2() == 2911);
     }
     
 

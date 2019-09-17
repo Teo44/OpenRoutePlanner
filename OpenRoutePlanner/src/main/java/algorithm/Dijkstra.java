@@ -68,12 +68,12 @@ public class Dijkstra {
             }
             visited[node.getID()] = true;
             for (Arc a : adList[node.getID()]) {
-                Double currentDist = distance[a.getNd2()];
+                Double currentDist = distance[a.getNode2().getID2()];
                 Double newDist = node.getDist() + a.getDist();
                 if (newDist < currentDist)  {
-                    previousNode[a.getNd2()] = a.getNd1();
-                    distance[a.getNd2()] = newDist;
-                    DijkstraNode newNode = new DijkstraNode(a.getNd2(), newDist);
+                    previousNode[a.getNode2().getID2()] = a.getNode1().getID2();
+                    distance[a.getNode2().getID2()] = newDist;
+                    DijkstraNode newNode = new DijkstraNode(a.getNode2().getID2(), newDist);
                     heap.add(newNode);
                 }
             }

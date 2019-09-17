@@ -95,7 +95,7 @@ public class ui {
     
     private void askForApprovedWays()   {
         approvedTags = new ArrayList<>();
-        System.out.print("Filter ways by tags? [Y]es/[N]o/[D]efault (highway)");
+        System.out.print("Filter ways by tags? [Y]es/[N]o/[D]efault (highway) ");
         while (true)    {    
             String filter = scanner.nextLine();
             if (filter.equalsIgnoreCase("y"))   {

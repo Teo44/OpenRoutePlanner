@@ -50,8 +50,8 @@ public class RandomGraphGenerator {
                 Node node2 = nodes.get((long) node2ID);
                 Node node1 = nodes.get((long) i);
                 double dist = nodeDistance(node1, node2);
-                adList[i].add(new Arc(node1.getID2(), node2.getID2(), node1.getID(), node2.getID(), node1, node2, dist));
-                adList[node2ID].add(new Arc(node2.getID2(), node1.getID2(), node2.getID(), node1.getID(), node2, node1, dist));
+                adList[i].add(new Arc(node1, node2, dist));
+                adList[node2ID].add(new Arc(node2, node1, dist));
                 arcCount += 2;
             }
         }
@@ -74,8 +74,8 @@ public class RandomGraphGenerator {
                 Node node2 = nodes.get((long) randomNodes[i]);
                 Node node1 = nodes.get((long) randomNodes[i+1]);
                 double dist = nodeDistance(node1, node2);
-                adList[i + 1].add(new Arc(node1.getID2(), node2.getID2(), node1.getID(), node2.getID(), node1, node2, dist));
-                adList[i].add(new Arc(node2.getID2(), node1.getID2(), node2.getID(), node1.getID(), node2, node1, dist));
+                adList[i + 1].add(new Arc(node1, node2, dist));
+                adList[i].add(new Arc(node2, node1, dist));
                 arcCount += 2;
             }
         }
