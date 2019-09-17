@@ -5,6 +5,7 @@
 * Working A*
 * Random graph generation for algorithm testing
 * Replaced java priority queue with own implementation
+* Replaced java arraylist with own implementation
 
 ## Issues
 
