@@ -6,8 +6,7 @@ package graph;
  */
 public class Arc {
     
-    Double dist; 
-    
+    Double dist;
     Node node1;
     Node node2;
 

@@ -6,12 +6,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import graph.Graph;
 
-public class OSMParser {
-    
-    public OSMParser()  {
-        
-    }
-    
+public class OSMParser { 
     /**
      * Parses an OSM XML file into a graph-object that the shortest 
      * path algorithms can use.

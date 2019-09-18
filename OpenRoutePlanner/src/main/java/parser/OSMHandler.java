@@ -9,6 +9,9 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+/**
+ * Extended saxhandler to parse OSM XML files to a graph.
+ */
 public class OSMHandler extends DefaultHandler  {
     
     ArrayList<Arc>[] adList;
@@ -25,6 +28,11 @@ public class OSMHandler extends DefaultHandler  {
     
     ArrayList<Integer> nodeIDList;
     
+    /**
+     * @param approvedTags Arraylist of tags for filtering the ways. 
+     * E.g. "highway" only parses ways with the k="highway" attributes in one of their 
+     * "tag" elements.
+     */
     public OSMHandler(ArrayList<String> approvedTags) {
         nodes = new HashMap<>();
         realNodeID = new HashMap<>();

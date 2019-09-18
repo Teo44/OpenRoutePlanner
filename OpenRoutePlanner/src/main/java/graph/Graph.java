@@ -4,7 +4,7 @@ import data_structure.ArrayList;
 import java.util.HashMap;
 
 /**
- * A representation of a parsed graph.
+ * A representation of a graph using an adjacency list. 
  */
 public class Graph {
     

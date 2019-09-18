@@ -13,7 +13,6 @@ import java.util.HashMap;
  */
 public class Astar {
 
-    //private PriorityQueue<DijkstraNode> heap;
     private BinaryHeap heap;
     private boolean[] visited;
     private int nodeCount;

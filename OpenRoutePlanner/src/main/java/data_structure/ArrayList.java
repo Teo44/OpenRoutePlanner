@@ -3,7 +3,7 @@ package data_structure;
 import java.util.Iterator;
 
 /**
- *  Simple general arraylist implementation
+ *  Simple general, iterable arraylist implementation
  * @param <T> The type of object to store in the arraylist
  */
 public class ArrayList<T> implements Iterable<T>{

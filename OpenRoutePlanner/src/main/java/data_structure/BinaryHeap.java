@@ -3,7 +3,7 @@ package data_structure;
 import algorithm.DijkstraNode;
 
 /**
- *  SImple minimum priority queue implemented with a binary heap
+ *  SImple minimum priority queue implemented using a binary heap
  */
 public class BinaryHeap {
 

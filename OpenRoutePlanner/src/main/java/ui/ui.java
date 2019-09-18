@@ -36,7 +36,6 @@ public class ui {
     
     public void start() {
         
-        
         System.out.println("Parse an OSM or generate a random graph? [O]SM/[R]andom");
         while(true) {
             String input = scanner.nextLine();
@@ -192,7 +191,6 @@ public class ui {
                 break;
             }
         }
-        
         RandomGraphGenerator generator = new RandomGraphGenerator();
         startNanoTimer();
         graph = generator.generateGraph(nodeAmount, arcAmount, maxLatDiff, maxLonDiff, connected);
@@ -210,7 +208,6 @@ public class ui {
             System.out.println("Node: " + hash.get(previousNode[prev]));
             prev = previousNode[prev];
         }
-        
     }
     
     private void printNodes()    {

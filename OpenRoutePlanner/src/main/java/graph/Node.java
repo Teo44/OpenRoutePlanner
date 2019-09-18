@@ -3,7 +3,7 @@ package graph;
 /**
  * A node-object for parsing nodes from OSM XML files. Contains the nodes 
  * real world coordinates, it's ID in the OSM XML file (id) and a running,  
- * more reasonably sized ID (id2) for the adjacency list etc.
+ * more reasonably sized ID (id2), e.g. for the adjacency list.
  */
 public class Node {
     
