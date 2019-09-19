@@ -18,6 +18,7 @@
             </goals>
             <properties>
                 <exec.args>-Xmx4096m -classpath %classpath ${packageClassName}</exec.args>
+                <exec.args>-Xss16m -classpath %classpath ${packageClassName}</exec.args>
                 <exec.executable>java</exec.executable>
             </properties>
         </action>

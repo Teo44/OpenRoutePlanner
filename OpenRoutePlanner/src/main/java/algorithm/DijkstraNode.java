@@ -8,6 +8,8 @@ public class DijkstraNode implements Comparable<DijkstraNode>{
     private double dist;
     private double hDist;
     private int ID;
+    private double lat;
+    private double lon;
 
     /**
      * @param ID node ID
@@ -29,6 +31,30 @@ public class DijkstraNode implements Comparable<DijkstraNode>{
         this.dist = dist;
         this.hDist = dist;
         this.ID = ID;
+    }
+    
+    public DijkstraNode(int ID, double dist, double hDist, double lat, double lon)  {
+        this.dist = dist;
+        this.hDist = hDist;
+        this.ID = ID;
+        this.lat = lat;
+        this.lon = lon;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
     }
     
     public void setDist(double dist) {

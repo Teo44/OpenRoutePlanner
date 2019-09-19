@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import algorithm.Astar;
 import algorithm.Dijkstra;
+import algorithm.IDAStar;
 import graph.Graph;
 import graph.RandomGraphGenerator;
 import algorithm.Result;
@@ -22,6 +23,7 @@ public class ui {
     private Graph graph;
     private Dijkstra dijkstra;
     private Astar a_star;
+    private IDAStar ida_star;
     private long startTime;
     private long nanoTime;
     private long msTime;
@@ -61,6 +63,7 @@ public class ui {
         
         dijkstra = new Dijkstra(graph);
         a_star = new Astar(graph);
+        ida_star = new IDAStar(graph);
         
         while(true) {
             askForNodes();
@@ -79,6 +82,13 @@ public class ui {
                 System.out.println("A* took: " + msTime + " milliseconds");
             }
             System.out.println("");
+//            ida_star(startNode, endNode);
+//            if (msTime > 1000)  {
+//                System.out.println("IDA* took: " + msTime / 1000 + "." + msTime % 1000 + " seconds");
+//            } else  {
+//                System.out.println("IDA* took: " + msTime + " milliseconds");
+//            }
+//            System.out.println("");
         }
         
     }
@@ -155,6 +165,19 @@ public class ui {
         }
         
         //printPath(result.getPreviousNode());
+    }
+    
+    public void ida_star(long start, long end)  {
+        startNanoTimer();
+        Result result = ida_star.shortestPath(start, end);
+        stopNanoTimer();
+                if (result.getDist() == Double.MAX_VALUE)   {
+            System.out.println("No route was found");
+        } else  {
+            DecimalFormat df = new DecimalFormat("#.###");
+            df.setRoundingMode(RoundingMode.CEILING);
+            System.out.println("Shortest distance to node: " + df.format(result.getDist()) + "km");
+        }
     }
     
     /**
