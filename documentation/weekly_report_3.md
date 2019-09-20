@@ -8,6 +8,13 @@
 * Replaced java arraylist with own implementation
 * Started working on IDA* algorithm, currently quite broken
 
-## Issues
+
 
 ## Plan for next week
+
+*Fix IDA*
+*Fix the parser to handle larger files
+*Replace any remaining Java data structures with own implementations
+
+Work hours: 11.5 hours
+
