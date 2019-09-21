@@ -5,6 +5,7 @@ import data_structure.ArrayList;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import graph.Graph;
+import java.util.HashSet;
 
 public class OSMParser { 
     /**
@@ -20,8 +21,14 @@ public class OSMParser {
         try {
            SAXParserFactory factory = SAXParserFactory.newInstance();
            SAXParser saxParser = factory.newSAXParser();
-           OSMHandler handler = new OSMHandler(approvedTags);
-           saxParser.parse(osm, handler);
+           OSMNodeNeighbourCount counter = new OSMNodeNeighbourCount(approvedTags);
+           saxParser.parse(osm, counter);
+           int[] neighbours = counter.getNodeNeighbourCount();
+           HashSet acceptedWays = counter.getAcceptedWays();
+           SAXParserFactory factory2 = SAXParserFactory.newInstance();
+           SAXParser saxParser2 = factory2.newSAXParser();
+           OSMHandler handler = new OSMHandler(approvedTags, neighbours, acceptedWays);
+           saxParser2.parse(osm, handler);
            return handler.getGraph();
         } catch (Exception e) {
            e.printStackTrace();

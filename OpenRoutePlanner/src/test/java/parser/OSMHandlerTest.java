@@ -41,7 +41,7 @@ public class OSMHandlerTest {
     
     @Test
     public void nodeCountCorrect2() {
-        assertTrue(kumpula.getNodeCount() == 12832);
+        assertTrue(kumpula.getNodeCount() == 3692);
     }
     
     @Test
@@ -85,7 +85,7 @@ public class OSMHandlerTest {
         arcs = kumpula.getAdList();
         nodes = kumpula.getNodes();
         Node nd1 = nodes.get(469651581l);
-        assertTrue(arcs[nd1.getID2()].get(0).getNode2().getID2() == 2911);
+        assertTrue(arcs[nd1.getID2()].get(0).getNode2().getID2() == 1079);
     }
     
 
