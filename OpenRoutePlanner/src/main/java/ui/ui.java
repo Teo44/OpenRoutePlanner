@@ -82,13 +82,13 @@ public class ui {
                 System.out.println("A* took: " + msTime + " milliseconds");
             }
             System.out.println("");
-//            ida_star(startNode, endNode);
-//            if (msTime > 1000)  {
-//                System.out.println("IDA* took: " + msTime / 1000 + "." + msTime % 1000 + " seconds");
-//            } else  {
-//                System.out.println("IDA* took: " + msTime + " milliseconds");
-//            }
-//            System.out.println("");
+            ida_star(startNode, endNode);
+            if (msTime > 1000)  {
+                System.out.println("IDA* took: " + msTime / 1000 + "." + msTime % 1000 + " seconds");
+            } else  {
+                System.out.println("IDA* took: " + msTime + " milliseconds");
+            }
+            System.out.println("");
         }
         
     }

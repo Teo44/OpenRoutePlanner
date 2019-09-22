@@ -39,6 +39,8 @@ public class IDAStar {
         
         Node start = nodes.get(nd1_id);
         Node end = nodes.get(nd2_id);
+//        System.out.println("ID of goal node: " + end.getID());
+//        System.out.println("ID2 of goal node: " + end.getID2());
         goalNode = end.getID2();
         goalLat = end.getLat();
         goalLon = end.getLon();
@@ -83,7 +85,9 @@ public class IDAStar {
         }
         if (node.getID() == goalNode)   {
 //            System.out.println("found goal node: " + node.getID());
+//            System.out.println("distance to node " + node.getDist());
             resultNode = node;
+            resultNode.setDist(g);
             return -1;
         }
         double min = Double.MAX_VALUE;
@@ -97,6 +101,13 @@ public class IDAStar {
                 path.add(succ);
                 nodeInPath[succ.getID()] = true;
 //                System.out.println("path size: " + path.size());
+                if (g == 0) {
+//                    System.out.println("starting from the beginning");
+                }
+//                System.out.println("searching node " + succ.getID());
+//                System.out.println("distance from current: " + succ.getDist());
+//                System.out.println("current distance: " + g);
+//                System.out.println("total dist of current route: " + (g + succ.getDist()));
                 double t = search(path, g + succ.getDist(), bound);
                 if (t == -1)    {
                     return -1;
