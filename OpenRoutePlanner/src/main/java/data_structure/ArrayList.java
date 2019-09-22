@@ -33,6 +33,7 @@ public class ArrayList<T> implements Iterable<T>{
             }
             array = newArray;
             size *= 2;
+            //System.out.println("increase arraylist array size to " + size);
         }
         array[index] = a;
         index += 1;

@@ -19,7 +19,7 @@ public class HashMap<T, K> {
         }
         size = n;
         objects = 0;
-        loadFactor = 0.75f;
+        loadFactor = 4f;
     }
     
     public HashMap(int n, float f)   {
@@ -39,7 +39,7 @@ public class HashMap<T, K> {
         }
         size = 128;
         objects = 0;
-        loadFactor = 0.75f;
+        loadFactor = 4f;
     }
     
     public void put(long key, K value)  {
