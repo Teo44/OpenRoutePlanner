@@ -1,7 +1,7 @@
 package graph;
 
 import data_structure.ArrayList;
-import java.util.HashMap;
+import data_structure.HashMap;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 

@@ -5,7 +5,7 @@ import graph.Arc;
 import graph.Node;
 import graph.Graph;
 import data_structure.ArrayList;
-import java.util.HashMap;
+import data_structure.HashMap;
 
 /**
  * A*  shortest path algorithm with direct distance from n to target node 

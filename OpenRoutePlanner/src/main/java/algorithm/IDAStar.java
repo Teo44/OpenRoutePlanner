@@ -5,9 +5,13 @@ import data_structure.BinaryHeap;
 import graph.Arc;
 import graph.Graph;
 import graph.Node;
-import java.util.HashMap;
+import data_structure.HashMap;
 import java.util.Stack;
 
+/**
+ * IDA*  shortest path algorithm with direct distance from n to target node 
+ * as the heuristic.
+ */
 public class IDAStar {
     
     private int nodeCount;

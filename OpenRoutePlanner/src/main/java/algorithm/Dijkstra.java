@@ -5,7 +5,7 @@ import data_structure.ArrayList;
 import graph.Arc;
 import graph.Node;
 import graph.Graph;
-import java.util.HashMap;
+import data_structure.HashMap;
 
 /**
  * Dijkstra's shortest path algorithm

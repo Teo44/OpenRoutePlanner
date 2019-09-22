@@ -2,7 +2,7 @@ package parser;
 
 import java.io.File;
 import data_structure.ArrayList;
-import java.util.HashMap;
+import data_structure.HashMap;
 import graph.Arc;
 import graph.Graph;
 import graph.Node;

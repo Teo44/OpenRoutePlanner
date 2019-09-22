@@ -4,7 +4,7 @@ import java.io.File;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import data_structure.ArrayList;
-import java.util.HashMap;
+import data_structure.HashMap;
 import java.util.Scanner;
 import algorithm.Astar;
 import algorithm.Dijkstra;

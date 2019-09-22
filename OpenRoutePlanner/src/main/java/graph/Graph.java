@@ -1,7 +1,7 @@
 package graph;
 
 import data_structure.ArrayList;
-import java.util.HashMap;
+import data_structure.HashMap;
 
 /**
  * A representation of a graph using an adjacency list. 
