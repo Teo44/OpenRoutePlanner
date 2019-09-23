@@ -29,8 +29,10 @@ public class RandomGraphGenerator {
         int arcCount = 0;
         
         for (int i = 0; i < nodeCount; i++) {
-            double lat = r.nextInt(maxLatDiff) - (maxLatDiff / 2) + r.nextDouble();
-            double lon = r.nextInt(maxLonDiff) - (maxLonDiff / 2) + r.nextDouble();
+//            double lat = r.nextInt(maxLatDiff) - (maxLatDiff / 2) + r.nextDouble();
+//            double lon = r.nextInt(maxLonDiff) - (maxLonDiff / 2) + r.nextDouble();
+            double lat = r.nextInt(maxLatDiff) + r.nextDouble();
+            double lon = r.nextInt(maxLonDiff) + r.nextDouble();
             Node node = new Node(i, i, lat, lon);
             nodes.put((long) i, node);
             realNodeID.put(i, (long) i);
