@@ -21,5 +21,5 @@ Well implemented Dijkstra should have time complexity O(n + m log n), which I wi
 
 ## Sources
 
-https://en.wikipedia.org/wiki/A\*_search_algorithm
+https://en.wikipedia.org/wiki/A*_search_algorithm
 
