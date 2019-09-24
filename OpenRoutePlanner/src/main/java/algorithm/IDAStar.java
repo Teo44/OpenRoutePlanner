@@ -79,7 +79,7 @@ public class IDAStar {
     private double search(Stack<DijkstraNode> path, double g, double bound) {
 //        System.out.println("called search with g of " + g + " and bound of: " + bound);
         DijkstraNode node = path.lastElement();
-        double f = g + 1.1*directDistance(node);
+        double f = g + directDistance(node);
         if (f > bound) {
 //            System.out.println("f > bound");
 //            System.out.println("f: " + f);
