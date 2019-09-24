@@ -7,12 +7,21 @@
 
 ### OSM XML parsing
 
+OpenRoutePlanner can parse Open street map's XML files, that contain 
+real world maps represented by nodes and ways between the nodes. Ways can 
+be filtered according to their tags, and all the nodes that have approved 
+ways leading to them will be added to the graph.  
+
 ### Random generation
+
+OpenRoutePlanner can also generate random graphs for testing the algorithms. 
+The graph generator takes a node count, arc count and maximum difference in the 
+nodes' latitude and longitude as variables, and generates a graph accordingly.
 
 
 ## Algorithms
 
-The program has three pathfinding algorithms, with A* being quite 
+OpenRoutePlanner has three pathfinding algorithms, with A* being quite 
 similar to dijkstra, while IDA* is a very different from the two.
 
 ### Dijkstra
@@ -36,6 +45,13 @@ by the heuristic calculations. (link to testing doc here?)
 
 ### IDA*
 
+TODO
+
+## Automated testing
+
+Automated testing can be used to test any of the algorithms in multiple 
+randomly generated graphs. The average and total times taken by each 
+algorithm are calculated and displayed at the end of a test.
 
 ## Sources
 
