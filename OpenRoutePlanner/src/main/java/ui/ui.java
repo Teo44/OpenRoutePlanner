@@ -29,6 +29,7 @@ public class ui {
     private long nanoTime;
     private long msTime;
     private ArrayList<String> approvedTags;
+    private boolean graphExists;
     
     private long startNode;
     private long endNode;
@@ -57,7 +58,7 @@ public class ui {
         System.out.println("");
         System.out.println("OpenRoutePlanner");
         System.out.println("");
-        
+        System.out.println("Main menu: ");
         System.out.println("G - parse or generate a new graph");
         System.out.println("P - Find paths in the current graph");
         System.out.println("T - automated performance testing");
@@ -65,6 +66,7 @@ public class ui {
         while (true)    {
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("g"))  {
+                graphExists = true;
                 System.out.println("");
                 newGraph();
                 System.out.println("");
@@ -74,11 +76,16 @@ public class ui {
                 System.out.println("");
             } else if (input.equalsIgnoreCase("p")) {
                 System.out.println("");
-                pathFindingLoop();
+                if (!(graphExists))  {
+                    System.out.println("No graph has been set");
+                } else  {
+                    pathFindingLoop();
+                }
                 System.out.println("");
             } else if (input.equalsIgnoreCase("q"))  {
                 break;
             }
+            System.out.println("Main menu: ");
         }
     }
     
@@ -92,6 +99,7 @@ public class ui {
     }
     
     private void pathFindingLoop()  {
+        System.out.println("Pathfinding: ");
         System.out.println("P - enter two nodes and find the shortest path between them");
         System.out.println("A - choose the algorithms to be used (default: all)");
         System.out.println("T - set timeout length (default: 10 seconds)");
@@ -107,7 +115,10 @@ public class ui {
                 
             } else if (input.equalsIgnoreCase("q"))  {
                 break;
+            } else  {
+                System.out.println("Not a valid option");
             }
+            System.out.println("Pathfinding: ");
         }
     }
     

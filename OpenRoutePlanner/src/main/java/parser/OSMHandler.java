@@ -83,7 +83,7 @@ public class OSMHandler extends DefaultHandler  {
             currentWayID = Long.parseLong(attributes.getValue("id"));
             if (adList == null)  {
                 //debug
-                System.out.println("Created adjacency list with " + acceptedNodeCount + " nodes");
+//                System.out.println("Created adjacency list with " + acceptedNodeCount + " nodes");
                 adList = new ArrayList[acceptedNodeCount];
                 for (int i = 0; i < acceptedNodeCount; i++) {
                     adList[i] = new ArrayList<>();
@@ -94,10 +94,10 @@ public class OSMHandler extends DefaultHandler  {
             Node newNode = nodes.get(Long.parseLong(attributes.getValue("ref")));
             if (lastNode != null)   {
                 double dist = nodeDistance(lastNode, newNode);
-                long nd1 = lastNode.getID();
-                long nd2 = newNode.getID();
-                int nd1_id2 = lastNode.getID2();
-                int nd2_id2 = newNode.getID2();
+//                long nd1 = lastNode.getID();
+//                long nd2 = newNode.getID();
+//                int nd1_id2 = lastNode.getID2();
+//                int nd2_id2 = newNode.getID2();
                 //realNodeID.put(nd1_id2, nd1);
                 //realNodeID.put(nd2_id2, nd2);
                 arcs.add(new Arc(lastNode, newNode, dist));

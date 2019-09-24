@@ -43,8 +43,6 @@ public class IDAStar {
         
         Node start = nodes.get(nd1_id);
         Node end = nodes.get(nd2_id);
-//        System.out.println("ID of goal node: " + end.getID());
-//        System.out.println("ID2 of goal node: " + end.getID2());
         goalNode = end.getID2();
         goalLat = end.getLat();
         goalLon = end.getLon();
@@ -64,6 +62,9 @@ public class IDAStar {
         */
         lonToKm = 111.320*Math.cos( (start.getLat() + end.getLat()) / 2 * Math.PI / 180);
         
+        //debug
+        int depth = 0;
+        
         while(true) {
             double t = search(path, 0, bound);
             if (t == -1)    {
@@ -73,23 +74,19 @@ public class IDAStar {
                 return new Result(null, null, Double.MAX_VALUE);
             }
             bound = t;
+            //debug
+//            System.out.print("Depth of IDA search: " + depth++);
+//            System.out.println(" Bound: " + bound);
         }
     }
     
     private double search(Stack<DijkstraNode> path, double g, double bound) {
-//        System.out.println("called search with g of " + g + " and bound of: " + bound);
         DijkstraNode node = path.lastElement();
-        double f = g + directDistance(node);
+        double f = g + 1.1*directDistance(node);
         if (f > bound) {
-//            System.out.println("f > bound");
-//            System.out.println("f: " + f);
-//            System.out.println("bound: " + bound);
-//            System.out.println("");
             return f;
         }
         if (node.getID() == goalNode)   {
-//            System.out.println("found goal node: " + node.getID());
-//            System.out.println("distance to node " + node.getDist());
             resultNode = node;
             resultNode.setDist(g);
             return -1;
@@ -97,21 +94,12 @@ public class IDAStar {
         double min = Double.MAX_VALUE;
         BinaryHeap heap = successors(node);
         while (!(heap.isEmpty()))   {
-//            System.out.println("polling heap");
             DijkstraNode succ = heap.poll();
-//            System.out.println("is node " + succ.getID() + " in the path: " + nodeInPath[succ.getID()]);
             if (!(nodeInPath[succ.getID()]))    {
-//                System.out.println("adding node to path: " + succ.getID());
                 path.add(succ);
                 nodeInPath[succ.getID()] = true;
-//                System.out.println("path size: " + path.size());
                 if (g == 0) {
-//                    System.out.println("starting from the beginning");
                 }
-//                System.out.println("searching node " + succ.getID());
-//                System.out.println("distance from current: " + succ.getDist());
-//                System.out.println("current distance: " + g);
-//                System.out.println("total dist of current route: " + (g + succ.getDist()));
                 double t = search(path, g + succ.getDist(), bound);
                 if (t == -1)    {
                     return -1;
@@ -129,10 +117,7 @@ public class IDAStar {
     
     private BinaryHeap successors(DijkstraNode node)  {
         BinaryHeap heap = new BinaryHeap();
-//        System.out.println("adlist size: " + adList[node.getID()].size());
         for (Arc a : adList[node.getID()])  {
-//            System.out.println("arc betweeen: " + a.getNode1().getID() + " and " + a.getNode2().getID());
-//            System.out.println("");
             Node n = a.getNode2();
             heap.add(new DijkstraNode(n.getID2(), a.getDist(), directDistance(n), n.getLat(), n.getLon()));
         }
