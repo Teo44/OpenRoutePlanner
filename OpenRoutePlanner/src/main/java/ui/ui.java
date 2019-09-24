@@ -30,6 +30,7 @@ public class ui {
     private long msTime;
     private ArrayList<String> approvedTags;
     private boolean graphExists;
+    private int timeOut;
     
     private long startNode;
     private long endNode;
@@ -50,6 +51,7 @@ public class ui {
          useDijkstra = true;
          useAstar = true;
          useIDAstar = true;
+         timeOut = 5;
     }
     
     public void start() {
@@ -84,6 +86,8 @@ public class ui {
                 System.out.println("");
             } else if (input.equalsIgnoreCase("q"))  {
                 break;
+            } else  {
+                System.out.println("Not a valid option");
             }
             System.out.println("Main menu: ");
         }
@@ -102,7 +106,7 @@ public class ui {
         System.out.println("Pathfinding: ");
         System.out.println("P - enter two nodes and find the shortest path between them");
         System.out.println("A - choose the algorithms to be used (default: all)");
-        System.out.println("T - set timeout length (default: 10 seconds)");
+        System.out.println("T - set timeout length (default: 5 seconds)");
         System.out.println("Q - return to the main menu");
         while(true) {
             String input = scanner.nextLine();
@@ -112,13 +116,25 @@ public class ui {
             } else if (input.equalsIgnoreCase("a")) {
                 chooseAlgorithms();
             } else if (input.equalsIgnoreCase("t")) {
-                
+                setTimeOut();
             } else if (input.equalsIgnoreCase("q"))  {
                 break;
             } else  {
                 System.out.println("Not a valid option");
             }
             System.out.println("Pathfinding: ");
+        }
+    }
+    
+    private void setTimeOut()   {
+        System.out.println("Enter timeout limit in seconds: ");
+        while(true) {
+            try {
+                timeOut = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch(Exception e)    {
+                System.out.println(e);
+            }
         }
     }
     
@@ -364,6 +380,7 @@ public class ui {
     }
     
     private void printLogo()    {
+        // doesn't really work without a monospace font...
         System.out.println("");
         System.out.println("	+--------------------+");
         System.out.println("	|  OpenRoutePlanner  |");
@@ -402,6 +419,8 @@ public class ui {
                 a_star = new Astar(graph);
                 ida_star = new IDAStar(graph);
                 break;
+            } else  {
+                System.out.println("Not a valid option");
             }
         }
     }
@@ -463,6 +482,7 @@ public class ui {
     }
     
     public void ida_star(long start, long end)  {
+        ida_star.setTimeOut(timeOut);
         startNanoTimer();
         Result result = ida_star.shortestPath(start, end);
         stopNanoTimer();
@@ -479,9 +499,19 @@ public class ui {
      * Prompts the user for an OSM XML file's name to be parsed into a graph.
      */
     public void parseOSM()  {
-        System.out.print("Enter name/path of OSM file to open: ");
-        String osmFileName = scanner.nextLine();
-        osmFile =  new File(osmFileName);
+        while (true)    {
+            try {
+                System.out.print("Enter name/path of OSM file to open: ");
+                String osmFileName = scanner.nextLine();
+                osmFile =  new File(osmFileName);
+                if (osmFile.exists())   {
+                    break;
+                }
+                System.out.println("Not a valid file");
+            } catch (Exception e)   {
+                System.out.println(e);
+            }
+        }
         parser = new OSMParser();
         startNanoTimer();
         graph = parser.parse(osmFile, approvedTags);

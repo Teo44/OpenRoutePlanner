@@ -28,12 +28,18 @@ public class IDAStar {
     private double lonToKm;
     private double goalLat;
     private double goalLon;
+    private long timeOut;
 
     public IDAStar(Graph graph)   {
         this.nodeCount = graph.getNodeCount();
         adList = graph.getAdList();
         nodes = graph.getNodes();
         latToKm = 110.574;
+        timeOut = Long.MAX_VALUE;
+    }
+    
+    public void setTimeOut(int timeout)    {
+        this.timeOut = timeout * 1000;
     }
     
     public Result shortestPath(Long nd1_id, Long nd2_id)    {
@@ -61,12 +67,17 @@ public class IDAStar {
         * to speed up the heuristics calculation.
         */
         lonToKm = 111.320*Math.cos( (start.getLat() + end.getLat()) / 2 * Math.PI / 180);
+        long startTime = System.currentTimeMillis();
         
         //debug
-        int depth = 0;
+//        int depth = 0;
         
         while(true) {
-            double t = search(path, 0, bound);
+            if (System.currentTimeMillis() - startTime > timeOut)   {
+                System.out.println("timed out");
+                return new Result(null, null, Double.MAX_VALUE);
+            }
+            double t = search(path, 0, bound, 0);
             if (t == -1)    {
                 return new Result(null, null, resultNode.getDist());
             }
@@ -80,13 +91,16 @@ public class IDAStar {
         }
     }
     
-    private double search(Stack<DijkstraNode> path, double g, double bound) {
+    private double search(Stack<DijkstraNode> path, double g, double bound, int d) {
         DijkstraNode node = path.lastElement();
-        double f = g + 1.1*directDistance(node);
-        if (f > bound) {
+        
+        double f = g + directDistance(node);
+        if (f > bound || d > 10000000) {
             return f;
         }
         if (node.getID() == goalNode)   {
+            //debug
+//            System.out.println("depth of final search: " + d);
             resultNode = node;
             resultNode.setDist(g);
             return -1;
@@ -100,7 +114,7 @@ public class IDAStar {
                 nodeInPath[succ.getID()] = true;
                 if (g == 0) {
                 }
-                double t = search(path, g + succ.getDist(), bound);
+                double t = search(path, g + succ.getDist(), bound, d+1);
                 if (t == -1)    {
                     return -1;
                 }

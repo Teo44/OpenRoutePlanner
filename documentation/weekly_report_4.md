@@ -6,6 +6,7 @@
 * OSM parser optimisation
 * Functional IDA*
 * Added automated, customisable testing of the algorithms
+* UI improvements: an actual menu, options, handling of invalid inputs
 
 ## Issues
 
