@@ -46,6 +46,28 @@ public class ArrayList<T> implements Iterable<T>{
         return array[i];
     }
     
+    public T getLast()  {
+        if (index == 0)  {
+            return null;
+        }
+        return array[index - 1];
+    }
+    
+    public void removeLast()    {
+        if (index == 0) {
+            return;
+        }
+        index -= 1;
+    }
+    
+    public T pollLast() {
+        if (index == 0) {
+            return null;
+        }
+        index -= 1;
+        return array[index];
+    }
+    
     public boolean isEmpty()    {
         return (index == 0);
     }

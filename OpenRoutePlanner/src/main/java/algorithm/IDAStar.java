@@ -6,7 +6,6 @@ import graph.Arc;
 import graph.Graph;
 import graph.Node;
 import data_structure.HashMap;
-import java.util.Stack;
 
 /**
  * IDA*  shortest path algorithm with direct distance from n to target node 
@@ -22,7 +21,7 @@ public class IDAStar {
     private boolean[] nodeInPath;
     private int[] previousNode;
     
-    private Stack<DijkstraNode> path;
+    private ArrayList<DijkstraNode> path;
 
     private double latToKm;
     private double lonToKm;
@@ -54,7 +53,7 @@ public class IDAStar {
         goalLon = end.getLon();
         
         double bound = directDistance(start);
-        path = new Stack();
+        path = new ArrayList<>();
         path.add(new DijkstraNode(start.getID2(), 0, bound, start.getLat(), start.getLon()));
         
         nodeInPath = new boolean[nodeCount];
@@ -91,12 +90,11 @@ public class IDAStar {
         }
     }
     
-    private double search(Stack<DijkstraNode> path, double g, double bound, int d) {
-        DijkstraNode node = path.peek();
+    private double search(ArrayList<DijkstraNode> path, double g, double bound, int d) {
+        DijkstraNode node = path.getLast();
 
         
         double f = g + directDistance(node);
-//double f = g + 0.001;
         if (f > bound || d > 10000000) {
             return f;
         }
@@ -112,7 +110,7 @@ public class IDAStar {
         while (!(heap.isEmpty()))   {
             DijkstraNode succ = heap.poll();
             if (!(nodeInPath[succ.getID()]))    {
-                path.push(succ);
+                path.add(succ);
                 nodeInPath[succ.getID()] = true;
                 if (g == 0) {
                 }
@@ -123,8 +121,8 @@ public class IDAStar {
                 if (t < min)  {
                     min = t;
                 }
-                nodeInPath[path.peek().getID()] = false;
-                path.pop();
+                nodeInPath[path.getLast().getID()] = false;
+                path.removeLast();
             }
         }
         
