@@ -3,9 +3,9 @@
 ## What was done
 
 * Replaced Java hashmap with own implementation
+* Added automated, configurable testing of the algorithms
 * OSM parser optimisation
-* (kind of) functional IDA*
-* Added automated, customisable testing of the algorithms
+* IDA* (kind of) functional
 * UI improvements: an actual menu, options, handling of invalid inputs
 
 ## Issues
