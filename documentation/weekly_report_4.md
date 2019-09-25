@@ -4,16 +4,18 @@
 
 * Replaced Java hashmap with own implementation
 * OSM parser optimisation
-* Functional IDA*
+* (kind of) functional IDA*
 * Added automated, customisable testing of the algorithms
 * UI improvements: an actual menu, options, handling of invalid inputs
 
 ## Issues
 
-IDA* is A LOT slower than Dijkstra and A* in many cases, not 
-sure if thats just the nature of the algorithm or if there is 
-something wrong with the implementation.
+IDA* is A LOT slower than Dijkstra and A* in most cases, something 
+wrong with the implementation. 
+
+Recording results for performance testing is also on hold until 
+IDA* is fixed.
 
 ## Plan for next week
 
-
+* Random generation of different kinds of graphs for further testing

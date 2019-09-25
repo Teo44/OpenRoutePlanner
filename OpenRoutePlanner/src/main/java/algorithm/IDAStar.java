@@ -92,9 +92,11 @@ public class IDAStar {
     }
     
     private double search(Stack<DijkstraNode> path, double g, double bound, int d) {
-        DijkstraNode node = path.lastElement();
+        DijkstraNode node = path.peek();
+
         
         double f = g + directDistance(node);
+//double f = g + 0.001;
         if (f > bound || d > 10000000) {
             return f;
         }
@@ -110,7 +112,7 @@ public class IDAStar {
         while (!(heap.isEmpty()))   {
             DijkstraNode succ = heap.poll();
             if (!(nodeInPath[succ.getID()]))    {
-                path.add(succ);
+                path.push(succ);
                 nodeInPath[succ.getID()] = true;
                 if (g == 0) {
                 }
@@ -121,7 +123,8 @@ public class IDAStar {
                 if (t < min)  {
                     min = t;
                 }
-                nodeInPath[path.pop().getID()] = false;
+                nodeInPath[path.peek().getID()] = false;
+                path.pop();
             }
         }
         
@@ -149,7 +152,6 @@ public class IDAStar {
         double lonKm = (lon1 - goalLon) * lonToKm;
         
         double dist = Math.sqrt(latKm * latKm + lonKm * lonKm);
-        
         return dist;
     }
     
@@ -164,7 +166,6 @@ public class IDAStar {
         double lonKm = (lon1 - goalLon) * lonToKm;
         
         double dist = Math.sqrt(latKm * latKm + lonKm * lonKm);
-        
         return dist;
     }
 

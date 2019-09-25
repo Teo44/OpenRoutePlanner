@@ -1,7 +1,9 @@
 # Implementation
 
-## General structure
+## UI
 
+OpenRoutePlanner has a basic text UI, from which users can find shortest paths 
+in OSM maps and randomly generated graphs, and run automated tests. 
 
 ## Graphs
 
