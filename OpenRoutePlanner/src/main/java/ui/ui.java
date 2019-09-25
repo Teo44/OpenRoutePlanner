@@ -35,6 +35,10 @@ public class ui {
     private long startNode;
     private long endNode;
     
+    private Result dijkstraResult;
+    private Result AstarResult;
+    private Result IDAstarResult;
+    
     private boolean useDijkstra;
     private boolean useAstar;
     private boolean useIDAstar;
@@ -105,6 +109,7 @@ public class ui {
     private void pathFindingLoop()  {
         System.out.println("Pathfinding: ");
         System.out.println("P - enter two nodes and find the shortest path between them");
+        System.out.println("S - print the path of the last search");
         System.out.println("A - choose the algorithms to be used (default: all)");
         System.out.println("T - set timeout length (default: 5 seconds)");
         System.out.println("Q - return to the main menu");
@@ -117,7 +122,11 @@ public class ui {
                 chooseAlgorithms();
             } else if (input.equalsIgnoreCase("t")) {
                 setTimeOut();
-            } else if (input.equalsIgnoreCase("q"))  {
+            } else if (input.equalsIgnoreCase("s")) {
+                System.out.println("Previous route: ");
+                printPath();
+                System.out.println("");
+            } else if (input.equalsIgnoreCase("q"))  {  
                 break;
             } else  {
                 System.out.println("Not a valid option");
@@ -453,14 +462,14 @@ public class ui {
      */
     public void dijkstra(long start, long end)  {
         startNanoTimer();
-        Result result = dijkstra.shortestPath(start, end);
+        dijkstraResult = dijkstra.shortestPath(start, end);
         stopNanoTimer();
-        if (result.getDist() == Double.MAX_VALUE)   {
+        if (dijkstraResult.getDist() == Double.MAX_VALUE)   {
             System.out.println("No route was found");
         } else  {
             DecimalFormat df = new DecimalFormat("#.###");
             df.setRoundingMode(RoundingMode.CEILING);
-            System.out.println("Shortest distance to node: " + df.format(result.getDist()) + "km");    
+            System.out.println("Shortest distance to node: " + df.format(dijkstraResult.getDist()) + "km");    
         }
         
         //printPath(result.getPreviousNode());
@@ -468,14 +477,14 @@ public class ui {
     
     public void a_star(long start, long end) {
         startNanoTimer();
-        Result result = a_star.shortestPath(start, end);
+        AstarResult = a_star.shortestPath(start, end);
         stopNanoTimer();
-        if (result.getDist() == Double.MAX_VALUE)   {
+        if (AstarResult.getDist() == Double.MAX_VALUE)   {
             System.out.println("No route was found");
         } else  {
             DecimalFormat df = new DecimalFormat("#.###");
             df.setRoundingMode(RoundingMode.CEILING);
-            System.out.println("Shortest distance to node: " + df.format(result.getDist()) + "km");    
+            System.out.println("Shortest distance to node: " + df.format(AstarResult.getDist()) + "km");    
         }
         
         //printPath(result.getPreviousNode());
@@ -484,14 +493,14 @@ public class ui {
     public void ida_star(long start, long end)  {
         ida_star.setTimeOut(timeOut);
         startNanoTimer();
-        Result result = ida_star.shortestPath(start, end);
+        IDAstarResult = ida_star.shortestPath(start, end);
         stopNanoTimer();
-                if (result.getDist() == Double.MAX_VALUE)   {
+                if (IDAstarResult.getDist() == Double.MAX_VALUE)   {
             System.out.println("No route was found");
         } else  {
             DecimalFormat df = new DecimalFormat("#.###");
             df.setRoundingMode(RoundingMode.CEILING);
-            System.out.println("Shortest distance to node: " + df.format(result.getDist()) + "km");
+            System.out.println("Shortest distance to node: " + df.format(IDAstarResult.getDist()) + "km");
         }
     }
     
@@ -545,16 +554,21 @@ public class ui {
         stopNanoTimer();
     }
     
-    private void printPath(int[] previousNode) {
-        
-        System.out.println("Printing route: ");
+    private void printPath() {
+        int[] prevNode = dijkstraResult.getPreviousNode();
         int prev = graph.getNodes().get(endNode).getID2();
         int start = graph.getNodes().get(startNode).getID2();
-        HashMap hash = graph.getRealNodeID();
+        HashMap<Integer, Long> hash = graph.getRealNodeID();
+        ArrayList<Long> path = new ArrayList<>();
         
+        path.add(hash.get(prev));
         while (prev != start) {
-            System.out.println("Node: " + hash.get(previousNode[prev]));
-            prev = previousNode[prev];
+            path.add(hash.get(prevNode[prev]));
+            prev = prevNode[prev];
+        }
+        
+        while(!path.isEmpty())  {
+            System.out.println(path.pollLast());
         }
     }
     

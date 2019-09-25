@@ -17,7 +17,7 @@ public class OSMHandler extends DefaultHandler  {
     
     private ArrayList<Arc>[] adList;
     private HashMap<Long, Node> nodes;
-    //private HashMap<Integer, Long> realNodeID;
+    private HashMap<Integer, Long> realNodeID;
     private int nodeCount;
     private int acceptedNodeCount;
     private int arcCount;
@@ -38,7 +38,7 @@ public class OSMHandler extends DefaultHandler  {
      */
     public OSMHandler(ArrayList<String> approvedTags, int[] neighbours, HashSet<Long> acceptedWays) {
         nodes = new HashMap<>();
-        //realNodeID = new HashMap<>();
+        realNodeID = new HashMap<>();
         nodeCount = 0;
         acceptedNodeCount = 0;
         nodeIDList = new ArrayList<>();
@@ -56,7 +56,7 @@ public class OSMHandler extends DefaultHandler  {
      * @return Graph-object
      */
     public Graph getGraph()    {
-        Graph graph = new Graph(nodes, null, adList, acceptedNodeCount, arcCount);
+        Graph graph = new Graph(nodes, realNodeID, adList, acceptedNodeCount, arcCount);
         return graph;
     }
     
@@ -94,12 +94,12 @@ public class OSMHandler extends DefaultHandler  {
             Node newNode = nodes.get(Long.parseLong(attributes.getValue("ref")));
             if (lastNode != null)   {
                 double dist = nodeDistance(lastNode, newNode);
-//                long nd1 = lastNode.getID();
-//                long nd2 = newNode.getID();
-//                int nd1_id2 = lastNode.getID2();
-//                int nd2_id2 = newNode.getID2();
-                //realNodeID.put(nd1_id2, nd1);
-                //realNodeID.put(nd2_id2, nd2);
+                long nd1 = lastNode.getID();
+                long nd2 = newNode.getID();
+                int nd1_id2 = lastNode.getID2();
+                int nd2_id2 = newNode.getID2();
+                realNodeID.put(nd1_id2, nd1);
+                realNodeID.put(nd2_id2, nd2);
                 arcs.add(new Arc(lastNode, newNode, dist));
                 arcs.add(new Arc(newNode, lastNode, dist));
                 lastNode = newNode;
