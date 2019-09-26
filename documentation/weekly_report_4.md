@@ -11,12 +11,16 @@
 
 ## Issues
 
-IDA* is A LOT slower than Dijkstra and A* in most cases, something 
-wrong with the implementation. It seems the bound starts increasing slower 
-as it nears the actual shortest distance, 
+IDA* is A LOT slower than Dijkstra and A* in most cases, something has to be 
+wrong with the implementation. It seems the increase of the bound slows down 
+as it nears the actual shortest distance, to the point where the bound might only 
+increase a couple meters at a time, when there are still a few kilometers until the 
+goal node can be reached.
 
 Recording results for performance testing is also on hold until 
 IDA* is fixed.
+
+
 
 ## Plan for next week
 
@@ -24,4 +28,4 @@ IDA* is fixed.
 * Random generation of different kinds of graphs for further testing
 
 
-Work hours: 13
+Work hours: 16
