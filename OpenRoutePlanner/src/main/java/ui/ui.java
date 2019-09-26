@@ -461,6 +461,7 @@ public class ui {
      * them will be calculated with Dijkstra.
      */
     public void dijkstra(long start, long end)  {
+		dijkstra.setTimeOut(timeOut);
         startNanoTimer();
         dijkstraResult = dijkstra.shortestPath(start, end);
         stopNanoTimer();
@@ -476,6 +477,7 @@ public class ui {
     }
     
     public void a_star(long start, long end) {
+		a_star.setTimeOut(timeOut);
         startNanoTimer();
         AstarResult = a_star.shortestPath(start, end);
         stopNanoTimer();

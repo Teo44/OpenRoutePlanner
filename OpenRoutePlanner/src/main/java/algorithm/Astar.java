@@ -25,6 +25,8 @@ public class Astar {
     private double lonToKm;
     private double goalLat;
     private double goalLon;
+
+	private long timeOut;
     
     /**
      * @param graph The graph to pathfind in
@@ -34,7 +36,12 @@ public class Astar {
         adList = graph.getAdList();
         nodes = graph.getNodes();
         latToKm = 110.574;
+		timeOut = Long.MAX_VALUE;
     }
+
+	public void setTimeOut(int timeout)	{
+		this.timeOut = timeout * 1000;
+	}
     
     /**
      * Returns the shortest route between nodes nd1 and nd2
@@ -74,8 +81,14 @@ public class Astar {
         goalLon = end.getLon();
         
         heap.add(start2);
+
+		long startTime = System.currentTimeMillis();
         
         while(!heap.isEmpty())  {
+			if (System.currentTimeMillis() - startTime > timeOut)	{
+				System.out.println("timed out");
+				return new Result(null, null, Double.MAX_VALUE);
+			}
             DijkstraNode node = heap.poll();
             if (visited[node.getID()])   {
                 continue;
