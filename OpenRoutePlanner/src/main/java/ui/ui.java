@@ -311,10 +311,6 @@ public class ui {
             System.out.print("disabled, ");
         }
         System.out.println("I to toggle");
-//        System.out.println("");
-//        System.out.println("D - toggle Dijkstra's");
-//        System.out.println("A - toggle A*");
-//        System.out.println("I - toggle IDA*");
         System.out.println("Q - return");
         System.out.println("");
         while (true)    {
@@ -478,10 +474,6 @@ public class ui {
         System.out.println("");
     }
    
-    /**
-     * Prompts the user to enter two nodes, the shortest distance between 
-     * them will be calculated with Dijkstra.
-     */
     public void dijkstra(long start, long end)  {
 		dijkstra.setTimeOut(timeOut);
         startNanoTimer();

@@ -16,20 +16,20 @@ import org.xml.sax.helpers.DefaultHandler;
 public class OSMHandler extends DefaultHandler  {
     
     private ArrayList<Arc>[] adList;
-    private HashMap<Long, Node> nodes;
-    private HashMap<Integer, Long> realNodeID;
+    final private HashMap<Long, Node> nodes;
+    final private HashMap<Integer, Long> realNodeID;
     private int nodeCount;
     private int acceptedNodeCount;
     private int arcCount;
     private Node lastNode;
-    private int[] neighbours;
-    private HashSet<Long> acceptedWays;
+    final private int[] neighbours;
+    final private HashSet<Long> acceptedWays;
     private long currentWayID;
     
     private ArrayList<Arc> arcs;
     private boolean noTagFiltering;
     
-    private ArrayList<Integer> nodeIDList;
+    final private ArrayList<Integer> nodeIDList;
     
     /**
      * @param approvedTags Arraylist of tags for filtering the ways. 
@@ -82,8 +82,6 @@ public class OSMHandler extends DefaultHandler  {
             // OSM XML files, so this works
             currentWayID = Long.parseLong(attributes.getValue("id"));
             if (adList == null)  {
-                //debug
-//                System.out.println("Created adjacency list with " + acceptedNodeCount + " nodes");
                 adList = new ArrayList[acceptedNodeCount];
                 for (int i = 0; i < acceptedNodeCount; i++) {
                     adList[i] = new ArrayList<>();

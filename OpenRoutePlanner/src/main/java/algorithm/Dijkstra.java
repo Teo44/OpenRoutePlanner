@@ -14,9 +14,9 @@ public class Dijkstra {
     
     private BinaryHeap heap;
     private boolean[] visited;
-    private int nodeCount;
-    private ArrayList<Arc>[] adList;
-    private HashMap<Long, Node> nodes;
+    final private int nodeCount;
+    final private ArrayList<Arc>[] adList;
+    final private HashMap<Long, Node> nodes;
     private double distance[];
     private int[] previousNode;
 

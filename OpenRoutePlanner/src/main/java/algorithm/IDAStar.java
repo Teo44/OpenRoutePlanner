@@ -13,9 +13,9 @@ import data_structure.HashMap;
  */
 public class IDAStar {
     
-    private int nodeCount;
-    private ArrayList<Arc>[] adList;
-    private HashMap<Long, Node> nodes;
+    final private int nodeCount;
+    final private ArrayList<Arc>[] adList;
+    final private HashMap<Long, Node> nodes;
     private DijkstraNode resultNode;
     private int goalNode;
     private boolean[] nodeInPath;
@@ -23,7 +23,7 @@ public class IDAStar {
     
     private ArrayList<DijkstraNode> path;
 
-    private double latToKm;
+    final private double latToKm;
     private double lonToKm;
     private double goalLat;
     private double goalLon;

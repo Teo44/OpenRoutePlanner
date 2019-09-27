@@ -6,9 +6,8 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Class for generating random graphs, with options to choose the amount of nodes, amount of 
- * arcs generated per node, the maximum difference in latitude and longitude and whether to make sure
- * the graph is connected.
+ * Class for generating different kinds of random graphs with configurable 
+ * variables, e.g. the amount of nodes and arcs.
  */
 public class RandomGraphGenerator {
     
@@ -29,8 +28,6 @@ public class RandomGraphGenerator {
         int arcCount = 0;
         
         for (int i = 0; i < nodeCount; i++) {
-//            double lat = r.nextInt(maxLatDiff) - (maxLatDiff / 2) + r.nextDouble();
-//            double lon = r.nextInt(maxLonDiff) - (maxLonDiff / 2) + r.nextDouble();
             double lat = r.nextInt(maxLatDiff) + r.nextDouble();
             double lon = r.nextInt(maxLonDiff) + r.nextDouble();
             Node node = new Node(i, i, lat, lon);
@@ -117,14 +114,10 @@ public class RandomGraphGenerator {
                 double lon = 1.0 * j / y * maxLonDiff;
                 int id = i*x+j;
                 Node node = new Node(id, id, lat, lon);
-                //debug
-//                System.out.println("generated node " + id + " at " + lat + " lat and " + lon + " lon");
                 nodes.put((long) id, node);
                 realNodeID.put(id, (long) id);
             }
         }
-        //debug
-        System.out.println("generating ways");
         // generate half of the "roads" leading through the graph one way...
         for (int n = 0; n < roadCount / 2; n++) {
             // the node where the road will beging
@@ -142,7 +135,6 @@ public class RandomGraphGenerator {
                     } else  {
                         nextX = curX + 1;
                     }
-//                    System.out.println("next x: " + nextX);
                     if (nextX >= 0 && nextX < x)    {
                         break;
                     }
@@ -152,9 +144,6 @@ public class RandomGraphGenerator {
                 double dist = nodeDistance(nd1, nd2);
                 adList[nd1.getID2()].add(new Arc(nd1, nd2, dist));
                 adList[nd2.getID2()].add(new Arc(nd2, nd1, dist));
-                //debug
-//                System.out.println("generated arc between nodes at " +
-//                        curX+" "+curY+" and " +nextX + " " + nextY);
                 arcCount += 2;
                 curY += 1;
                 curX = nextX;
@@ -185,9 +174,6 @@ public class RandomGraphGenerator {
                 double dist = nodeDistance(nd1, nd2);
                 adList[nd1.getID2()].add(new Arc(nd1, nd2, dist));
                 adList[nd2.getID2()].add(new Arc(nd2, nd1, dist));
-                //debug
-//                System.out.println("generated arc between nodes at " +
-//                        curX+" "+curY+" and " +nextX + " " + nextY);
                 arcCount += 2;
                 curX += 1;
                 curY = nextY;
