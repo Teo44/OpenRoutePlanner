@@ -88,13 +88,15 @@ public class RandomGraphGenerator {
     
     /**
      * Generates a graph consisting of x times y evenly spread nodes, with 
-     * n roads spanning though the graph 
-     * @param x
-     * @param y
-     * @param roadCount
-     * @param maxLatDiff
-     * @param maxLonDiff
-     * @return 
+     * n randomised roads spanning though the graph.
+     * @param x X dimension of the graph
+     * @param y y dimension of the graph
+     * @param roadCount The amount of ways going through the graph
+     * @param maxLatDiff The difference in latitude between the first and last 
+     * node in the x dimension
+     * @param maxLonDiff The difference in longitude between the first and last
+     * node in the y dimension
+     * @return The generated graph as a graph-object
      */
     public Graph generateGraph2(int x, int y, int roadCount, int maxLatDiff, int maxLonDiff)   {
         

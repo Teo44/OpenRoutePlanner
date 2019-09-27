@@ -1,5 +1,6 @@
 package data_structure;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -74,5 +75,13 @@ public class ArrayListTest {
         assertTrue(array.isEmpty());
     }
     
+    
+    @Test
+    public void addingManyObject()  {
+        for (int i = 0; i < 1000000; i++)   {
+            array.add(i);
+        }
+        assertEquals(12345, array.get(12345), 0);
+    }
     
 }
