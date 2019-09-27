@@ -55,4 +55,29 @@ public class RandomGraphGeneratorTest {
         assertTrue(routeFound);
     }
     
+    @Test
+    public void graphType2NodeCountCorrect()    {
+        graph = gen.generateGraph2(100, 100, 2, 1, 1);
+        assertEquals(10000, graph.getNodeCount());
+    }
+    
+    @Test
+    public void graphType2FirstRowConnected()   {
+        graph = gen.generateGraph2(100, 100, 2, 1, 1);
+        Dijkstra d = new Dijkstra(graph);
+        boolean routeFound = true;
+        for (long i = 1; i < 99; i++)   {
+            if (d.shortestPath(0l, i).getDist() == Double.MAX_VALUE) {
+                routeFound = false;
+            }
+        }
+        assertTrue(routeFound);
+    }
+    
+    @Test
+    public void graphType2ArcCountCorrect() {
+        graph = gen.generateGraph2(100, 100, 2, 1, 1);
+        assertEquals(594, graph.getArcCount());
+    }
+    
 }
