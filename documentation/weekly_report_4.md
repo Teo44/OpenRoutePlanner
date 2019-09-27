@@ -24,8 +24,10 @@ IDA* is fixed.
 
 ## Plan for next week
 
-* Figure out IDA*
-* Random generation of different kinds of graphs for further testing
+* Fix IDA*
+* Add generating different kinds of graphs for further testing
+* Run and document tests in different graphs
+* Research the time and space complexities of the algorithms for the documentation
 
 
 Work hours: 16
