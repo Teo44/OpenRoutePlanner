@@ -6,8 +6,8 @@
 * Added automated, configurable testing of the algorithms
 * OSM parser optimisation
 * IDA* (kind of) functional
-* UI improvements: an actual menu, options, handling of invalid inputs, printing routes
-* Added configurable timing out of algorithms
+* UI improvements: an actual menu, options, handling of invalid inputs, printing routes, timing out algorithms
+* Added second kind of random graph generation
 
 ## Issues
 
@@ -30,4 +30,4 @@ IDA* is fixed.
 * Research the time and space complexities of the algorithms for the documentation
 
 
-Work hours: 16
+Work hours: 18
