@@ -9,17 +9,21 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+/**
+ * Extended saxhandler to count the neighbours of each node. Used for 
+ * optimising the results of the actual parser.
+ */
 public class OSMNodeNeighbourCount extends DefaultHandler{
 
     private int nodeCount;
-    private HashMap<Long, Node> nodes;
+    final private HashMap<Long, Node> nodes;
     private int[] neighbours;
     private Node lastNode;
     private ArrayList<Arc> arcs;
     boolean wayApproved;
     boolean noTagFiltering;
     private long currentWayID;
-    private HashSet<Long> acceptedWays;
+    final private HashSet<Long> acceptedWays;
     ArrayList<String> approvedTags;
     
     public OSMNodeNeighbourCount(ArrayList<String> approvedTags) {

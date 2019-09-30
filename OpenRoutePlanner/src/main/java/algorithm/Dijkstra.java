@@ -14,11 +14,13 @@ public class Dijkstra {
     
     private BinaryHeap heap;
     private boolean[] visited;
-    private int nodeCount;
-    private ArrayList<Arc>[] adList;
-    private HashMap<Long, Node> nodes;
+    final private int nodeCount;
+    final private ArrayList<Arc>[] adList;
+    final private HashMap<Long, Node> nodes;
     private double distance[];
     private int[] previousNode;
+
+	private long timeOut;
     
     /**
      * @param graph The graph to pathfind in
@@ -27,7 +29,12 @@ public class Dijkstra {
         this.nodeCount = graph.getNodeCount();
         adList = graph.getAdList();
         nodes = graph.getNodes();
+		timeOut = Long.MAX_VALUE;
     }
+
+	public void setTimeOut(int timeout)	{
+		this.timeOut = timeout * 1000;
+	}
     
     /**
      * Calculates the shortest path from node 1 (nd1) to node 2 (nd2)
@@ -56,8 +63,14 @@ public class Dijkstra {
         DijkstraNode start2 = new DijkstraNode(start.getID2(), 0);
         
         heap.add(start2);
+
+		long startTime = System.currentTimeMillis();
         
         while(!heap.isEmpty())  {
+			if (System.currentTimeMillis() - startTime > timeOut)	{
+				System.out.println("timed out");
+				return new Result(null, null, Double.MAX_VALUE);
+			}
             DijkstraNode node = heap.poll();
             if (visited[node.getID()])   {
                 continue;

@@ -1,7 +1,7 @@
 package data_structure;
 
 /**
- *  Simple hashmap implementation with put and get operations.
+ *  Simple hash map implementation with put and get operations.
  * @param <T> Type of the key
  * @param <K> Type of the value
  */
@@ -10,7 +10,7 @@ public class HashMap<T, K> {
     private ArrayList<HashObject<K>>[] array;
     private int size;
     private int objects;
-    private float loadFactor;
+    final private float loadFactor;
     
     public HashMap(int n)   {
         array = new ArrayList[n];

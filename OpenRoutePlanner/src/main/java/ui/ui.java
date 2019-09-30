@@ -311,10 +311,6 @@ public class ui {
             System.out.print("disabled, ");
         }
         System.out.println("I to toggle");
-//        System.out.println("");
-//        System.out.println("D - toggle Dijkstra's");
-//        System.out.println("A - toggle A*");
-//        System.out.println("I - toggle IDA*");
         System.out.println("Q - return");
         System.out.println("");
         while (true)    {
@@ -416,7 +412,29 @@ public class ui {
                 ida_star = new IDAStar(graph);
                 break;
             } else if (input.equalsIgnoreCase("r")) {
-                randomGraph();
+                System.out.println("Select graph type: ");
+                System.out.println("1 - A completely random graph with n nodes and m ways");
+                System.out.println("2 - A graph with x by y evenly distributed nodes");
+                System.out.println("    and n ways leading through the graph");
+                System.out.println("");
+                System.out.println("    Graph 2 is not guaranteed to be connected, but nodes ");
+                System.out.println("    0 to x - 1 are always connected and will have routes to most nodes");
+                while (true)    {
+                    try {
+                        int type = Integer.parseInt(scanner.nextLine());
+                        if (type == 1)  {
+                            randomGraph();
+                            break;
+                        }
+                        if (type == 2)  {
+                            randomGraph2();
+                            break;
+                        }
+                        System.out.println("Not a valid option");
+                    } catch(Exception e)    {
+                        System.out.println(e);
+                    }
+                }
                 System.out.println("Generated " + graph.getNodeCount() + " nodes");
                 System.out.println("Generated " + graph.getArcCount() + " approved arcs");
                 if (msTime > 1000)  {
@@ -456,11 +474,8 @@ public class ui {
         System.out.println("");
     }
    
-    /**
-     * Prompts the user to enter two nodes, the shortest distance between 
-     * them will be calculated with Dijkstra.
-     */
     public void dijkstra(long start, long end)  {
+		dijkstra.setTimeOut(timeOut);
         startNanoTimer();
         dijkstraResult = dijkstra.shortestPath(start, end);
         stopNanoTimer();
@@ -476,6 +491,7 @@ public class ui {
     }
     
     public void a_star(long start, long end) {
+		a_star.setTimeOut(timeOut);
         startNanoTimer();
         AstarResult = a_star.shortestPath(start, end);
         stopNanoTimer();
@@ -551,6 +567,23 @@ public class ui {
         RandomGraphGenerator generator = new RandomGraphGenerator();
         startNanoTimer();
         graph = generator.generateGraph(nodeAmount, arcAmount, maxLatDiff, maxLonDiff, connected);
+        stopNanoTimer();
+    }
+    
+    private void randomGraph2() {
+        System.out.println("Enter dimension x of the graph: ");
+        int x = Integer.parseInt(scanner.nextLine());
+        System.out.println("Enter dimension y of the graph: ");
+        int y = Integer.parseInt(scanner.nextLine());
+        System.out.println("Enter the amount of ways leading through the graph: ");
+        int ways = Integer.parseInt(scanner.nextLine());
+        System.out.println("Enter the latitude range between nodes: (1-90)");
+        int maxLatDiff = Integer.parseInt(scanner.nextLine());
+        System.out.println("Enter the longitude range between nodes: (1-180)");
+        int maxLonDiff = Integer.parseInt(scanner.nextLine());
+        RandomGraphGenerator generator = new RandomGraphGenerator();
+        startNanoTimer();
+        graph = generator.generateGraph2(x, y, ways, maxLatDiff, maxLonDiff);
         stopNanoTimer();
     }
     

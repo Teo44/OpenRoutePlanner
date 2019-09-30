@@ -13,9 +13,9 @@ import data_structure.HashMap;
  */
 public class IDAStar {
     
-    private int nodeCount;
-    private ArrayList<Arc>[] adList;
-    private HashMap<Long, Node> nodes;
+    final private int nodeCount;
+    final private ArrayList<Arc>[] adList;
+    final private HashMap<Long, Node> nodes;
     private DijkstraNode resultNode;
     private int goalNode;
     private boolean[] nodeInPath;
@@ -23,11 +23,13 @@ public class IDAStar {
     
     private ArrayList<DijkstraNode> path;
 
-    private double latToKm;
+    final private double latToKm;
     private double lonToKm;
     private double goalLat;
     private double goalLon;
+    
     private long timeOut;
+    private long startTime;
 
     public IDAStar(Graph graph)   {
         this.nodeCount = graph.getNodeCount();
@@ -66,10 +68,7 @@ public class IDAStar {
         * to speed up the heuristics calculation.
         */
         lonToKm = 111.320*Math.cos( (start.getLat() + end.getLat()) / 2 * Math.PI / 180);
-        long startTime = System.currentTimeMillis();
-        
-        //debug
-//        int depth = 0;
+        startTime = System.currentTimeMillis();
         
         while(true) {
             if (System.currentTimeMillis() - startTime > timeOut)   {
@@ -84,23 +83,23 @@ public class IDAStar {
                 return new Result(null, null, Double.MAX_VALUE);
             }
             bound = t;
-            //debug
-//            System.out.print("Depth of IDA search: " + depth++);
-//            System.out.println(" Bound: " + bound);
         }
     }
     
     private double search(ArrayList<DijkstraNode> path, double g, double bound, int d) {
         DijkstraNode node = path.getLast();
-
+        if (System.currentTimeMillis() - startTime > timeOut)   {
+                System.out.println("timed out");
+                resultNode = node;
+                resultNode.setDist(Double.MAX_VALUE);
+                return -1;
+            }
         
         double f = g + directDistance(node);
         if (f > bound || d > 10000000) {
             return f;
         }
         if (node.getID() == goalNode)   {
-            //debug
-//            System.out.println("depth of final search: " + d);
             resultNode = node;
             resultNode.setDist(g);
             return -1;
