@@ -10,5 +10,6 @@ to kilometers conversion, instead of the minimum, which is guaranteed
 to be admissible. 
 
 * Improved graph memory usage by replacing a note ID hashmap with an array
+(parsing a 4.7Gb OSM file now takes ~1 gigabyte less memory (8.3Gb))
 
 Work hours:
