@@ -24,7 +24,8 @@ public class RandomGraphGenerator {
         ArrayList<Arc>[] adList = new ArrayList[nodeCount];
         Random r = new Random();
         HashMap<Long, Node> nodes = new HashMap<>();
-        HashMap<Integer, Long> realNodeID = new HashMap<>();
+        //HashMap<Integer, Long> realNodeID = new HashMap<>();
+        long[] realNodeID = new long[nodeCount];
         int arcCount = 0;
         
         for (int i = 0; i < nodeCount; i++) {
@@ -32,7 +33,7 @@ public class RandomGraphGenerator {
             double lon = r.nextInt(maxLonDiff) + r.nextDouble();
             Node node = new Node(i, i, lat, lon);
             nodes.put((long) i, node);
-            realNodeID.put(i, (long) i);
+            realNodeID[i] = (long) i;
         }
         
         for (int i = 0; i < nodeCount; i++) {
@@ -101,7 +102,7 @@ public class RandomGraphGenerator {
         Random r = new Random();
         ArrayList<Arc>[] adList = new ArrayList[nodeCount];
         HashMap<Long, Node> nodes = new HashMap<>();
-        HashMap<Integer, Long> realNodeID = new HashMap<>();
+        long[] realNodeID = new long[nodeCount];
         int arcCount = 0;
         for (int i = 0; i < nodeCount; i++) {
             adList[i] = new ArrayList<>();
@@ -115,7 +116,7 @@ public class RandomGraphGenerator {
                 int id = i*x+j;
                 Node node = new Node(id, id, lat, lon);
                 nodes.put((long) id, node);
-                realNodeID.put(id, (long) id);
+                realNodeID[id] = (long) id;
             }
         }
         // generate half of the "roads" leading through the graph one way...

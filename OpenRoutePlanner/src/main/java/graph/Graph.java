@@ -10,7 +10,7 @@ public class Graph {
     
     private ArrayList<Arc>[] adList;
     private HashMap<Long, Node> nodes;
-    private HashMap<Integer, Long> realNodeID;
+    private long[] realNodeID;
     private int nodeCount;
     private int arcCount;
     private double maxLat;
@@ -25,7 +25,7 @@ public class Graph {
      * @param nodeCount Amount of nodes in the graph
      * @param arcCount  Amount of arcs in the graph
      */
-    public Graph(HashMap<Long, Node> nodes, HashMap<Integer, Long> realNodeID, ArrayList<Arc>[] adList, int nodeCount, int arcCount, double maxLat, double minLat, double maxLon, double minLon)  {
+    public Graph(HashMap<Long, Node> nodes, long[] realNodeID, ArrayList<Arc>[] adList, int nodeCount, int arcCount, double maxLat, double minLat, double maxLon, double minLon)  {
         this.adList = adList;
         this.nodes = nodes;
         this.realNodeID = realNodeID;
@@ -37,11 +37,11 @@ public class Graph {
         this.minLon = minLon;
     }
 
-    public HashMap<Integer, Long> getRealNodeID() {
+    public long[] getRealNodeID() {
         return realNodeID;
     }
 
-    public void setRealNodeID(HashMap<Integer, Long> realNodeID) {
+    public void setRealNodeID(long[] realNodeID) {
         this.realNodeID = realNodeID;
     }
 

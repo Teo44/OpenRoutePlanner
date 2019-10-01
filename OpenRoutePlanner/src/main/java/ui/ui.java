@@ -591,12 +591,12 @@ public class ui {
         int[] prevNode = dijkstraResult.getPreviousNode();
         int prev = graph.getNodes().get(endNode).getID2();
         int start = graph.getNodes().get(startNode).getID2();
-        HashMap<Integer, Long> hash = graph.getRealNodeID();
+        long[] hash = graph.getRealNodeID();
         ArrayList<Long> path = new ArrayList<>();
         
-        path.add(hash.get(prev));
+        path.add(hash[prev]);
         while (prev != start) {
-            path.add(hash.get(prevNode[prev]));
+            path.add(hash[(prevNode[prev])]);
             prev = prevNode[prev];
         }
         

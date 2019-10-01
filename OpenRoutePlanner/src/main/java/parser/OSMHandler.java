@@ -17,7 +17,8 @@ public class OSMHandler extends DefaultHandler  {
     
     private ArrayList<Arc>[] adList;
     final private HashMap<Long, Node> nodes;
-    final private HashMap<Integer, Long> realNodeID;
+    //final private HashMap<Integer, Long> realNodeID;
+    private long[] realNodeID;
     private int nodeCount;
     private int acceptedNodeCount;
     private int arcCount;
@@ -42,7 +43,7 @@ public class OSMHandler extends DefaultHandler  {
      */
     public OSMHandler(ArrayList<String> approvedTags, int[] neighbours, HashSet<Long> acceptedWays) {
         nodes = new HashMap<>();
-        realNodeID = new HashMap<>();
+//        realNodeID = new HashMap<>();
         nodeCount = 0;
         acceptedNodeCount = 0;
         nodeIDList = new ArrayList<>();
@@ -95,6 +96,7 @@ public class OSMHandler extends DefaultHandler  {
                 for (int i = 0; i < acceptedNodeCount; i++) {
                     adList[i] = new ArrayList<>();
                 }
+                realNodeID = new long[acceptedNodeCount];
             }
             arcs = new ArrayList<>();
         } else if (qName.equals("nd") && (acceptedWays.contains(currentWayID) || noTagFiltering))    {
@@ -105,8 +107,10 @@ public class OSMHandler extends DefaultHandler  {
                 long nd2 = newNode.getID();
                 int nd1_id2 = lastNode.getID2();
                 int nd2_id2 = newNode.getID2();
-                realNodeID.put(nd1_id2, nd1);
-                realNodeID.put(nd2_id2, nd2);
+//                realNodeID.put(nd1_id2, nd1);
+//                realNodeID.put(nd2_id2, nd2);
+                realNodeID[nd1_id2] = nd1;
+                realNodeID[nd2_id2] = nd2;
                 arcs.add(new Arc(lastNode, newNode, dist));
                 arcs.add(new Arc(newNode, lastNode, dist));
                 lastNode = newNode;

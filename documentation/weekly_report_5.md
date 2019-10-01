@@ -9,5 +9,6 @@ distance in some borderline cases, due to using the average longitude
 to kilometers conversion, instead of the minimum, which is guaranteed 
 to be admissible. 
 
+* Improved graph memory usage by replacing a note ID hashmap with an array
 
 Work hours:
