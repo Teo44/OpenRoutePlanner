@@ -13,6 +13,10 @@ public class Graph {
     private HashMap<Integer, Long> realNodeID;
     private int nodeCount;
     private int arcCount;
+    private double maxLat;
+    private double minLat;
+    private double maxLon;
+    private double minLon;
     
     /**
      * @param nodes Hashmap with ID of node as key, node-object as value
@@ -21,12 +25,16 @@ public class Graph {
      * @param nodeCount Amount of nodes in the graph
      * @param arcCount  Amount of arcs in the graph
      */
-    public Graph(HashMap<Long, Node> nodes, HashMap<Integer, Long> realNodeID, ArrayList<Arc>[] adList, int nodeCount, int arcCount)  {
+    public Graph(HashMap<Long, Node> nodes, HashMap<Integer, Long> realNodeID, ArrayList<Arc>[] adList, int nodeCount, int arcCount, double maxLat, double minLat, double maxLon, double minLon)  {
         this.adList = adList;
         this.nodes = nodes;
         this.realNodeID = realNodeID;
         this.nodeCount = nodeCount;
         this.arcCount = arcCount;
+        this.maxLat = maxLat;
+        this.minLat = minLat;
+        this.maxLon = maxLon;
+        this.minLon = minLon;
     }
 
     public HashMap<Integer, Long> getRealNodeID() {
@@ -69,4 +77,35 @@ public class Graph {
         this.nodeCount = nodeCount;
     }
 
+    public double getMaxLat() {
+        return maxLat;
+    }
+
+    public void setMaxLat(double maxLat) {
+        this.maxLat = maxLat;
+    }
+
+    public double getMinLat() {
+        return minLat;
+    }
+
+    public void setMinLat(double minLat) {
+        this.minLat = minLat;
+    }
+
+    public double getMaxLon() {
+        return maxLon;
+    }
+
+    public void setMaxLon(double maxLon) {
+        this.maxLon = maxLon;
+    }
+
+    public double getMinLon() {
+        return minLon;
+    }
+
+    public void setMinLon(double minLon) {
+        this.minLon = minLon;
+    }
 }

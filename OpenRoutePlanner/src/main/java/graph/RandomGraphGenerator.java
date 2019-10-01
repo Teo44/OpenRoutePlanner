@@ -79,7 +79,7 @@ public class RandomGraphGenerator {
             }
         }
         
-        Graph graph = new Graph(nodes, realNodeID, adList, nodeCount, arcCount);
+        Graph graph = new Graph(nodes, realNodeID, adList, nodeCount, arcCount, maxLatDiff, -maxLatDiff, maxLonDiff, -maxLonDiff);
         return graph;
     }
     
@@ -188,7 +188,7 @@ public class RandomGraphGenerator {
             arcCount += 2;    
         }
         
-        Graph graph = new Graph(nodes, realNodeID, adList, nodeCount, arcCount);
+        Graph graph = new Graph(nodes, realNodeID, adList, nodeCount, arcCount, maxLatDiff, -maxLatDiff, maxLonDiff, -maxLonDiff);
         return graph;
     }
     

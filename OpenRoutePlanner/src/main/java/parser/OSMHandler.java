@@ -25,6 +25,10 @@ public class OSMHandler extends DefaultHandler  {
     final private int[] neighbours;
     final private HashSet<Long> acceptedWays;
     private long currentWayID;
+    private double maxLat;
+    private double minLat;
+    private double maxLon;
+    private double minLon;
     
     private ArrayList<Arc> arcs;
     private boolean noTagFiltering;
@@ -56,14 +60,19 @@ public class OSMHandler extends DefaultHandler  {
      * @return Graph-object
      */
     public Graph getGraph()    {
-        Graph graph = new Graph(nodes, realNodeID, adList, acceptedNodeCount, arcCount);
+        Graph graph = new Graph(nodes, realNodeID, adList, acceptedNodeCount, arcCount, maxLat, minLat, maxLon, minLon);
         return graph;
     }
     
     @Override
     public void startElement( String uri, String localName, String qName, Attributes attributes) throws SAXException {
         
-        if (qName.equals("node"))   {
+        if (qName.equals("bounds")) {
+            maxLat = Double.parseDouble(attributes.getValue("maxlat"));
+            minLat = Double.parseDouble(attributes.getValue("minlat"));
+            maxLon = Double.parseDouble(attributes.getValue("maxlon"));
+            minLon = Double.parseDouble(attributes.getValue("minlon"));
+        } else if (qName.equals("node"))   {
             String id = attributes.getValue("id");
             String lat = attributes.getValue("lat");
             String lon = attributes.getValue("lon");

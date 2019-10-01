@@ -26,7 +26,7 @@ public class Astar {
     private double goalLat;
     private double goalLon;
 
-	private long timeOut;
+    private long timeOut;
     
     /**
      * @param graph The graph to pathfind in
@@ -36,7 +36,13 @@ public class Astar {
         adList = graph.getAdList();
         nodes = graph.getNodes();
         latToKm = 110.574;
-		timeOut = Long.MAX_VALUE;
+        timeOut = Long.MAX_VALUE;
+        
+        /** 
+        * The conversion of longitudes to kilometers is set to use whichever of the graphs bound 
+        * longitudes results in the smaller conversion, to keep the heuristic admissible in all cases.
+        */
+        lonToKm = 111.320 * Math.min(graph.getMaxLon() * Math.PI / 180, graph.getMinLon() * Math.PI / 180);
     }
 
 	public void setTimeOut(int timeout)	{
@@ -67,13 +73,8 @@ public class Astar {
         Node start = nodes.get(nd1_id);
         Node end = nodes.get(nd2_id);
         
-       /** 
-        *Approximation for the longitude to km conversion to use for the heuristic
-        * Longitude to km ratio differs a lot from the equator to the poles, so we take
-        * the average between the start and end points latitude, and use that for the conversion 
-        * to speed up the heuristics calculation.
-        */
-        lonToKm = 111.320*Math.cos( (start.getLat() + end.getLat()) / 2 * Math.PI / 180);
+       
+        
         
         DijkstraNode start2 = new DijkstraNode(start.getID2(), 0);
         
