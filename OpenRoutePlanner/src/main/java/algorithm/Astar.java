@@ -42,7 +42,7 @@ public class Astar {
         * The conversion of longitudes to kilometers is set to use whichever of the graphs bound 
         * longitudes results in the smaller conversion, to keep the heuristic admissible in all cases.
         */
-        lonToKm = 111.320 * Math.min(graph.getMaxLon() * Math.PI / 180, graph.getMinLon() * Math.PI / 180);
+        lonToKm = 111.320 * Math.cos(Math.min(graph.getMaxLat() * Math.PI / 180, graph.getMinLat() * Math.PI / 180));
     }
 
 	public void setTimeOut(int timeout)	{
@@ -72,9 +72,6 @@ public class Astar {
         
         Node start = nodes.get(nd1_id);
         Node end = nodes.get(nd2_id);
-        
-       
-        
         
         DijkstraNode start2 = new DijkstraNode(start.getID2(), 0);
         
