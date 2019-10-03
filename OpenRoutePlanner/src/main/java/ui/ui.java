@@ -49,6 +49,7 @@ public class ui {
     private int testPathCount;
     private boolean testConnected;
     private Graph testGraph;
+    private int testGraphType;
     
     public ui() {
          scanner = new Scanner(System.in);
@@ -156,31 +157,57 @@ public class ui {
         long dijkstraTotalTime = 0;
         long AstarTotalTime = 0;
         long IDAstarTotalTime = 0; 
-        for (int g = 0; g < testGraphCount; g++)    {
-            System.out.println("Generating graph...");
-            testGraph = generator.generateGraph(testNodeCount, testArcCount, 10, 10, testConnected);
+        if (testGraphType == 2) {
+            for (int g = 0; g < testGraphCount; g++)    {
+                System.out.println("Generating graph...");
+                testGraph = generator.generateGraph(testNodeCount, testArcCount, 10, 10, testConnected);
+                dijkstra = new Dijkstra(testGraph);
+                a_star = new Astar(testGraph);
+                ida_star = new IDAStar(testGraph);
+                for (int p = 0; p < testPathCount; p++) {
+                    int testStartNode = random.nextInt(testNodeCount);
+                    int testEndNode = random.nextInt(testNodeCount);
+                    if (useDijkstra)    {
+                        System.out.print("Dijkstra's: ");
+                        dijkstra(testStartNode, testEndNode);
+                        dijkstraTotalTime += msTime;
+                    }
+                    if (useAstar)   {
+                        System.out.print("A*: ");
+                        a_star(testStartNode, testEndNode);
+                        AstarTotalTime += msTime;
+                    }
+                    if (useIDAstar)    {
+                        System.out.print("IDA*: ");
+                        ida_star(testStartNode, testEndNode);
+                        IDAstarTotalTime += msTime;
+                    }
+                }
+            }
+        } else  {
             dijkstra = new Dijkstra(testGraph);
             a_star = new Astar(testGraph);
             ida_star = new IDAStar(testGraph);
+            long[] realNodeID = testGraph.getRealNodeID();
             for (int p = 0; p < testPathCount; p++) {
-                int testStartNode = random.nextInt(testNodeCount);
-                int testEndNode = random.nextInt(testNodeCount);
-                if (useDijkstra)    {
-                    System.out.print("Dijkstra's: ");
-                    dijkstra(testStartNode, testEndNode);
-                    dijkstraTotalTime += msTime;
+                    long testStartNode = realNodeID[random.nextInt(testNodeCount)];
+                    long testEndNode = realNodeID[random.nextInt(testNodeCount)];
+                    if (useDijkstra)    {
+                        System.out.print("Dijkstra's: ");
+                        dijkstra(testStartNode, testEndNode);
+                        dijkstraTotalTime += msTime;
+                    }
+                    if (useAstar)   {
+                        System.out.print("A*: ");
+                        a_star(testStartNode, testEndNode);
+                        AstarTotalTime += msTime;
+                    }
+                    if (useIDAstar)    {
+                        System.out.print("IDA*: ");
+                        ida_star(testStartNode, testEndNode);
+                        IDAstarTotalTime += msTime;
+                    }
                 }
-                if (useAstar)   {
-                    System.out.print("A*: ");
-                    a_star(testStartNode, testEndNode);
-                    AstarTotalTime += msTime;
-                }
-                if (useIDAstar)    {
-                    System.out.print("IDA*: ");
-                    ida_star(testStartNode, testEndNode);
-                    IDAstarTotalTime += msTime;
-                }
-            }
         }
         System.out.println("");
         if (useDijkstra)    {
@@ -240,52 +267,91 @@ public class ui {
     private void performanceTestOptions()  {
         System.out.println("Set the algorithms to use: ");
         chooseAlgorithms();
-        System.out.print("How many different graphs to generate? ");
+        System.out.println("Use an OSM graph or generate random graph? [O]SM/[R]andom");
         while (true)    {
             try {
-                testGraphCount = Integer.parseInt(scanner.nextLine());
-                break;
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("o"))    {
+                    testGraphType = 1;
+                    break;
+                } 
+                if (input.equalsIgnoreCase("r"))    {
+                    testGraphType = 2;
+                    break;
+                }
             } catch (Exception e)   {
                 System.out.println(e);
             }
         }
-        System.out.print("How many nodes to generate per graph? ");
-        while (true)    {
-            try {
-                testNodeCount = Integer.parseInt(scanner.nextLine());
-                break;
-            } catch (Exception e)   {
-                System.out.println(e);
+        if (testGraphType == 2) {
+            System.out.print("How many different graphs to generate? ");
+            while (true)    {
+                try {
+                    testGraphCount = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (Exception e)   {
+                    System.out.println(e);
+                }
             }
-        }
-        System.out.println("How many arcs to generate per node? ");
-        while (true)    {
-            try {
-                testArcCount = Integer.parseInt(scanner.nextLine());
-                break;
-            } catch (Exception e)   {
-                System.out.println(e);
+            System.out.print("How many nodes to generate per graph? ");
+            while (true)    {
+                try {
+                    testNodeCount = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (Exception e)   {
+                    System.out.println(e);
+                }
             }
-        }
-        System.out.println("How many paths to find in each graph? ");
-        while (true)    {
-            try {
-                testPathCount = Integer.parseInt(scanner.nextLine());
-                break;
-            } catch (Exception e)   {
-                System.out.println(e);
+            System.out.println("How many arcs to generate per node? ");
+            while (true)    {
+                try {
+                    testArcCount = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (Exception e)   {
+                    System.out.println(e);
+                }
             }
-        }
-        System.out.println("Make sure graph is connected? ([Y]es/[N]o) ");
-        while (true)    {
-            String input = scanner.nextLine();
-            if (input.equalsIgnoreCase("y"))    {
-                testConnected = true;
-                break;
-            } else if (input.equalsIgnoreCase("n")) {
-                testConnected = false;
-                break;
+            System.out.println("How many paths to find in each graph? ");
+            while (true)    {
+                try {
+                    testPathCount = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (Exception e)   {
+                    System.out.println(e);
+                }
             }
+            System.out.println("Make sure graph is connected? ([Y]es/[N]o) ");
+            while (true)    {
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("y"))    {
+                    testConnected = true;
+                    break;
+                } else if (input.equalsIgnoreCase("n")) {
+                    testConnected = false;
+                    break;
+                }
+            }
+        } else  {
+            askForApprovedWays();
+                parseOSMForTest();
+                testNodeCount = testGraph.getNodeCount();
+                testGraphCount = 1;
+                System.out.println("Found " + testGraph.getNodeCount() + " nodes");
+                System.out.println("Found " + testGraph.getArcCount() + " approved arcs");
+                if (msTime > 1000)  {
+                    System.out.println("Parsing took " + msTime / 1000 +  "seconds");
+                } else  {
+                    System.out.println("Parsing took " + msTime + " milliseconds");
+                }
+                System.out.println("How many paths to find in the graph? ");
+                while (true)    {
+                    try {
+                        testPathCount = Integer.parseInt(scanner.nextLine());
+                        break;
+                    } catch (Exception e)   {
+                        System.out.println(e);
+                    }
+                }
         }
     }
     
@@ -475,7 +541,7 @@ public class ui {
     }
    
     public void dijkstra(long start, long end)  {
-		dijkstra.setTimeOut(timeOut);
+        dijkstra.setTimeOut(timeOut);
         startNanoTimer();
         dijkstraResult = dijkstra.shortestPath(start, end);
         stopNanoTimer();
@@ -537,9 +603,30 @@ public class ui {
                 System.out.println(e);
             }
         }
+        System.out.println("Parsing...");
         parser = new OSMParser();
         startNanoTimer();
         graph = parser.parse(osmFile, approvedTags);
+        stopNanoTimer();
+    }
+    
+    public void parseOSMForTest()  {
+        while (true)    {
+            try {
+                System.out.print("Enter name/path of OSM file to open: ");
+                String osmFileName = scanner.nextLine();
+                osmFile =  new File(osmFileName);
+                if (osmFile.exists())   {
+                    break;
+                }
+                System.out.println("Not a valid file");
+            } catch (Exception e)   {
+                System.out.println(e);
+            }
+        }
+        parser = new OSMParser();
+        startNanoTimer();
+        testGraph = parser.parse(osmFile, approvedTags);
         stopNanoTimer();
     }
     

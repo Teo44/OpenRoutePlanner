@@ -46,6 +46,10 @@ public class Dijkstra {
      * @see algorithm.Result
      */
     public Result shortestPath(Long nd1_id, Long nd2_id)  {
+        if (nodes.get(nd1_id) == null || nodes.get(nd2_id) == null) {
+            System.out.println("Node with given ID doesn't exist in graph");
+            return new Result(null, null, Double.MAX_VALUE);
+        }
         if (nd1_id.equals(nd2_id))   {
             return new Result(distance, previousNode, 0l);
         }
