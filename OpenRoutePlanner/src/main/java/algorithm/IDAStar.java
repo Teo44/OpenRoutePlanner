@@ -35,14 +35,14 @@ public class IDAStar {
         this.nodeCount = graph.getNodeCount();
         adList = graph.getAdList();
         nodes = graph.getNodes();
-        latToKm = 110.574;
+        latToKm = 100;
         timeOut = Long.MAX_VALUE;
         
         /** 
         * The conversion of longitudes to kilometers is set to use whichever of the graphs bound 
         * longitudes results in the smaller conversion, to keep the heuristic admissible in all cases.
         */
-        lonToKm = 111.320 * Math.cos(Math.min(graph.getMaxLat() * Math.PI / 180, graph.getMinLat() * Math.PI / 180));
+        lonToKm = 100 * Math.cos(Math.min(graph.getMaxLat() * Math.PI / 180, graph.getMinLat() * Math.PI / 180));
     }
     
     public void setTimeOut(int timeout)    {
