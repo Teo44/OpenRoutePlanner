@@ -1,6 +1,7 @@
 package data_structure;
 
 import algorithm.DijkstraNode;
+import java.util.Random;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
@@ -83,6 +84,37 @@ public class BinaryHeapTest {
         heap.add(new DijkstraNode(1, 123));
         heap.poll();
         assertTrue(heap.isEmpty());
+    }
+    
+    @Test
+    public void randomNodes1()   {
+        Random r = new Random();
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < 10000; i++) {
+            int n = r.nextInt(1000000) + 1;
+            if (n < min)    {
+                min = n;
+            }
+            heap.add(new DijkstraNode(n, n));
+        }
+        assertEquals(min, heap.poll().getID());
+    }
+    
+    @Test
+    public void randomNodes2()  {
+        Random r = new Random();
+        int max = 0;
+        for (int i = 0; i < 10000; i++) {
+            int n = r.nextInt(1000000) + 1;
+            if (n > max)    {
+                max = n;
+            }
+            heap.add(new DijkstraNode(n, n));
+        }
+        for (int i = 0; i < 9999; i++)  {
+            heap.poll();
+        }
+        assertEquals(max, heap.poll().getID());
     }
     
 }

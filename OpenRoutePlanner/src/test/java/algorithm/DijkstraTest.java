@@ -67,4 +67,9 @@ public class DijkstraTest {
     public void testKumpulaPath2()  {
         assertEquals(0.09573535075927543, dijkstraKumpula.shortestPath(34399420l, 583267403l).getDist(), 0.00001);
     }
+    
+    @Test
+    public void nonExistingNodes()  {
+        assertEquals(Double.MAX_VALUE, dijkstra.shortestPath(3333l, 3344l).getDist(), 0);
+    }
 }

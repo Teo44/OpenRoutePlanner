@@ -68,4 +68,9 @@ public class IDAstarTest {
     public void testKumpulaPath2()  {
         assertEquals(0.09573535075927543, ida_starKumpula.shortestPath(34399420l, 583267403l).getDist(), 0.00001);
     }
+    
+    @Test
+    public void nonExistingNodes()  {
+        assertEquals(Double.MAX_VALUE, ida_star.shortestPath(3333l, 3344l).getDist(), 0);
+    }
 }
