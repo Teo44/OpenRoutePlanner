@@ -353,6 +353,7 @@ public class ui {
                     }
                 }
         }
+        setTimeOut();
     }
     
     private void chooseAlgorithms() {
