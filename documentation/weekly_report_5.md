@@ -9,5 +9,6 @@ distances in large graphs.
 * Added automated performance testing in OSM graphs and grid type random graphs
 * Added couple more tests, coverage of all packages >90%
 * Replaced last usages of Java data structures with own implementations.
+* Added javadoc for the UI-class
 
 Work hours:

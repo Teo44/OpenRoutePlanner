@@ -4,7 +4,6 @@ import java.io.File;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import data_structure.ArrayList;
-import data_structure.HashMap;
 import java.util.Scanner;
 import algorithm.Astar;
 import algorithm.Dijkstra;
@@ -61,6 +60,9 @@ public class ui {
          timeOut = 5;
     }
     
+    /**
+     * The main menu loop
+     */
     public void start() {
         
 //        printLogo();
@@ -100,6 +102,9 @@ public class ui {
         }
     }
     
+    /**
+     * For timing algorithms and graph parsing
+     */
     private void startNanoTimer()    {
         startTime = System.nanoTime();
     }
@@ -109,6 +114,9 @@ public class ui {
         msTime = nanoTime / 1000000;
     }
     
+    /**
+     * The path finding menu loop
+     */
     private void pathFindingLoop()  {
         System.out.println("Pathfinding: ");
         System.out.println("P - enter two nodes and find the shortest path between them");
@@ -138,6 +146,9 @@ public class ui {
         }
     }
     
+    /**
+     * Menu to change the timeout limit of the algorithms
+     */
     private void setTimeOut()   {
         System.out.println("Enter timeout limit in seconds: ");
         while(true) {
@@ -150,6 +161,11 @@ public class ui {
         }
     }
     
+    /**
+     * An automated performance tests. Can generate multiple graphs, 
+     * search random paths in them and keep track of each algorithms 
+     * performance. Helpful for larger scale testing.
+     */
     private void performanceTest()  {
         performanceTestOptions();
         System.out.println("");
@@ -270,6 +286,10 @@ public class ui {
         }
     }
     
+    /**
+     * The menu to set the variables of the performance test, like what kind 
+     * of graph, which algorithms will be used and how many paths searched.
+     */
     private void performanceTestOptions()  {
         System.out.println("Set the algorithms to use: ");
         chooseAlgorithms();
@@ -420,6 +440,9 @@ public class ui {
         setTimeOut();
     }
     
+    /**
+     * The menu for choosing algorithms to use.
+     */
     private void chooseAlgorithms() {
         System.out.print("Dijkstra's - ");
         if (useDijkstra)    {
@@ -461,6 +484,9 @@ public class ui {
         }
     }
     
+    /**
+     * Method to search for a path with all the enabled algorithms.
+     */
     private void findPath() {
         if (useDijkstra)    {
             dijkstra(startNode, endNode);
@@ -491,6 +517,9 @@ public class ui {
         }
     }
     
+    /**
+     * Menu for setting the way filtering for parsing an OSM map.
+     */
     private void askForApprovedWays()   {
         approvedTags = new ArrayList<>();
         System.out.println("Filter ways by tags? [Y]es/[N]o/[D]efault (highway) ");
@@ -524,6 +553,9 @@ public class ui {
         System.out.println("");
     }
     
+    /**
+     * The menu for parsing an OSM map or generating a random one.
+     */
     private void newGraph() {
         System.out.println("Parse an OSM or generate a random graph? [O]SM/[R]andom");
         while(true) {
@@ -583,6 +615,9 @@ public class ui {
         }
     }
     
+    /**
+     * The method to enter the start and goal nodes for a search.
+     */
     private void askForNodes()  {
         System.out.print("Enter the start node ID: ");
         while (true)    {
@@ -605,6 +640,11 @@ public class ui {
         System.out.println("");
     }
    
+    /**
+     * Uses Dijkstra to search for a path between the given nodes.
+     * @param start
+     * @param end 
+     */
     public void dijkstra(long start, long end)  {
         dijkstra.setTimeOut(timeOut);
         startNanoTimer();
@@ -617,10 +657,13 @@ public class ui {
             df.setRoundingMode(RoundingMode.CEILING);
             System.out.println("Shortest distance to node: " + df.format(dijkstraResult.getDist()) + "km");    
         }
-        
-        //printPath(result.getPreviousNode());
     }
     
+    /**
+     * Uses A* to search for a path between the given nodes.
+     * @param start
+     * @param end 
+     */
     public void a_star(long start, long end) {
 		a_star.setTimeOut(timeOut);
         startNanoTimer();
@@ -633,10 +676,13 @@ public class ui {
             df.setRoundingMode(RoundingMode.CEILING);
             System.out.println("Shortest distance to node: " + df.format(AstarResult.getDist()) + "km");    
         }
-        
-        //printPath(result.getPreviousNode());
     }
     
+    /**
+     * Uses IDA* to search for a path between the given nodes.
+     * @param start
+     * @param end 
+     */
     public void ida_star(long start, long end)  {
         ida_star.setTimeOut(timeOut);
         startNanoTimer();
@@ -675,6 +721,10 @@ public class ui {
         stopNanoTimer();
     }
     
+    /**
+     * Prompts the user for an OSM XML file's name to be parsed into a graph for the 
+     * automated testing.
+     */
     public void parseOSMForTest()  {
         while (true)    {
             try {
@@ -695,6 +745,9 @@ public class ui {
         stopNanoTimer();
     }
     
+    /**
+     * Takes the variables for generating a type 1 random graph.
+     */
     private void randomGraph()  {
         System.out.print("Enter amount of nodes to generate: ");
         int nodeAmount = Integer.parseInt(scanner.nextLine());
@@ -722,6 +775,9 @@ public class ui {
         stopNanoTimer();
     }
     
+    /**
+     * Takes the variables for generating a type 2 random graph.
+     */
     private void randomGraph2() {
         System.out.println("Enter dimension x of the graph: ");
         int x = Integer.parseInt(scanner.nextLine());
@@ -739,6 +795,10 @@ public class ui {
         stopNanoTimer();
     }
     
+    /**
+     * Prints out the previously searched path in the form of the 
+     * IDs of the nodes.
+     */
     private void printPath() {
         int[] prevNode = dijkstraResult.getPreviousNode();
         int prev = graph.getNodes().get(endNode).getID2();
