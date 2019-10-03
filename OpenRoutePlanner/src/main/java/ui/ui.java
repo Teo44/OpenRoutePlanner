@@ -50,6 +50,8 @@ public class ui {
     private boolean testConnected;
     private Graph testGraph;
     private int testGraphType;
+    private int testGraphX;
+    private int testGraphY;
     
     public ui() {
          scanner = new Scanner(System.in);
@@ -157,10 +159,14 @@ public class ui {
         long dijkstraTotalTime = 0;
         long AstarTotalTime = 0;
         long IDAstarTotalTime = 0; 
-        if (testGraphType == 2) {
+        if (testGraphType == 2 || testGraphType == 3) {
             for (int g = 0; g < testGraphCount; g++)    {
                 System.out.println("Generating graph...");
-                testGraph = generator.generateGraph(testNodeCount, testArcCount, 10, 10, testConnected);
+                if (testGraphType == 2) {
+                    testGraph = generator.generateGraph(testNodeCount, testArcCount, 10, 10, testConnected);
+                } else  {
+                    testGraph = generator.generateGraph2(testGraphX, testGraphY, testArcCount, 10, 10);
+                }
                 dijkstra = new Dijkstra(testGraph);
                 a_star = new Astar(testGraph);
                 ida_star = new IDAStar(testGraph);
@@ -276,7 +282,18 @@ public class ui {
                     break;
                 } 
                 if (input.equalsIgnoreCase("r"))    {
-                    testGraphType = 2;
+                    System.out.println("Select graph type 1 or 2?");
+                    while(true) {
+                        String input2 = scanner.nextLine();
+                        if (input2.equalsIgnoreCase("1"))   {
+                            testGraphType = 2;
+                            break;
+                        } 
+                        if (input2.equalsIgnoreCase("2"))   {
+                            testGraphType = 3;
+                            break;
+                        }
+                    }
                     break;
                 }
             } catch (Exception e)   {
@@ -331,6 +348,53 @@ public class ui {
                     break;
                 }
             }
+        } if (testGraphType == 3)   {
+            System.out.print("How many different graphs to generate? ");
+            while (true)    {
+                try {
+                    testGraphCount = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (Exception e)   {
+                    System.out.println(e);
+                }
+            }
+            System.out.println("Enter dimension x of the graph: ");
+            while (true)    {
+                try {
+                    testGraphX = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (Exception e)   {
+                    System.out.println(e);
+                }
+            }
+            System.out.println("Enter dimension y of the graph: ");
+            while (true)    {
+                try {
+                    testGraphY = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (Exception e)   {
+                    System.out.println(e);
+                }
+            }
+            System.out.println("Enter the amount of ways leading through the graph: ");
+            while (true)    {
+                try {
+                    testArcCount = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (Exception e)   {
+                    System.out.println(e);
+                }
+            }
+            System.out.println("How many paths to find in each graph? ");
+            while (true)    {
+                try {
+                    testPathCount = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (Exception e)   {
+                    System.out.println(e);
+                }
+            }
+            testNodeCount = testGraphX * testGraphY;
         } else  {
             askForApprovedWays();
                 parseOSMForTest();
