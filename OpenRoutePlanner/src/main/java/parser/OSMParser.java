@@ -2,10 +2,10 @@ package parser;
 
 import java.io.File;
 import data_structure.ArrayList;
+import data_structure.HashMap;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import graph.Graph;
-import java.util.HashSet;
 
 public class OSMParser { 
     /**
@@ -24,7 +24,7 @@ public class OSMParser {
            OSMNodeNeighbourCount counter = new OSMNodeNeighbourCount(approvedTags);
            saxParser.parse(osm, counter);
            int[] neighbours = counter.getNodeNeighbourCount();
-           HashSet acceptedWays = counter.getAcceptedWays();
+           HashMap acceptedWays = counter.getAcceptedWays();
            SAXParserFactory factory2 = SAXParserFactory.newInstance();
            SAXParser saxParser2 = factory2.newSAXParser();
            OSMHandler handler = new OSMHandler(approvedTags, neighbours, acceptedWays);

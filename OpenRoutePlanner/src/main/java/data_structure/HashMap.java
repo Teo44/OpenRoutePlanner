@@ -59,6 +59,15 @@ public class HashMap<T, K> {
         return null;
     }
     
+    public boolean contains(long key)  {
+        for (HashObject o : array[hash(key)])   {
+            if (o.getKey() == key)  {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     private void reHash()   {
         size *= 2;
         ArrayList<HashObject<K>>[] newArray = new ArrayList[size];

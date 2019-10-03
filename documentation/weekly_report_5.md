@@ -14,4 +14,8 @@ to be admissible.
 
 * Added automated performance testing in OSM graphs
 
+* Added couple more tests, coverage of all packages >90%
+
+* Replaces last usages of Java data structures with own implementations.
+
 Work hours:

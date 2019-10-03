@@ -5,7 +5,6 @@ import data_structure.HashMap;
 import graph.Arc;
 import graph.Graph;
 import graph.Node;
-import java.util.HashSet;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -17,14 +16,13 @@ public class OSMHandler extends DefaultHandler  {
     
     private ArrayList<Arc>[] adList;
     final private HashMap<Long, Node> nodes;
-    //final private HashMap<Integer, Long> realNodeID;
+    final private HashMap<Long, Long> acceptedWays;
     private long[] realNodeID;
     private int nodeCount;
     private int acceptedNodeCount;
     private int arcCount;
     private Node lastNode;
     final private int[] neighbours;
-    final private HashSet<Long> acceptedWays;
     private long currentWayID;
     private double maxLat;
     private double minLat;
@@ -40,8 +38,10 @@ public class OSMHandler extends DefaultHandler  {
      * @param approvedTags Arraylist of tags for filtering the ways. 
      * E.g. "highway" only parses ways with the k="highway" attributes in one of their 
      * "tag" elements.
+     * @param acceptedWays HashMap containing the ID's of ways to be accepted.
+     * @param neighbours An array containing the amount of neighbours each node has.
      */
-    public OSMHandler(ArrayList<String> approvedTags, int[] neighbours, HashSet<Long> acceptedWays) {
+    public OSMHandler(ArrayList<String> approvedTags, int[] neighbours, HashMap<Long, Long> acceptedWays) {
         nodes = new HashMap<>();
 //        realNodeID = new HashMap<>();
         nodeCount = 0;

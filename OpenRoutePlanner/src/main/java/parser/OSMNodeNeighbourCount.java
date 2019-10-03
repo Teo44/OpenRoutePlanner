@@ -1,10 +1,9 @@
 package parser;
 
 import data_structure.ArrayList;
-import java.util.HashMap;
+import data_structure.HashMap;
 import graph.Arc;
 import graph.Node;
-import java.util.HashSet;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -17,13 +16,13 @@ public class OSMNodeNeighbourCount extends DefaultHandler{
 
     private int nodeCount;
     final private HashMap<Long, Node> nodes;
+    final private HashMap<Long, Long> acceptedWays;
     private int[] neighbours;
     private Node lastNode;
     private ArrayList<Arc> arcs;
     boolean wayApproved;
     boolean noTagFiltering;
     private long currentWayID;
-    final private HashSet<Long> acceptedWays;
     ArrayList<String> approvedTags;
     
     public OSMNodeNeighbourCount(ArrayList<String> approvedTags) {
@@ -33,7 +32,7 @@ public class OSMNodeNeighbourCount extends DefaultHandler{
             noTagFiltering = true;
         }
         this.approvedTags = approvedTags;
-        acceptedWays = new HashSet<>();
+        acceptedWays = new HashMap<>();
     }
     
     @Override
@@ -86,7 +85,7 @@ public class OSMNodeNeighbourCount extends DefaultHandler{
             // set lastNode to null, so the current way isn't connected to the next one
             lastNode = null;
             if (wayApproved)    {
-                acceptedWays.add(currentWayID);
+                acceptedWays.put(currentWayID, 0l);
                 for (Arc a : arcs)  {
                     neighbours[a.getNode1().getID2()] += 1;
                 }
@@ -99,7 +98,7 @@ public class OSMNodeNeighbourCount extends DefaultHandler{
         return neighbours;
     }
     
-    public HashSet getAcceptedWays()   {
+    public HashMap getAcceptedWays()   {
         return acceptedWays;
     }
 }
