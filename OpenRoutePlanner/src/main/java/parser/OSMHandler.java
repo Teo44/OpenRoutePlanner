@@ -43,7 +43,6 @@ public class OSMHandler extends DefaultHandler  {
      */
     public OSMHandler(ArrayList<String> approvedTags, int[] neighbours, HashMap<Long, Long> acceptedWays) {
         nodes = new HashMap<>();
-//        realNodeID = new HashMap<>();
         nodeCount = 0;
         acceptedNodeCount = 0;
         nodeIDList = new ArrayList<>();
@@ -107,8 +106,6 @@ public class OSMHandler extends DefaultHandler  {
                 long nd2 = newNode.getID();
                 int nd1_id2 = lastNode.getID2();
                 int nd2_id2 = newNode.getID2();
-//                realNodeID.put(nd1_id2, nd1);
-//                realNodeID.put(nd2_id2, nd2);
                 realNodeID[nd1_id2] = nd1;
                 realNodeID[nd2_id2] = nd2;
                 arcs.add(new Arc(lastNode, newNode, dist));
