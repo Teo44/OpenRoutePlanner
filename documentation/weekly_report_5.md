@@ -11,5 +11,8 @@ distances in large graphs.
 * Replaced last usages of Java data structures with own implementations.
 * Added javadoc for the UI-class
 * Working IDA* (finally)
+* Continued the implementation documentation
+* Started performance testing
+* Started writing the manual
 
 Work hours:

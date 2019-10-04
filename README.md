@@ -10,6 +10,8 @@ Finding the shortest routes using open map data and algorithms. A university cou
 
 * [Testing](https://github.com/Teo44/OpenRoutePlanner/blob/master/documentation/testing.md)
 
+* [Manual](https://github.com/Teo44/OpenRoutePlanner/blob/master/documentation/manual.md)
+
 
 ## Weekly reports
 
