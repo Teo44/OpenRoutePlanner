@@ -33,6 +33,8 @@ guaranteed to be the shortest possible ones.
 		 A* 650s, avg 259ms
 4 arcs per node: Dijkstra's total 1969s, avg of 787ms
 		 A* total 554s, avg 221ms
+5 arcs per node: Dijkstra's total 2315s, avg of 925ms
+		 A* total 562s, avg of 224ms
 
 TODO: graphical representation of the results
 

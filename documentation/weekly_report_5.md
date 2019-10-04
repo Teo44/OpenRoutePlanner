@@ -15,4 +15,4 @@ distances in large graphs.
 * Started performance testing
 * Started writing the manual
 
-Work hours:
+Work hours: 12
