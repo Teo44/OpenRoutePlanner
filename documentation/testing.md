@@ -29,10 +29,13 @@ guaranteed to be the shortest possible ones.
 
 2 arcs per node: Dijkstra's total time 1332 seconds, average 532 ms per path.
 		 A* total time 687s, average of 275ms per path
+
 3 arcs per node: Dijkstra's total time 1723s, avg 689ms
 		 A* 650s, avg 259ms
+
 4 arcs per node: Dijkstra's total 1969s, avg of 787ms
 		 A* total 554s, avg 221ms
+
 5 arcs per node: Dijkstra's total 2315s, avg of 925ms
 		 A* total 562s, avg of 224ms
 
@@ -44,6 +47,8 @@ TODO: graphical representation of the results
 
 The premise of theses tests is the same as in the previous segment, but the graph size 
 is reduced to 50 000 nodes. 
+
+TODO
 
 ## Performance tests in OSM maps
 
