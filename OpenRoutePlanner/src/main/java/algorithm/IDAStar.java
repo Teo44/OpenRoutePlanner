@@ -85,6 +85,9 @@ public class IDAStar {
             if (t == Double.MAX_VALUE)  {
                 return new Result(null, null, Double.MAX_VALUE);
             }
+            if ((t - bound) < 0.01) {
+                t += 0.01;
+            }
             bound = t;
         }
     }
@@ -120,7 +123,7 @@ public class IDAStar {
                 if (t == -1)    {
                     return -1;
                 }
-                if (t + directDistance(path.getLast()) < min)  {
+                if (t < min)  {
                     min = t;
                 }
                 nodeInPath[path.getLast().getID()] = false;
