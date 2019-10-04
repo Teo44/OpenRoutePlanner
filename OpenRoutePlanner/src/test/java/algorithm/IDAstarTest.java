@@ -58,7 +58,6 @@ public class IDAstarTest {
         assertEquals(0.6386424878158962, ida_star.shortestPath(321l, 666l).getDist(), 0.00001);
     }
 
-    // IDA* seems to never find the route in this case?
     @Test
     public void testKumpulaPath1()  {
         assertEquals(1.0597847879291002, ida_starKumpula.shortestPath(34399420l, 364533819l).getDist(), 0.00001);

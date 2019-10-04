@@ -368,7 +368,7 @@ public class ui {
                     break;
                 }
             }
-        } if (testGraphType == 3)   {
+        } else if (testGraphType == 3)   {
             System.out.print("How many different graphs to generate? ");
             while (true)    {
                 try {

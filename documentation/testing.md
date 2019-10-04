@@ -9,10 +9,10 @@ between the nodes were tested.
 
 The tests can all be easily reproduced with the automated testing. While the 
 generated graphs will be different each time, large enough sample sizes will 
-make up for the it to show the differences of the algorithms with each type of graph.
+make up for the it to show the differences of the algorithms.
 
 TODO: tests multiple graphs of each kind, visualise with graphs
 
 ## Performance in OSM maps
 
-TODO: test multiple paths in the largest map that can reasonably be parsed
+TODO: n random routes in Helsinki, Tokyo and Kanto OSM maps
