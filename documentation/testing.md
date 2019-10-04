@@ -29,7 +29,10 @@ guaranteed to be the shortest possible ones.
 
 2 arcs per node: Dijkstra's total time 1332 seconds, average 532 ms per path.
 		 A* total time 687s, average of 275ms per path
-3 arcs per node:
+3 arcs per node: Dijkstra's total time 1723s, avg 689ms
+		 A* 650s, avg 259ms
+4 arcs per node: Dijkstra's total 1969s, avg of 787ms
+		 A* total 554s, avg 221ms
 
 TODO: graphical representation of the results
 
@@ -50,3 +53,8 @@ TODO: n random routes in Helsinki, Tokyo and Kanto OSM maps
 
 ### Random routes in an OSM map of Kanto region
 
+
+## Memory usage comparisons
+
+TODO: run tests in small graphs with all the algorithms, compare memory usage with psrecord
+ 
