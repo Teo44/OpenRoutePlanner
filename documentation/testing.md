@@ -1,6 +1,6 @@
 # Testing
 
-## Performance in ramdomised graphs
+## Performance tests in ramdomised graphs
 
 Tests were (will be) performed using the automated testing in the program. 
 To compare the performance of the algorithms in different kind of graphs, 
@@ -45,7 +45,7 @@ TODO: graphical representation of the results
 The premise of theses tests is the same as in the previous segment, but the graph size 
 is reduced to 50 000 nodes. 
 
-## Performance in OSM maps
+## Performance tests in OSM maps
 
 TODO: n random routes in Helsinki, Tokyo and Kanto OSM maps
 
@@ -59,4 +59,7 @@ TODO: n random routes in Helsinki, Tokyo and Kanto OSM maps
 ## Memory usage comparisons
 
 TODO: run tests in small graphs with all the algorithms, compare memory usage with psrecord
+
+
+## JUnit tests 
  
