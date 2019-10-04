@@ -120,7 +120,7 @@ public class IDAStar {
                 if (t == -1)    {
                     return -1;
                 }
-                if (t < min)  {
+                if (t + directDistance(path.getLast()) < min)  {
                     min = t;
                 }
                 nodeInPath[path.getLast().getID()] = false;

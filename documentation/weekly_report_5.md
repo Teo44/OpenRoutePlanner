@@ -10,5 +10,6 @@ distances in large graphs.
 * Added couple more tests, coverage of all packages >90%
 * Replaced last usages of Java data structures with own implementations.
 * Added javadoc for the UI-class
+* Working IDA* (finally)
 
 Work hours:
