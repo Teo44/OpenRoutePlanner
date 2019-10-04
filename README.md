@@ -22,3 +22,5 @@ Finding the shortest routes using open map data and algorithms. A university cou
 * [3. week](https://github.com/Teo44/OpenRoutePlanner/blob/master/documentation/weekly_report_3.md)
 
 * [4. week](https://github.com/Teo44/OpenRoutePlanner/blob/master/documentation/weekly_report_4.md)
+
+* [5. week](https://github.com/Teo44/OpenRoutePlanner/blob/master/documentation/weekly_report_5.md)
