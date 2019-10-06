@@ -15,4 +15,9 @@ distances in large graphs.
 * Started performance testing
 * Started writing the manual
 
+## Next week's plan
+
+* More testing
+* Implement measuring of algorithms memory usage.
+
 Work hours: 12

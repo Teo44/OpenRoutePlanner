@@ -18,8 +18,8 @@ All tests were performed by searching 50 paths between randomly selected nodes
 in 50 different randomly generated graphs in a 500 000 node graph. 
 The graphs were generated using the 
 type 1 graphs of the graph generator, which places *n* nodes in random coordinates, 
-and connects each of them to *b* other nodes. The timeout limit was set to 3 seconds, 
-after which a search is terminated even if no path was found.  
+and connects each of them to *b* other nodes. The timeout for each search was set to 3 
+seconds to perform the tests at a reasonable pace.  
 
 IDA* was not used in these tests, as it times out for practically every path. 
 The density of the nodes results in the threshold increasing very slowly, since 
@@ -44,6 +44,31 @@ guaranteed to be the shortest possible ones.
 
 7 arcs per node: Dijkstra's total 2917s, avg 1.166s
 		 A* total 522s, avg 208ms
+
+8 arcs per node: DIjkstra's total 3123s, total 1.253s
+		 A* total 590sm avg 236ms
+
+9 arcs per node: Dijkstra's total 3612s, avg 1,444s
+		 A* total 696s, avg 278ms
+
+10 arcs per node: Dijkstra's total 3553, avg 1.421s
+		  A* total 511, avg 204ms
+
+11 arcs per node: Dijkstra's total 3982s, avg 1.592s
+		  A* total 522s, avg 208ms
+
+12 arcs per node: Dijkstra's total 4056s, avg 1.622s
+		  A* total 579s, avg 231ms
+
+13 arcs per node: Dijkstra's total 4599s, avg 1.839
+		  A* total 648s, avg 259ms
+
+14 arcs per node: Dijkstra's total 4864s, avg 1.945
+		  A* total 615s, avg 245ms
+
+15 arcs per node: 
+
+
 
 TODO: graphical representation of the results
 
