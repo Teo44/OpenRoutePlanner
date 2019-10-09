@@ -64,6 +64,6 @@ the average and total time taken by each algorithm.
 
 4. Choose the timeout limit
 
-5. The results will be printed after all the path have been found
+5. The results will be printed after all the paths have been searched
 	  
 
