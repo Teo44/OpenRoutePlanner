@@ -178,9 +178,7 @@ public class ui {
         int dijkstraFails = 0;
         int AstarFails = 0;
         int IDAstarFails = 0;
-        long dijkstraMemory = 0;
-        long AstarMemory = 0;
-        long IDAstarMemory = 0;
+        // loop for paths in randomised graphs
         if (testGraphType == 2 || testGraphType == 3) {
             for (int g = 0; g < testGraphCount; g++)    {
                 System.out.println("Generating graph...");
@@ -224,6 +222,7 @@ public class ui {
                     }
                 }
             }
+            // loop for paths in an OSM graph
         } else  {
             dijkstra = new Dijkstra(testGraph);
             a_star = new Astar(testGraph);
@@ -261,6 +260,7 @@ public class ui {
                 }
             }
         }
+        // printing the final results of the testing; total and average times, and amount of fails (timeouts)
         System.out.println("");
         if (useDijkstra)    {
             System.out.print("Dijkstra took ");
@@ -289,6 +289,7 @@ public class ui {
             } 
             System.out.println("");
         }
+        
         if (useAstar)    {
             System.out.print("A* took ");
             if (AstarTotalTime > 1000)  {
@@ -875,16 +876,4 @@ public class ui {
             System.out.println(path.pollLast());
         }
     }
-    
-    private void printNodes()    {
-        if (nodeIDList != null)  {
-            System.out.println("arraylist not null");
-            for (Integer i : nodeIDList) {
-                System.out.println("node: " + i);
-            }
-        } else  {
-            System.out.println("arraylist null");
-        }
-    }
-    
 }
