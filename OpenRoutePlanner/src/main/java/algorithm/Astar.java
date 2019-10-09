@@ -84,13 +84,15 @@ public class Astar {
         
         heap.add(start2);
 
-		long startTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
         
         while(!heap.isEmpty())  {
-			if (System.currentTimeMillis() - startTime > timeOut)	{
-				System.out.println("timed out");
-				return new Result(null, null, Double.MAX_VALUE);
-			}
+            if (System.currentTimeMillis() - startTime > timeOut)	{
+                System.out.println("timed out");
+                Result result = new Result(null, null, Double.MAX_VALUE);
+                result.setTimedOut(true);
+                return result;
+            }
             DijkstraNode node = heap.poll();
             if (visited[node.getID()])   {
                 continue;

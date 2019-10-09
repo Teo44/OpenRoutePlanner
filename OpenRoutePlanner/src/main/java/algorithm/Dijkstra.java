@@ -48,7 +48,9 @@ public class Dijkstra {
     public Result shortestPath(Long nd1_id, Long nd2_id)  {
         if (nodes.get(nd1_id) == null || nodes.get(nd2_id) == null) {
             System.out.println("Node with given ID doesn't exist in graph");
-            return new Result(null, null, Double.MAX_VALUE);
+            Result result = new Result(null, null, Double.MAX_VALUE);
+            result.setTimedOut(true);
+            return result;
         }
         if (nd1_id.equals(nd2_id))   {
             return new Result(distance, previousNode, 0l);
@@ -68,13 +70,15 @@ public class Dijkstra {
         
         heap.add(start2);
 
-		long startTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
         
         while(!heap.isEmpty())  {
-			if (System.currentTimeMillis() - startTime > timeOut)	{
-				System.out.println("timed out");
-				return new Result(null, null, Double.MAX_VALUE);
-			}
+            if (System.currentTimeMillis() - startTime > timeOut)	{
+                System.out.println("timed out");
+                Result result = new Result(null, null, Double.MAX_VALUE);
+                result.setTimedOut(true);
+                return result;
+            }
             DijkstraNode node = heap.poll();
             if (visited[node.getID()])   {
                 continue;

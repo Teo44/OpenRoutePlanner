@@ -8,6 +8,7 @@ public class Result {
     private double distance[];
     private int[] previousNode;
     private double dist;
+    private boolean timedOut;
 
     /**
      * @param distance The shortest distances from the start node to all the traversed nodes.
@@ -18,6 +19,15 @@ public class Result {
         this.distance = distance;
         this.previousNode = previousNode;
         this.dist = dist;
+        this.timedOut = false;
+    }
+
+    public boolean timedOut() {
+        return timedOut;
+    }
+
+    public void setTimedOut(boolean timedOut) {
+        this.timedOut = timedOut;
     }
     
     public double[] getDistance() {

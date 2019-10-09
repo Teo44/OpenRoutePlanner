@@ -52,7 +52,9 @@ public class IDAStar {
     public Result shortestPath(Long nd1_id, Long nd2_id)    {
         if (nodes.get(nd1_id) == null || nodes.get(nd2_id) == null) {
             System.out.println("Node with given ID doesn't exist in graph");
-            return new Result(null, null, Double.MAX_VALUE);
+            Result result = new Result(null, null, Double.MAX_VALUE);
+            result.setTimedOut(true);
+            return result;
         }
         if (nd1_id.equals(nd2_id))   {
             return new Result(null, previousNode, 0l);
@@ -76,7 +78,9 @@ public class IDAStar {
         while(true) {
             if (System.currentTimeMillis() - startTime > timeOut)   {
                 System.out.println("timed out");
-                return new Result(null, null, Double.MAX_VALUE);
+                Result result = new Result(null, null, Double.MAX_VALUE);
+                result.setTimedOut(true);
+                return result;
             }
             double t = search(path, 0, bound, 0);
             if (t == -1)    {

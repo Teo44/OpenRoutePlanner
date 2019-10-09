@@ -175,6 +175,9 @@ public class ui {
         long dijkstraTotalTime = 0;
         long AstarTotalTime = 0;
         long IDAstarTotalTime = 0; 
+        int dijkstraFails = 0;
+        int AstarFails = 0;
+        int IDAstarFails = 0;
         if (testGraphType == 2 || testGraphType == 3) {
             for (int g = 0; g < testGraphCount; g++)    {
                 System.out.println("Generating graph...");
@@ -193,16 +196,25 @@ public class ui {
                         System.out.print("Dijkstra's: ");
                         dijkstra(testStartNode, testEndNode);
                         dijkstraTotalTime += msTime;
+                        if (dijkstraResult.timedOut())  {
+                            dijkstraFails += 1;
+                        }
                     }
                     if (useAstar)   {
                         System.out.print("A*: ");
                         a_star(testStartNode, testEndNode);
                         AstarTotalTime += msTime;
+                        if (AstarResult.timedOut()) {
+                            AstarFails += 1;
+                        }
                     }
                     if (useIDAstar)    {
                         System.out.print("IDA*: ");
                         ida_star(testStartNode, testEndNode);
                         IDAstarTotalTime += msTime;
+                        if (IDAstarResult.timedOut())   {
+                            IDAstarFails += 1;
+                        }
                     }
                 }
             }
@@ -212,24 +224,24 @@ public class ui {
             ida_star = new IDAStar(testGraph);
             long[] realNodeID = testGraph.getRealNodeID();
             for (int p = 0; p < testPathCount; p++) {
-                    long testStartNode = realNodeID[random.nextInt(testNodeCount)];
-                    long testEndNode = realNodeID[random.nextInt(testNodeCount)];
-                    if (useDijkstra)    {
-                        System.out.print("Dijkstra's: ");
-                        dijkstra(testStartNode, testEndNode);
-                        dijkstraTotalTime += msTime;
-                    }
-                    if (useAstar)   {
-                        System.out.print("A*: ");
-                        a_star(testStartNode, testEndNode);
-                        AstarTotalTime += msTime;
-                    }
-                    if (useIDAstar)    {
-                        System.out.print("IDA*: ");
-                        ida_star(testStartNode, testEndNode);
-                        IDAstarTotalTime += msTime;
-                    }
+                long testStartNode = realNodeID[random.nextInt(testNodeCount)];
+                long testEndNode = realNodeID[random.nextInt(testNodeCount)];
+                if (useDijkstra)    {
+                    System.out.print("Dijkstra's: ");
+                    dijkstra(testStartNode, testEndNode);
+                    dijkstraTotalTime += msTime;
                 }
+                if (useAstar)   {
+                    System.out.print("A*: ");
+                    a_star(testStartNode, testEndNode);
+                    AstarTotalTime += msTime;
+                }
+                if (useIDAstar)    {
+                    System.out.print("IDA*: ");
+                    ida_star(testStartNode, testEndNode);
+                    IDAstarTotalTime += msTime;
+                }
+            }
         }
         System.out.println("");
         if (useDijkstra)    {
@@ -283,6 +295,15 @@ public class ui {
                 System.out.print(IDAstarAvgTime + " milliseconds ");
             }
             System.out.println("per path");
+        }
+        if (dijkstraFails > 0)  {
+            System.out.println("Dijkstra failed " + dijkstraFails + " times");
+        } 
+        if (AstarFails > 0) {
+            System.out.println("A* failed " + AstarFails + " times");
+        }
+        if (IDAstarFails >  0)  {
+            System.out.println("IDA* failed " + IDAstarFails + " times");
         }
     }
     
