@@ -195,17 +195,19 @@ public class ui {
                     if (useDijkstra)    {
                         System.out.print("Dijkstra's: ");
                         dijkstra(testStartNode, testEndNode);
-                        dijkstraTotalTime += msTime;
                         if (dijkstraResult.timedOut())  {
                             dijkstraFails += 1;
+                        } else  {
+                            dijkstraTotalTime += msTime;
                         }
                     }
                     if (useAstar)   {
                         System.out.print("A*: ");
                         a_star(testStartNode, testEndNode);
-                        AstarTotalTime += msTime;
                         if (AstarResult.timedOut()) {
                             AstarFails += 1;
+                        } else  {
+                            AstarTotalTime += msTime;
                         }
                     }
                     if (useIDAstar)    {
@@ -214,6 +216,8 @@ public class ui {
                         IDAstarTotalTime += msTime;
                         if (IDAstarResult.timedOut())   {
                             IDAstarFails += 1;
+                        } else  {
+                            IDAstarTotalTime += msTime;
                         }
                     }
                 }
