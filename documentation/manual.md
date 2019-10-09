@@ -60,9 +60,7 @@ the average and total time taken by each algorithm.
 	
 	* For an OSM graph enter the file path
 	
-	* For the random graphs choose the graph variables as explained in "Parsing or generating graph". 
-	  
-	Also choose how many different graphs to generate and how many paths to find in each of them.
+	* For the random graphs choose the graph variables as explained in "Parsing or generating graph". Also choose how many different graphs to generate and how many paths to find in each of them.
 
 4. Choose the timeout limit
 
