@@ -41,10 +41,11 @@ Very large graphs can require more than the default five seconds for any of the
 algorithms to find a shortest path.
 4. Enter the start and end node by pressing __P__ again and entering their IDs.
 When using a randomly generated graph, the nodes are numbered from 0 to n-1.
-5. If a path was found, optionally print out the path with __S__.
+5. Results of the search will be printed shortly
+6. Optionally print the path of the search with __S__
 
 
-### Using the automated performance testing.
+## Automated performance testing
 
 OpenRoutePlanner has automated performance testing, which can be used to find 
 multiple random paths in multiple random graphs or a single OSM map, and track 
@@ -61,7 +62,7 @@ the average and total time taken by each algorithm.
 	
 	* For the random graphs choose the graph variables as explained in "Parsing or generating graph". 
 	  
-	Also choose how many different graphs to generate and how many paths to find in each.
+	Also choose how many different graphs to generate and how many paths to find in each of them.
 
 4. Choose the timeout limit
 
