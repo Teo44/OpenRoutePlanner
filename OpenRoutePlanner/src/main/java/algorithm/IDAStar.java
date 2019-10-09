@@ -30,6 +30,7 @@ public class IDAStar {
     
     private long timeOut;
     private long startTime;
+    private boolean timedOut;
 
     public IDAStar(Graph graph)   {
         this.nodeCount = graph.getNodeCount();
@@ -84,6 +85,11 @@ public class IDAStar {
             }
             double t = search(path, 0, bound, 0);
             if (t == -1)    {
+                if(timedOut)    {
+                    Result result = new Result(null, null, Double.MAX_VALUE);
+                    result.setTimedOut(true);
+                    return result;
+                }
                 return new Result(null, null, resultNode.getDist());
             }
             if (t == Double.MAX_VALUE)  {
@@ -102,6 +108,7 @@ public class IDAStar {
                 System.out.println("timed out");
                 resultNode = node;
                 resultNode.setDist(Double.MAX_VALUE);
+                timedOut = true;
                 return -1;
             }
         
