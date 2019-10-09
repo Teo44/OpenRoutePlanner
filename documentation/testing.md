@@ -66,8 +66,13 @@ guaranteed to be the shortest possible ones.
 14 arcs per node: Dijkstra's total 4864s, avg 1.945
 		  A* total 615s, avg 245ms
 
-15 arcs per node: 
+15 arcs per node: Dijkstra's total 4798s, avg 1.919s
+		  A* total 608s, avg 243ms
 
+
+dijkstra totals in minutes: 22.2, 28.9, 32.8, 38.6, 43.7, 48.6, 52.1, 60.2, 59.2, 66.4, 67.6, 76.7, 81.1, 80
+a* total times in minutes: 11.5 10.8 9.2 9.4 9.6 8.7 9.8 11.6 8.5 8.7 9.7 10.8 10.3 10.1
+687 650 554 562 577 522 590 696 511 522 579 648 615 608
 
 
 TODO: graphical representation of the results
@@ -77,7 +82,89 @@ TODO: graphical representation of the results
 ### The effect of graph density in small graphs
 
 The premise of theses tests is the same as in the previous segment, but the graph size 
-is reduced to 50 000 nodes. 
+is reduced to 50 000 nodes. IDA* was still too slow to be included. With the timeout 
+at 10 seconds, IDA* averaged 8.3 seconds per path with 2 arcs per node, making including it 
+infeasible.
+
+2 arcs per node: Dijkstra 76s total, 30ms avg
+		 A* 39s total, 15ms avg
+		 IDA* 20928s, avg 8.371s
+
+3 arcs per node: Dijkstra's 97s total, 38ms avg
+		 A* 34s total, 13ms avg
+		 IDA* 20165s totak, 8.66s avg
+
+4 arcs per node: Dijkstra's 133s total, avg 53ms
+		 A* 38s total, 15ms avg
+
+5 arcs per node: Dijkstra's 158s total, avg 63ms
+		 A* 36s total, avg 14ms
+
+6 arcs: Dijkstra's total 174s, avg 69ms
+	A* 35s, avg 13ms
+
+7 arcs: Dijkstra's total 192s, avg 76ms
+	A* total 33s, avg 13ms
+
+8 arcs: Dijkstra's total 214s, avg 85ms
+	A* total 33s, avg 13ms
+
+9 arcs: Dijkstra's total 232s, avg 92ms
+	A* toal 32s, avg 12ms
+
+10 arcs: D total 261s, avg 104ms
+	 A* total 34s, avg 13ms
+
+11 arcs: D total 277s, avg 110ms
+	 A* total 33s, avg 13ms
+
+12 arcs: D total 295s, avg 117ms
+	 A* total 33s, avg 13ms
+
+13 arcs: D total 103s, avg 123ms
+	 A* total 32s, avg 12ms
+
+15 arcs: D total 355s, avg 141ms
+	 A* total 33s, avg 13ms
+
+16 arcs: D total 381s, avg 152ms
+	 A* 33s, avg 13ms
+
+20 arcs: D total 461s, avg 184ms
+	 A* total 35s, avg 13ms
+
+25 arcs: D total 560s, avg 224ms
+	 A* total 39s, avg 15ms
+
+30 arcs: D total 640s, 256ms avg
+ 	 A* total 39s, 15ms avg
+
+35 arcs: D total 742s. 296ms avg
+	 A* total 40s, 15ms avg
+
+40 arcs: D total 833s, avg 333ms
+	 A* total 45s, avg 17ms
+
+45 arcs: D total 886s, avg 354ms
+	 A* total 45s, avg 17ms
+
+50 arcs: D total 992s, avg 396ms
+	 A* total 48s, avg 19ms
+
+55 arcs: D total 1062s, avg 424ms
+	 A* total 61s, avg 24ms
+
+60 arcs: D total 1153s, avg 461ms
+	 A* 66s, avg 26ms
+
+65 arcs: D total 1213s, avg 485ms
+	 A* 68s, avg 27ms
+
+### The effect of graph density in very small graphs.
+
+The premise of theses tests is the same as in the previous segment, but the graph size 
+is further reduced to 5000 nodes.
+
 
 TODO
 
@@ -85,7 +172,19 @@ TODO
 
 TODO: n random routes in Helsinki, Tokyo and Kanto OSM maps
 
+### Random routes in an OSM map of Kumpula
+
+Searched 500 shortest paths between two random nodes in an OSM map of Kumpula. 
+
+Dijktra tood 626ms in total, ~1ms avg
+A* took 623ms in total, ~1ms avg
+IDA* took 2632ms in total, with avg of 529ms, but failed 495 with timeout of 5 seconds.
+
+Even with timeout at 10 seconds IDA* still failed 494 out of 500 times.
+
 ### Random routes in an OSM map of Helsinki
+
+timeout 10s, 500 random routes
 
 ### Random routes in an OSM map of Tokyo
 
