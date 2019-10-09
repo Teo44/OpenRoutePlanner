@@ -178,6 +178,9 @@ public class ui {
         int dijkstraFails = 0;
         int AstarFails = 0;
         int IDAstarFails = 0;
+        long dijkstraMemory = 0;
+        long AstarMemory = 0;
+        long IDAstarMemory = 0;
         if (testGraphType == 2 || testGraphType == 3) {
             for (int g = 0; g < testGraphCount; g++)    {
                 System.out.println("Generating graph...");
@@ -268,13 +271,23 @@ public class ui {
             }
             System.out.print("in total ");
             System.out.print("and an average of ");
-            long dijkstraAvgTime = dijkstraTotalTime / (testGraphCount * testPathCount);
+            int successes = (testGraphCount * testPathCount) - dijkstraFails;
+            long dijkstraAvgTime;
+            if (successes > 0)  {
+                dijkstraAvgTime = dijkstraTotalTime / successes;
+            } else  {
+                dijkstraAvgTime = 0;
+            }
             if (dijkstraAvgTime > 1000)  {
                 System.out.print(dijkstraAvgTime / 1000 + "." + dijkstraAvgTime % 1000 + " seconds ");
             } else  {
                 System.out.print(dijkstraAvgTime + " milliseconds ");
             }
             System.out.println("per path");
+            if (dijkstraFails > 0)  {
+            System.out.println("Dijkstra failed " + dijkstraFails + " times");
+            } 
+            System.out.println("");
         }
         if (useAstar)    {
             System.out.print("A* took ");
@@ -285,13 +298,23 @@ public class ui {
             }
             System.out.print("in total ");
             System.out.print("and an average of ");
-            long AstarAvgTime = AstarTotalTime / (testGraphCount * testPathCount);
+            int successes = (testGraphCount * testPathCount) - AstarFails;
+            long AstarAvgTime;
+            if (successes > 0)  {
+                AstarAvgTime = AstarTotalTime / ((testGraphCount * testPathCount) - AstarFails);
+            } else  {
+                AstarAvgTime = 0;
+            }
             if (AstarAvgTime > 1000)  {
                 System.out.print(AstarAvgTime / 1000 + "." + AstarAvgTime % 1000 + " seconds ");
             } else  {
                 System.out.print(AstarAvgTime + " milliseconds ");
             }
             System.out.println("per path");
+            if (AstarFails > 0) {
+            System.out.println("A* failed " + AstarFails + " times");
+            }
+            System.out.println("");
         }
         
         if (useIDAstar)    {
@@ -303,22 +326,22 @@ public class ui {
             }
             System.out.print("in total ");
             System.out.print("and an average of ");
-            long IDAstarAvgTime = IDAstarTotalTime / (testGraphCount * testPathCount);
+            int successes = (testGraphCount * testPathCount) - IDAstarFails;
+            long IDAstarAvgTime;
+            if (successes > 0)  {
+                IDAstarAvgTime = IDAstarTotalTime / ((testGraphCount * testPathCount) - IDAstarFails);
+            } else  {
+                IDAstarAvgTime = 0;
+            }
             if (IDAstarAvgTime > 1000)  {
                 System.out.print(IDAstarAvgTime / 1000 + "." + IDAstarAvgTime % 1000 + " seconds ");
             } else  {
                 System.out.print(IDAstarAvgTime + " milliseconds ");
             }
             System.out.println("per path");
-        }
-        if (dijkstraFails > 0)  {
-            System.out.println("Dijkstra failed " + dijkstraFails + " times");
-        } 
-        if (AstarFails > 0) {
-            System.out.println("A* failed " + AstarFails + " times");
-        }
-        if (IDAstarFails >  0)  {
-            System.out.println("IDA* failed " + IDAstarFails + " times");
+            if (IDAstarFails >  0)  {
+                System.out.println("IDA* failed " + IDAstarFails + " times");
+            }
         }
     }
     
