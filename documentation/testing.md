@@ -136,12 +136,17 @@ TODO: n random routes in Helsinki, Tokyo and Kanto OSM maps
 
 ### Random routes in an OSM map of Kumpula
 
+![](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/kumpula_osm_area.png)
+
 Searched 500 shortest paths between two random nodes in an OSM map of Kumpula. The map is 
 a ~1km by ~1km OpenStreetMap extract of the Kumpula Campus area.
 
 Dijkstra took 626 milliseconds and A* 623 milliseconds in total, meaning an average time 
 of ~1 millisecond for both of them. Here we can see how the addition of a heuristic can be 
 unhelpful in a simple enough graph. 
+
+
+
 
 Dijktra tood 626ms in total, ~1ms avg
 A* took 623ms in total, ~1ms avg
@@ -151,6 +156,8 @@ Even with timeout at 10 seconds IDA* still failed 494 out of 500 times.
 
 ### Random routes in an OSM map of Helsinki
 
+![](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/helsinki_osm_area.png)
+
 timeout 10s, 500 random routes
 
 Dijkstra 264s total, 528ms avg
@@ -159,10 +166,16 @@ IDA* 8.2s total, 1029ms avg. 492/500 searches timed out.
 
 ### Random routes in an OSM map of Tokyo
 
+![](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/tokyo_osm_area.png)
+
 Again searching 500 shortest paths between random notes, now in a graph parsed from a 
 24km by 30km OpenStreetMap extract of Tokyo.
 
 ### Random routes in an OSM map of Kanto region
+
+![](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/kanto_osm_area.png)
+
+Image credit: https://download.geofabrik.de/asia/japan/kanto.html
 
 
 ## Memory usage comparisons
