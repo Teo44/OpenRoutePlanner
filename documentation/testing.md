@@ -27,60 +27,17 @@ the previous threshold is often exceeded by very little. The rate of the thresho
 incrementation cannot be increased, or the returned paths would no longer be 
 guaranteed to be the shortest possible ones.
 
-2 arcs per node: Dijkstra's total time 1332 seconds, average 532 ms per path.
-		 A* total time 687s, average of 275ms per path
+We can see how the running time of Dijkstra increases quite linearly with the graph density, 
+while A* is practically unaffected.
 
-3 arcs per node: Dijkstra's total time 1723s, avg 689ms
-		 A* 650s, avg 259ms
-
-4 arcs per node: Dijkstra's total 1969s, avg of 787ms
-		 A* total 554s, avg 221ms
-
-5 arcs per node: Dijkstra's total 2315s, avg of 925ms
-		 A* total 562s, avg of 224ms
-
-6 arcs per node: Dijkstra's total 2622s, avg 1.048 seconds.
-		 A* total 577, avg 230ms
-
-7 arcs per node: Dijkstra's total 2917s, avg 1.166s
-		 A* total 522s, avg 208ms
-
-8 arcs per node: DIjkstra's total 3123s, total 1.253s
-		 A* total 590sm avg 236ms
-
-9 arcs per node: Dijkstra's total 3612s, avg 1,444s
-		 A* total 696s, avg 278ms
-
-10 arcs per node: Dijkstra's total 3553, avg 1.421s
-		  A* total 511, avg 204ms
-
-11 arcs per node: Dijkstra's total 3982s, avg 1.592s
-		  A* total 522s, avg 208ms
-
-12 arcs per node: Dijkstra's total 4056s, avg 1.622s
-		  A* total 579s, avg 231ms
-
-13 arcs per node: Dijkstra's total 4599s, avg 1.839
-		  A* total 648s, avg 259ms
-
-14 arcs per node: Dijkstra's total 4864s, avg 1.945
-		  A* total 615s, avg 245ms
-
-15 arcs per node: Dijkstra's total 4798s, avg 1.919s
-		  A* total 608s, avg 243ms
+|Average times | Total time |
+| --- | --- |
+| ![Average time to find a path](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test1_avg_time_graph_v2.png) | ![Total time for all paths](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test1_total_time_minutes_graph_v2.png) |
 
 
-dijkstra totals in minutes: 22.2, 28.9, 32.8, 38.6, 43.7, 48.6, 52.1, 60.2, 59.2, 66.4, 67.6, 76.7, 81.1, 80
-a* total times in minutes: 11.5 10.8 9.2 9.4 9.6 8.7 9.8 11.6 8.5 8.7 9.7 10.8 10.3 10.1
-687 650 554 562 577 522 590 696 511 522 579 648 615 608
 
 
-TODO: graphical representation of the results
 
-![Average time to find a path](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test1_avg_time_graph_v2.png)
-
-
-![Total time for all paths](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test1_total_time_minutes_graph_v2.png)
 
 
 ### The effect of graph density in small graphs
