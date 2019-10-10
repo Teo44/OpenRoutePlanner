@@ -77,6 +77,10 @@ a* total times in minutes: 11.5 10.8 9.2 9.4 9.6 8.7 9.8 11.6 8.5 8.7 9.7 10.8 1
 
 TODO: graphical representation of the results
 
+![Average time to find a path](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test1_avg_time_graph_v2.png)
+
+
+![Total time for all paths](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test1_total_time_minutes_graph_v2.png)
 
 
 ### The effect of graph density in small graphs
@@ -185,6 +189,10 @@ Even with timeout at 10 seconds IDA* still failed 494 out of 500 times.
 ### Random routes in an OSM map of Helsinki
 
 timeout 10s, 500 random routes
+
+Dijkstra 264s total, 528ms avg
+A* 255s total, 509 avg
+IDA* 8.2s total, 1029ms avg. 492/500 searches timed out.
 
 ### Random routes in an OSM map of Tokyo
 
