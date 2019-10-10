@@ -124,7 +124,8 @@ infeasible.
 ### The effect of graph density in very small graphs.
 
 The premise of theses tests is the same as in the previous segment, but the graph size 
-is further reduced to 5000 nodes.
+is further reduced to 5000 nodes. The performance of IDA* in these graph was good enough 
+to include it in the testing. 
 
 
 TODO
@@ -135,7 +136,12 @@ TODO: n random routes in Helsinki, Tokyo and Kanto OSM maps
 
 ### Random routes in an OSM map of Kumpula
 
-Searched 500 shortest paths between two random nodes in an OSM map of Kumpula. 
+Searched 500 shortest paths between two random nodes in an OSM map of Kumpula. The map is 
+a ~1km by ~1km OpenStreetMap extract of the Kumpula Campus area.
+
+Dijkstra took 626 milliseconds and A* 623 milliseconds in total, meaning an average time 
+of ~1 millisecond for both of them. Here we can see how the addition of a heuristic can be 
+unhelpful in a simple enough graph. 
 
 Dijktra tood 626ms in total, ~1ms avg
 A* took 623ms in total, ~1ms avg
@@ -152,6 +158,9 @@ A* 255s total, 509 avg
 IDA* 8.2s total, 1029ms avg. 492/500 searches timed out.
 
 ### Random routes in an OSM map of Tokyo
+
+Again searching 500 shortest paths between random notes, now in a graph parsed from a 
+24km by 30km OpenStreetMap extract of Tokyo.
 
 ### Random routes in an OSM map of Kanto region
 
