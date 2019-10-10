@@ -183,7 +183,10 @@ Interestingly Dijkstra failed in exactly one path with the 5 second timeout, eve
 
 The area of Kanto, Japan. The largest map I could reasonably parse for testing, around 9-10 gigabytes of RAM is required. Timeout was set to 20 seconds, since some paths in this graphs can take very long to find.
 
-//TODO 500 random paths
+Even in a graph this large the difference in average was small:
+Dijkstra's average was 7.794 seconds, A*'s 7.831 seconds.
+
+Total times for the 500 paths were both ~65 minutes.
 
 [Image credit and map download](https://download.geofabrik.de/asia/japan/kanto.html)
 
