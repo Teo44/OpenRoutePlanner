@@ -132,18 +132,21 @@ TODO
 
 ## Performance tests in OSM maps
 
-TODO: n random routes in Helsinki, Tokyo and Kanto OSM maps
+Each test was performed by searching 500 shortest paths between two random nodes with each algorithm.
 
 ### Random routes in an OSM map of Kumpula
 
 ![](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/kumpula_osm_area.png)
 
-The test was performed by searching shortest paths between two . The map is 
-a ~1km by ~1km OpenStreetMap extract of the Kumpula Campus area.
+The test was performed in a ~1km by ~1km OpenStreetMap extract of the Kumpula Campus area with a 5 second time out limit.
 
-Dijkstra took 626 milliseconds and A* 623 milliseconds in total, meaning an average time 
-of ~1 millisecond for both of them. Here we can see how the addition of a heuristic can be 
-unhelpful in a simple enough graph. 
+Dijkstra took 598 milliseconds and A* 540 milliseconds in total, meaning an average time 
+of ~1 millisecond for both of them. We can see how the heuristic helps a little even in such a 
+small graph.
+
+IDA* meanwhile only found 353 out of 500 paths within the time out limit of 5 seconds. The average time for 
+these 353 paths was 383 milliseconds. We can calculate the total time to find all the paths with IDA* to be in the excess of 
+29 minutes, making IDA* over 1400 times slower than Dijkstra in this graph.
 
 The map is a custom extract using https://extract.bbbike.org.
 
@@ -151,7 +154,7 @@ The map is a custom extract using https://extract.bbbike.org.
 
 ![](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/helsinki_osm_area.png)
 
-timeout 10s, 500 random routes
+timeout 5s, 500 random routes
 
 //REDO
 
