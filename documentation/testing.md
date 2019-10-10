@@ -170,13 +170,18 @@ scale, unless memory usage is very constrained.
 Again searching 500 shortest paths between random notes, now in a graph parsed from a 
 24km by 30km OpenStreetMap extract of Tokyo.
 
+Dijstra: 187 seconds in total, average 373 milliseconds
+A*: 183 seconds total, average 365 milliseconds
+
+Interestingly Dijkstra failed in exactly one path with the 5 second timeout, even though it performed very close to A* on average.
+
 [Map download](https://download.bbbike.org/osm/bbbike/Tokyo/)
 
 ### Random routes in an OSM map of Kanto region
 
 ![](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/kanto_osm_area.png)
 
-The whole Kanto area of Japan. The largest map I could reasonably parse for testing, around 9-10 gigabytes of RAM required. 
+The area of Kanto, Japan. The largest map I could reasonably parse for testing, around 9-10 gigabytes of RAM is required. Timeout was set to 20 seconds, since some paths in this graphs can take very long to find.
 
 //TODO 500 random paths
 
