@@ -67,6 +67,8 @@ public class IDAStar {
         goalLat = end.getLat();
         goalLon = end.getLon();
         
+        timedOut = false;
+        
         double bound = directDistance(start);
         path = new ArrayList<>();
         path.add(new DijkstraNode(start.getID2(), 0, bound, start.getLat(), start.getLon()));
