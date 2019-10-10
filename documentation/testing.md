@@ -154,9 +154,12 @@ The map is a custom extract using https://extract.bbbike.org.
 
 ![](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/helsinki_osm_area.png)
 
-timeout 5s, 500 random routes
+Graph was a parsed OSM map of Helsinki, timeout set to 10 seconds.
 
-//REDO
+Dijktra and A* were still very close, with average time to find a path at 492 and 529 milliseconds respectively. 
+
+IDA* only managed to find 7 out of the 500 paths within 10 seconds, which makes IDA* pretty much unusable at this 
+scale, unless memory usage is very constrained. 
 
 [Map download](https://download.bbbike.org/osm/bbbike/Helsinki/)
 
