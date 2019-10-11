@@ -127,6 +127,12 @@ The premise of theses tests is the same as in the previous segment, but the grap
 is further reduced to 5000 nodes. The performance of IDA* in these graph was good enough 
 to include it in the testing. 
 
+2 arcs:
+	D total 3,5s, avg 1ms
+	A* total 1.442s, avg <0ms
+	IDA* avg 789, failed 496/500
+
+
 
 TODO
 
@@ -189,11 +195,6 @@ Dijkstra's average was 7.794 seconds, A*'s 7.831 seconds.
 Total times for the 500 paths were both ~65 minutes.
 
 [Image credit and map download](https://download.geofabrik.de/asia/japan/kanto.html)
-
-## Memory usage comparisons
-
-TODO: run tests in small graphs with all the algorithms, compare memory usage with psrecord
-
 
 ## JUnit tests 
  

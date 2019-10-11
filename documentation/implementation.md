@@ -68,6 +68,11 @@ and Dijkstra's in large and dense graphs. However IDA* is very space efficient c
 to A* and Dijkstra's, as it only keeps one path at a time in memory, resulting in linear 
 *O(d)* space complexity[3].
 
+In this implementation the threshold is always increased by at least 10 meters. Because of this the 
+path found by IDA* can be up to 10 meters longer than the actual optimal path. This tradeoff was chosen 
+since it improved IDA*'s performance a lot, and an inaccuracy of >10 meters would be acceptable in 
+many practical applications of pathfinding algorithms.
+
 ## Automated testing
 
 Automated testing can be used to test any of the algorithms in multiple 

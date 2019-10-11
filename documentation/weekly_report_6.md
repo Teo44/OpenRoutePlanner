@@ -6,5 +6,6 @@
 * A lot of testing, all documented
 * Added pictures and graphs to testing document
 * Finished the manual
+* Added choosing random nodes to pathfinding menu for demo purposes
 
-Work hours:
+Work hours: 10

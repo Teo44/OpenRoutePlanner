@@ -120,6 +120,7 @@ public class ui {
     private void pathFindingLoop()  {
         System.out.println("Pathfinding: ");
         System.out.println("P - enter two nodes and find the shortest path between them");
+        System.out.println("R - find a path between two random nodes in the graph");
         System.out.println("S - print the path of the last search");
         System.out.println("A - choose the algorithms to be used (default: all)");
         System.out.println("T - set timeout length (default: 5 seconds)");
@@ -133,6 +134,9 @@ public class ui {
                 chooseAlgorithms();
             } else if (input.equalsIgnoreCase("t")) {
                 setTimeOut();
+            } else if (input.equalsIgnoreCase("r")) {
+                randomNodes();
+                findPath();
             } else if (input.equalsIgnoreCase("s")) {
                 System.out.println("Previous route: ");
                 printPath();
@@ -698,6 +702,16 @@ public class ui {
             }
         }
         System.out.println("");
+    }
+    
+    private void randomNodes()  {
+        if (graph == null)  {
+            return;
+        }
+        Random r = new Random();
+        long[] realIDs = graph.getRealNodeID();
+        startNode = realIDs[r.nextInt(graph.getNodeCount())];
+        endNode = realIDs[r.nextInt(graph.getNodeCount())];
     }
    
     /**
