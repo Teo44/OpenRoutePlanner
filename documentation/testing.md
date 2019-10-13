@@ -9,7 +9,9 @@ between the nodes were tested.
 
 The tests can all be easily reproduced with the automated testing. While the 
 generated graphs will be different each time, large enough sample sizes will 
-make up for the it to show the differences of the algorithms.
+make up for the it to show the differences of the algorithms. None of the graphs 
+were guaranteed to be connected and the rest of the graph generation variables 
+are written down for each test for replication.
 
 
 ### The effect of graph density in large graphs
@@ -43,9 +45,12 @@ while A* is practically unaffected.
 ### The effect of graph density in small graphs
 
 The premise of theses tests is the same as in the previous segment, but the graph size 
-is reduced to 50 000 nodes. IDA* was still too slow to be included. With the timeout 
-at 10 seconds, IDA* averaged 8.3 seconds per path with 2 arcs per node, making including it 
-infeasible.
+is reduced to 50 000 nodes. IDA* was still too slow to be included. Even with the timeout 
+at 10 seconds, IDA* timed our for 2022 out of the 2500 paths with 1 arc per node, and was 
+thus not included in the this test.
+
+1 arcs per node: Dijkstra 28s total, 11ms avg
+				 A* 29 total, 11ms avg
 
 2 arcs per node: Dijkstra 76s total, 30ms avg
 		 A* 39s total, 15ms avg
@@ -121,20 +126,96 @@ infeasible.
 65 arcs: D total 1213s, avg 485ms
 	 A* 68s, avg 27ms
 
+70 arcs: 
+
 ### The effect of graph density in very small graphs.
 
 The premise of theses tests is the same as in the previous segment, but the graph size 
-is further reduced to 5000 nodes. The performance of IDA* in these graph was good enough 
-to include it in the testing. 
+is further reduced to 5000 nodes. The performance of IDA* in these graphs was good enough 
+to include it in the testing, though it still times out for a good portion of the paths with 
+the timeout at 5 seconds. 
 
 2 arcs:
 	D total 3,5s, avg 1ms
 	A* total 1.442s, avg <0ms
-	IDA* avg 789, failed 496/500
+	IDA* avg 789, failed 496/2500.
+
+3 arcs:
+	D total 4.618s, avg 1ms
+	A* total 1.199s, avg <0ms
+	IDA* avg 737, failed 353.
+
+4 arcs: 
+	D total 4.287s, avg 1ms
+	A* total 743ms, avg <0ms
+	IDA* tavg 630, failed 303
+
+5 arcs: 
+	D total 5.4s, avg 2ms
+	A* total 816ms, avg >0ms
+	IDA* avg 580ms, failed 245
+
+6 arcs:
+	D total 5.4s, avg 2ms
+	A* total 877ms, avg <0ms
+	IDA* avg 643ms, failed 219
+
+7 arcs:  
+	D total 6.263s, avg 2ms
+	A* total 615ms, avg <0ms
+	IDA avg 519ms, failed 184
+
+8 arcs: 
+	D total 7.23s, avg 2ms
+	A* total 652ms, avg <0ms
+	IDA* avg 531, failed 183
+
+9 arcs:
+	D total 7.622s, avg 3ms
+	A* total 639ms
+	IDA avg 500ms, failed 156
+
+10 arcs:
+	D total 7.388, avg 2ms
+	A* total 366
+	IDA avg 507, failed 158
+
+11 arcs:
+	D total 8.187s, avg 3ms
+	A* total 386ms
+	IDA avg 496, failed 150
+
+12 arcs:
+	D total 8.881s, avg 3ms
+	A* total 504ms
+	IDA avg 463ms, failed 119 times
+
+13 arcs:
+	D total 9.714s, avg 3ms
+	A* total 494ms
+	IDA avg 447, failed 114	
+
+14 arcs: 
+	D total 10.161s, avg 4ms
+	A* total 534ms
+	IDA avg 448ms, failed 132
+
+15 arcs:
+	D total 10.683s, avg 4ms
+	A( total 499ms
+	IDA avg 421, failed 103
+
+16 arcs:
+	D total 10.967s, avg 4ms
+	A* total 379ms
+	IDA avg 410ms, failed 113
+
+17 arcs:
 
 
-
-TODO
+TODO: graphs of average times, with recorded and actual minimum averages for IDA*, 
+	  graph of IDA* fails / density of graph
+	  graph of only Dikjstra and A*?
 
 ## Performance tests in OSM maps
 
