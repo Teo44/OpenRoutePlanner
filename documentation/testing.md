@@ -46,87 +46,11 @@ while A* is practically unaffected.
 
 The premise of theses tests is the same as in the previous segment, but the graph size 
 is reduced to 50 000 nodes. IDA* was still too slow to be included. Even with the timeout 
-at 10 seconds, IDA* timed our for 2022 out of the 2500 paths with 1 arc per node, and was 
+at 10 seconds, IDA* timed our for 2022 out of the 2500 paths even with 1 arc per node, and was 
 thus not included in the this test.
 
-1 arcs per node: Dijkstra 28s total, 11ms avg
-				 A* 29 total, 11ms avg
+![Average time to find a path](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test1_avg_time_graph_v2.png) | ![Total time for all paths](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test2_avg_time_graph.png)
 
-2 arcs per node: Dijkstra 76s total, 30ms avg
-		 A* 39s total, 15ms avg
-		 IDA* 20928s, avg 8.371s
-
-3 arcs per node: Dijkstra's 97s total, 38ms avg
-		 A* 34s total, 13ms avg
-		 IDA* 20165s totak, 8.66s avg
-
-4 arcs per node: Dijkstra's 133s total, avg 53ms
-		 A* 38s total, 15ms avg
-
-5 arcs per node: Dijkstra's 158s total, avg 63ms
-		 A* 36s total, avg 14ms
-
-6 arcs: Dijkstra's total 174s, avg 69ms
-	A* 35s, avg 13ms
-
-7 arcs: Dijkstra's total 192s, avg 76ms
-	A* total 33s, avg 13ms
-
-8 arcs: Dijkstra's total 214s, avg 85ms
-	A* total 33s, avg 13ms
-
-9 arcs: Dijkstra's total 232s, avg 92ms
-	A* toal 32s, avg 12ms
-
-10 arcs: D total 261s, avg 104ms
-	 A* total 34s, avg 13ms
-
-11 arcs: D total 277s, avg 110ms
-	 A* total 33s, avg 13ms
-
-12 arcs: D total 295s, avg 117ms
-	 A* total 33s, avg 13ms
-
-13 arcs: D total 103s, avg 123ms
-	 A* total 32s, avg 12ms
-
-15 arcs: D total 355s, avg 141ms
-	 A* total 33s, avg 13ms
-
-16 arcs: D total 381s, avg 152ms
-	 A* 33s, avg 13ms
-
-20 arcs: D total 461s, avg 184ms
-	 A* total 35s, avg 13ms
-
-25 arcs: D total 560s, avg 224ms
-	 A* total 39s, avg 15ms
-
-30 arcs: D total 640s, 256ms avg
- 	 A* total 39s, 15ms avg
-
-35 arcs: D total 742s. 296ms avg
-	 A* total 40s, 15ms avg
-
-40 arcs: D total 833s, avg 333ms
-	 A* total 45s, avg 17ms
-
-45 arcs: D total 886s, avg 354ms
-	 A* total 45s, avg 17ms
-
-50 arcs: D total 992s, avg 396ms
-	 A* total 48s, avg 19ms
-
-55 arcs: D total 1062s, avg 424ms
-	 A* total 61s, avg 24ms
-
-60 arcs: D total 1153s, avg 461ms
-	 A* 66s, avg 26ms
-
-65 arcs: D total 1213s, avg 485ms
-	 A* 68s, avg 27ms
-
-70 arcs: 
 
 ### The effect of graph density in very small graphs.
 
@@ -135,87 +59,30 @@ is further reduced to 5000 nodes. The performance of IDA* in these graphs was go
 to include it in the testing, though it still times out for a good portion of the paths with 
 the timeout at 5 seconds. 
 
-2 arcs:
-	D total 3,5s, avg 1ms
-	A* total 1.442s, avg <0ms
-	IDA* avg 789, failed 496/2500.
+The performance of IDA* is orders of magnitude slower than Dijkstra's 
+and A*, so its results were visualised separately. The timeout was again set to 5 seconds to make 
+the tests' running times practical, resulting in IDA* still failing a portion of the paths. The 
+amount of timeouts was also recorded and displayed in the results. There are also two average 
+times per path displayed for IDA*. The first one is calculated only from the successfully found 
+paths, while the second one gives the minimum actual average time, where each fails is calculated 
+to have taken 5 seconds.
 
-3 arcs:
-	D total 4.618s, avg 1ms
-	A* total 1.199s, avg <0ms
-	IDA* avg 737, failed 353.
+| Dijkstra's and A* total times | IDA* timeouts per test|
+| --- | --- | 
+| ![Dijkstra's and A* total times](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test3_total_times.png) | ![IDA* timeouts per test](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test3_ida_timeouts.png) |
+| --- | --- | 
+| IDA* averages of successful searches | IDA* minimum actual averages | 
+| --- | --- | 
+| ![IDA* success averages](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test3_ida_avg.png) | ![IDA* minimum actual averages](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test3_ida_real_avg.png) |
 
-4 arcs: 
-	D total 4.287s, avg 1ms
-	A* total 743ms, avg <0ms
-	IDA* tavg 630, failed 303
 
-5 arcs: 
-	D total 5.4s, avg 2ms
-	A* total 816ms, avg >0ms
-	IDA* avg 580ms, failed 245
-
-6 arcs:
-	D total 5.4s, avg 2ms
-	A* total 877ms, avg <0ms
-	IDA* avg 643ms, failed 219
-
-7 arcs:  
-	D total 6.263s, avg 2ms
-	A* total 615ms, avg <0ms
-	IDA avg 519ms, failed 184
-
-8 arcs: 
-	D total 7.23s, avg 2ms
-	A* total 652ms, avg <0ms
-	IDA* avg 531, failed 183
-
-9 arcs:
-	D total 7.622s, avg 3ms
-	A* total 639ms
-	IDA avg 500ms, failed 156
-
-10 arcs:
-	D total 7.388, avg 2ms
-	A* total 366
-	IDA avg 507, failed 158
-
-11 arcs:
-	D total 8.187s, avg 3ms
-	A* total 386ms
-	IDA avg 496, failed 150
-
-12 arcs:
-	D total 8.881s, avg 3ms
-	A* total 504ms
-	IDA avg 463ms, failed 119 times
-
-13 arcs:
-	D total 9.714s, avg 3ms
-	A* total 494ms
-	IDA avg 447, failed 114	
-
-14 arcs: 
-	D total 10.161s, avg 4ms
-	A* total 534ms
-	IDA avg 448ms, failed 132
-
-15 arcs:
-	D total 10.683s, avg 4ms
-	A( total 499ms
-	IDA avg 421, failed 103
-
-16 arcs:
-	D total 10.967s, avg 4ms
-	A* total 379ms
-	IDA avg 410ms, failed 113
-
-17 arcs:
+	
 
 
 TODO: graphs of average times, with recorded and actual minimum averages for IDA*, 
 	  graph of IDA* fails / density of graph
 	  graph of only Dikjstra and A*?
+	  
 
 ## Performance tests in OSM maps
 
@@ -270,7 +137,7 @@ Interestingly Dijkstra failed in exactly one path with the 5 second timeout, eve
 
 The area of Kanto, Japan. The largest map I could reasonably parse for testing, around 9-10 gigabytes of RAM is required. Timeout was set to 20 seconds, since some paths in this graphs can take very long to find.
 
-Even in a graph this large the difference in average was small:
+Even in a graph this large the difference of the averages was small:
 Dijkstra's average was 7.794 seconds, A*'s 7.831 seconds.
 
 Total times for the 500 paths were both ~65 minutes.
