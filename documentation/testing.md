@@ -65,7 +65,9 @@ to have taken 5 seconds.
 | Dijkstra's and A* total times | IDA* timeouts per test|
 | --- | --- | 
 | ![Dijkstra's and A* total times](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test3_total_times.png) | ![IDA* timeouts per test](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test3_ida_timeouts.png) |
+
 | IDA* averages of successful searches | IDA* minimum actual averages | 
+| --- | --- | 
 | ![IDA* success averages](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test3_ida_avg.png) | ![IDA* minimum actual averages](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test3_ida_real_avg.png) |
 	  
 
