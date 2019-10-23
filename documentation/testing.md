@@ -37,11 +37,6 @@ while A* is practically unaffected.
 | ![Average time to find a path](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test1_avg_time_graph_v2.png) | ![Total time for all paths](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test1_total_time_minutes_graph_v2.png) |
 
 
-
-
-
-
-
 ### The effect of graph density in small graphs
 
 The premise of theses tests is the same as in the previous segment, but the graph size 
@@ -49,7 +44,7 @@ is reduced to 50 000 nodes. IDA* was still too slow to be included. Even with th
 at 10 seconds, IDA* timed our for 2022 out of the 2500 paths even with 1 arc per node, and was 
 thus not included in the this test.
 
-![Average time to find a path](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test1_avg_time_graph_v2.png) | ![Total time for all paths](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test2_avg_time_graph.png)
+![Average time per path](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test2_avg_time_graph.png)
 
 
 ### The effect of graph density in very small graphs.
@@ -74,14 +69,6 @@ to have taken 5 seconds.
 | IDA* averages of successful searches | IDA* minimum actual averages | 
 | --- | --- | 
 | ![IDA* success averages](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test3_ida_avg.png) | ![IDA* minimum actual averages](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test3_ida_real_avg.png) |
-
-
-	
-
-
-TODO: graphs of average times, with recorded and actual minimum averages for IDA*, 
-	  graph of IDA* fails / density of graph
-	  graph of only Dikjstra and A*?
 	  
 
 ## Performance tests in OSM maps
