@@ -62,6 +62,11 @@ times per path displayed for IDA*. The first one is calculated only from the suc
 paths, while the second one gives the minimum actual average time, where each fails is calculated 
 to have taken 5 seconds.
 
+We can see how IDA*'s performance gets better the denser the graph, probably because less 
+iterations are needed to find a path. IDA* and Dijkstra's on the other hand slow down in the 
+denser graphs with more arcs to examine per node.
+
+
 | Dijkstra's and A* total times | IDA* timeouts per test|
 | --- | --- | 
 | ![Dijkstra's and A* total times](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test3_total_times.png) | ![IDA* timeouts per test](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test3_ida_timeouts.png) |
