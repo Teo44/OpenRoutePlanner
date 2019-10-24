@@ -137,4 +137,17 @@ Total times for the 500 paths were both ~65 minutes.
 [Image credit and map download](https://download.geofabrik.de/asia/japan/kanto.html)
 
 ## JUnit tests 
- 
+
+All classes with complex functions (not storage classes) have JUnit tests for them, 
+except the UI which is not very feasible to test.
+All implemented data structures and algorithms are tested. The algorithm tests 
+also require the data structures and graph representation classes to function 
+correctly. 88% or more of coverage for all classes is achieved. 
+Most missed instructions are in one's very difficult to test, mostly the timing out of 
+algorithms. 
+
+Jacoco coverage report:
+
+![Jacoco coverage](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/jacoco_coverage.png)
+
+
