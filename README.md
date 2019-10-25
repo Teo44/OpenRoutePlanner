@@ -2,6 +2,10 @@
 
 Finding the shortest routes using open map data and algorithms. A university course project.
 
+## Releases
+
+[v1.0](https://github.com/Teo44/OpenRoutePlanner/releases/tag/v1.0)
+
 ## Documentation
 
 * [Specifications](https://github.com/Teo44/OpenRoutePlanner/blob/master/documentation/specifications.md)
