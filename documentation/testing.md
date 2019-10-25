@@ -1,6 +1,6 @@
 # Testing
 
-## Performance tests in ramdomised graphs
+## Performance tests in randomised graphs
 
 Tests were (will be) performed using the automated testing in the program. 
 To compare the performance of the algorithms in different kind of graphs, 
@@ -63,7 +63,7 @@ paths, while the second one gives the minimum actual average time, where each fa
 to have taken 5 seconds.
 
 We can see how IDA*'s performance gets better the denser the graph, probably because less 
-iterations are needed to find a path. IDA* and Dijkstra's on the other hand slow down in the 
+iterations are needed to find a path. Dijkstra's on the other hand slow down in the 
 denser graphs with more arcs to examine per node.
 
 
