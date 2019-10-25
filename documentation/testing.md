@@ -88,7 +88,7 @@ in its own graph. It also failed a signigant portion of the searches, which is a
 
 | IDA* timeouts |
 | --- | 
-| ![IDA* timeouts](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test4_ida_timeouts.png | width=400) |
+| ![IDA* timeouts](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test4_ida_timeouts.png) |
 
 
 
