@@ -1,4 +1,4 @@
-package data_structure;
+package datastructure;
 
 /**
  *  Simple hash map implementation with put and get operations.
@@ -74,7 +74,7 @@ public class HashMap<T, K> {
         for (int i = 0; i < size; i++)  {
             newArray[i] = new ArrayList<>();
         }
-        for (int i = 0; i < size/2; i++)  {
+        for (int i = 0; i < size / 2; i++)  {
             for (HashObject o : array[i])   {
                 newArray[hash(o.getKey())].add(o);
             }

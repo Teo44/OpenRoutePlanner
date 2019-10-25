@@ -1,8 +1,8 @@
 package parser;
 
 import java.io.File;
-import data_structure.ArrayList;
-import data_structure.HashMap;
+import datastructure.ArrayList;
+import datastructure.HashMap;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import graph.Graph;
@@ -19,19 +19,19 @@ public class OSMParser {
      */
     public Graph parse(File osm, ArrayList<String> approvedTags)  {
         try {
-           SAXParserFactory factory = SAXParserFactory.newInstance();
-           SAXParser saxParser = factory.newSAXParser();
-           OSMNodeNeighbourCount counter = new OSMNodeNeighbourCount(approvedTags);
-           saxParser.parse(osm, counter);
-           int[] neighbours = counter.getNodeNeighbourCount();
-           HashMap acceptedWays = counter.getAcceptedWays();
-           SAXParserFactory factory2 = SAXParserFactory.newInstance();
-           SAXParser saxParser2 = factory2.newSAXParser();
-           OSMHandler handler = new OSMHandler(approvedTags, neighbours, acceptedWays);
-           saxParser2.parse(osm, handler);
-           return handler.getGraph();
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            SAXParser saxParser = factory.newSAXParser();
+            OSMNodeNeighbourCount counter = new OSMNodeNeighbourCount(approvedTags);
+            saxParser.parse(osm, counter);
+            int[] neighbours = counter.getNodeNeighbourCount();
+            HashMap acceptedWays = counter.getAcceptedWays();
+            SAXParserFactory factory2 = SAXParserFactory.newInstance();
+            SAXParser saxParser2 = factory2.newSAXParser();
+            OSMHandler handler = new OSMHandler(approvedTags, neighbours, acceptedWays);
+            saxParser2.parse(osm, handler);
+            return handler.getGraph();
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
         return null;
     }

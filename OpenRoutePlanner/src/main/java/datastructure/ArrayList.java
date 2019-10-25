@@ -1,4 +1,4 @@
-package data_structure;
+package datastructure;
 
 import java.util.Iterator;
 
@@ -6,7 +6,7 @@ import java.util.Iterator;
  *  Simple general, iterable arraylist implementation
  * @param <T> The type of object to store in the arraylist
  */
-public class ArrayList<T> implements Iterable<T>{
+public class ArrayList<T> implements Iterable<T> {
     
     private T[] array;
     int index;
@@ -82,7 +82,7 @@ public class ArrayList<T> implements Iterable<T>{
             
             @Override
             public boolean hasNext()   {
-                 return i < index;
+                return i < index;
             }
             
             @Override
@@ -97,6 +97,4 @@ public class ArrayList<T> implements Iterable<T>{
         };
         return it;
     }
-    
-    
 }

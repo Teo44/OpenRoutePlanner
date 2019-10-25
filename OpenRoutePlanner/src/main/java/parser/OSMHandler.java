@@ -1,7 +1,7 @@
 package parser;
 
-import data_structure.ArrayList;
-import data_structure.HashMap;
+import datastructure.ArrayList;
+import datastructure.HashMap;
 import graph.Arc;
 import graph.Graph;
 import graph.Node;
@@ -65,7 +65,7 @@ public class OSMHandler extends DefaultHandler  {
     }
     
     @Override
-    public void startElement( String uri, String localName, String qName, Attributes attributes) throws SAXException {
+    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         
         if (qName.equals("bounds")) {
             maxLat = Double.parseDouble(attributes.getValue("maxlat"));
@@ -104,10 +104,10 @@ public class OSMHandler extends DefaultHandler  {
                 double dist = nodeDistance(lastNode, newNode);
                 long nd1 = lastNode.getID();
                 long nd2 = newNode.getID();
-                int nd1_id2 = lastNode.getID2();
-                int nd2_id2 = newNode.getID2();
-                realNodeID[nd1_id2] = nd1;
-                realNodeID[nd2_id2] = nd2;
+                int node1ID2 = lastNode.getID2();
+                int node2ID2 = newNode.getID2();
+                realNodeID[node1ID2] = nd1;
+                realNodeID[node2ID2] = nd2;
                 arcs.add(new Arc(lastNode, newNode, dist));
                 arcs.add(new Arc(newNode, lastNode, dist));
                 lastNode = newNode;
@@ -123,14 +123,13 @@ public class OSMHandler extends DefaultHandler  {
             // set lastNode to null, so the current way isn't connected to the next one
             lastNode = null;
             arcCount += arcs.size();
-                for (Arc a : arcs)  {
-                    adList[a.getNode1().getID2()].add(a);
-                }
+            for (Arc a : arcs)  {
+                adList[a.getNode1().getID2()].add(a);
+            }
         }
     }
     
     private double nodeDistance(Node nd1, Node nd2) {
-        
         double lat1 = nd1.getLat();
         double lon1 = nd1.getLon();
         double lat2 = nd2.getLat();
@@ -138,8 +137,7 @@ public class OSMHandler extends DefaultHandler  {
         
         if ((lat1 == lat2) && (lon1 == lon2)) {
             return 0;
-        }
-        else {
+        } else {
             double theta = lon1 - lon2;
             double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(theta));
             dist = Math.acos(dist);
@@ -153,5 +151,4 @@ public class OSMHandler extends DefaultHandler  {
     public ArrayList getNodeList() {
         return nodeIDList;
     }
-    
 }

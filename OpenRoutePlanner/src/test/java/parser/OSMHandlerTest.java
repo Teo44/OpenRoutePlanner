@@ -1,8 +1,8 @@
 package parser;
 
 import java.io.File;
-import data_structure.ArrayList;
-import data_structure.HashMap;
+import datastructure.ArrayList;
+import datastructure.HashMap;
 import graph.Arc;
 import graph.Graph;
 import graph.Node;

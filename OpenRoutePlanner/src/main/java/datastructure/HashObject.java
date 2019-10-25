@@ -1,4 +1,4 @@
-package data_structure;
+package datastructure;
 
 /**
  * Object for storing the values in a hashmap and their keys

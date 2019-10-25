@@ -1,5 +1,6 @@
 package data_structure;
 
+import datastructure.BinaryHeap;
 import algorithm.DijkstraNode;
 import java.util.Random;
 import static org.junit.Assert.assertEquals;

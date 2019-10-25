@@ -1,11 +1,11 @@
 package algorithm;
 
-import data_structure.BinaryHeap;
-import data_structure.ArrayList;
+import datastructure.BinaryHeap;
+import datastructure.ArrayList;
 import graph.Arc;
 import graph.Node;
 import graph.Graph;
-import data_structure.HashMap;
+import datastructure.HashMap;
 
 /**
  * Dijkstra's shortest path algorithm
@@ -19,8 +19,7 @@ public class Dijkstra {
     final private HashMap<Long, Node> nodes;
     private double distance[];
     private int[] previousNode;
-
-	private long timeOut;
+    private long timeOut;
     
     /**
      * @param graph The graph to pathfind in
@@ -29,30 +28,30 @@ public class Dijkstra {
         this.nodeCount = graph.getNodeCount();
         adList = graph.getAdList();
         nodes = graph.getNodes();
-		timeOut = Long.MAX_VALUE;
+        timeOut = Long.MAX_VALUE;
     }
 
-	public void setTimeOut(int timeout)	{
-		this.timeOut = timeout * 1000;
-	}
+    public void setTimeOut(int timeout)	{
+        this.timeOut = timeout * 1000;
+    }
     
     /**
      * Calculates the shortest path from node 1 (nd1) to node 2 (nd2)
      * 
-     * @param nd1_id Node 1's ID from the OSM XML file
-     * @param nd2_id Node 2's ID from the OSM XML file
+     * @param node1ID Node 1's ID from the OSM XML file
+     * @param node2ID Node 2's ID from the OSM XML file
      * @return A result object containing the results of the search
      * 
      * @see algorithm.Result
      */
-    public Result shortestPath(Long nd1_id, Long nd2_id)  {
-        if (nodes.get(nd1_id) == null || nodes.get(nd2_id) == null) {
+    public Result shortestPath(Long node1ID, Long node2ID)  {
+        if (nodes.get(node1ID) == null || nodes.get(node2ID) == null) {
             System.out.println("Node with given ID doesn't exist in graph");
             Result result = new Result(null, null, Double.MAX_VALUE);
             result.setTimedOut(true);
             return result;
         }
-        if (nd1_id.equals(nd2_id))   {
+        if (node1ID.equals(node2ID))   {
             return new Result(distance, previousNode, 0l);
         }
         
@@ -64,15 +63,14 @@ public class Dijkstra {
         }
         previousNode = new int[nodeCount];
         
-        Node start = nodes.get(nd1_id);
-        Node end = nodes.get(nd2_id);
+        Node start = nodes.get(node1ID);
+        Node end = nodes.get(node2ID);
         DijkstraNode start2 = new DijkstraNode(start.getID2(), 0);
-        
         heap.add(start2);
 
         long startTime = System.currentTimeMillis();
         
-        while(!heap.isEmpty())  {
+        while (!heap.isEmpty())  {
             if (System.currentTimeMillis() - startTime > timeOut)	{
                 System.out.println("timed out");
                 Result result = new Result(null, null, Double.MAX_VALUE);
@@ -99,9 +97,7 @@ public class Dijkstra {
                 }
             }
         }
-        
         Result result = new Result(distance, previousNode, distance[end.getID2()]);
         return result;
     }
-    
 }

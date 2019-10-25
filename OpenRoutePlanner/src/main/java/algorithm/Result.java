@@ -53,7 +53,4 @@ public class Result {
     public void setDist(double dist) {
         this.dist = dist;
     }
-    
-    
-
 }

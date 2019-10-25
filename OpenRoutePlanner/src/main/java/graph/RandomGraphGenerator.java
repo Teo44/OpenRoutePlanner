@@ -1,9 +1,9 @@
 package graph;
 
-import data_structure.ArrayList;
-import data_structure.HashMap;
+import datastructure.ArrayList;
+import datastructure.HashMap;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
+//import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Class for generating different kinds of random graphs with configurable 
@@ -24,7 +24,6 @@ public class RandomGraphGenerator {
         ArrayList<Arc>[] adList = new ArrayList[nodeCount];
         Random r = new Random();
         HashMap<Long, Node> nodes = new HashMap<>();
-        //HashMap<Integer, Long> realNodeID = new HashMap<>();
         long[] realNodeID = new long[nodeCount];
         int arcCount = 0;
         
@@ -62,17 +61,16 @@ public class RandomGraphGenerator {
             for (int i = 0; i < nodeCount; i++) {
                 randomNodes[i] = i;
             }
-            Random rnd = ThreadLocalRandom.current();
-            for (int i = nodeCount - 1; i > 0; i--)
-            {
-              int index = rnd.nextInt(i + 1);
-              int a = randomNodes[index];
-              randomNodes[index] = randomNodes[i];
-              randomNodes[i] = a;
+            Random rnd = new Random();
+            for (int i = nodeCount - 1; i > 0; i--) {
+                int index = rnd.nextInt(i + 1);
+                int a = randomNodes[index];
+                randomNodes[index] = randomNodes[i];
+                randomNodes[i] = a;
             }
             for (int i = 0; i < nodeCount - 1; i++) {
                 Node node2 = nodes.get((long) randomNodes[i]);
-                Node node1 = nodes.get((long) randomNodes[i+1]);
+                Node node1 = nodes.get((long) randomNodes[i + 1]);
                 double dist = nodeDistance(node1, node2);
                 adList[i + 1].add(new Arc(node1, node2, dist));
                 adList[i].add(new Arc(node2, node1, dist));
@@ -113,7 +111,7 @@ public class RandomGraphGenerator {
             for (int j = 0; j < y; j++) {
                 double lat = 1.0 * i / x * maxLatDiff;
                 double lon = 1.0 * j / y * maxLonDiff;
-                int id = i*x+j;
+                int id = i * x + j;
                 Node node = new Node(id, id, lat, lon);
                 nodes.put((long) id, node);
                 realNodeID[id] = (long) id;
@@ -182,7 +180,7 @@ public class RandomGraphGenerator {
         }
         for (int i = 0; i < x - 1; i++) {
             Node nd1 = nodes.get(i);
-            Node nd2 = nodes.get(i+1);
+            Node nd2 = nodes.get(i + 1);
             double dist = nodeDistance(nd1, nd2);
             adList[nd1.getID2()].add(new Arc(nd1, nd2, dist));
             adList[nd2.getID2()].add(new Arc(nd2, nd1, dist));
@@ -201,8 +199,7 @@ public class RandomGraphGenerator {
         
         if ((lat1 == lat2) && (lon1 == lon2)) {
             return 0;
-        }
-        else {
+        } else {
             double theta = lon1 - lon2;
             double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(theta));
             dist = Math.acos(dist);

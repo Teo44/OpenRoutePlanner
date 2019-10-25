@@ -3,40 +3,40 @@ package algorithm;
 /**
  * A comparable node object for the path finding algorithms to use
  */
-public class DijkstraNode implements Comparable<DijkstraNode>{
+public class DijkstraNode implements Comparable<DijkstraNode> {
 
     private double dist;
     private double hDist;
-    private int ID;
+    private int id;
     private double lat;
     private double lon;
 
     /**
-     * @param ID node ID
+     * @param id node ID
      * @param dist The real distance to the node from the start 
      * @param hDist  An additional distance variable that is used for comparisons instead of 
      * the dist variable if given, e.g. for A*'s heuristic distances.
      */
-    public DijkstraNode(int ID, double dist, double hDist)    {
+    public DijkstraNode(int id, double dist, double hDist)    {
         this.dist = dist;
-        this.ID = ID;
+        this.id = id;
         this.hDist = hDist;
     }
     
     /**
-     * @param ID node ID
+     * @param id node ID
      * @param dist  The distance to the node from start, used for comparing nodes.
      */
-    public DijkstraNode(int ID, double dist) {
+    public DijkstraNode(int id, double dist) {
         this.dist = dist;
         this.hDist = dist;
-        this.ID = ID;
+        this.id = id;
     }
     
-    public DijkstraNode(int ID, double dist, double hDist, double lat, double lon)  {
+    public DijkstraNode(int id, double dist, double hDist, double lat, double lon)  {
         this.dist = dist;
         this.hDist = hDist;
-        this.ID = ID;
+        this.id = id;
         this.lat = lat;
         this.lon = lon;
     }
@@ -74,16 +74,18 @@ public class DijkstraNode implements Comparable<DijkstraNode>{
     }
     
     public int getID() {
-        return ID;
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setID(int id) {
+        this.id = id;
     }
     
     @Override
     public int compareTo(DijkstraNode s)   {
-        if (this.hDist > s.gethDist()) return 1;
+        if (this.hDist > s.gethDist())  {
+            return 1;
+        }
         return -1;
     }
 }

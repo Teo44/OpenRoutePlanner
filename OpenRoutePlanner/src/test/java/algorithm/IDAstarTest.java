@@ -4,7 +4,7 @@ import graph.Arc;
 import graph.Node;
 import graph.Graph;
 import java.io.File;
-import data_structure.ArrayList;
+import datastructure.ArrayList;
 import java.util.HashMap;
 import static org.junit.Assert.assertEquals;
 import org.junit.BeforeClass;

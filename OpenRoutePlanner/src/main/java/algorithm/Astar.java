@@ -1,11 +1,11 @@
 package algorithm;
 
-import data_structure.BinaryHeap;
+import datastructure.BinaryHeap;
 import graph.Arc;
 import graph.Node;
 import graph.Graph;
-import data_structure.ArrayList;
-import data_structure.HashMap;
+import datastructure.ArrayList;
+import datastructure.HashMap;
 
 /**
  * A*  shortest path algorithm with direct distance from n to target node 
@@ -42,7 +42,7 @@ public class Astar {
         * The conversion of longitudes to kilometers is set to use whichever of the graphs bound 
         * longitudes results in the smaller conversion, to keep the heuristic admissible in all cases.
         */
-        lonToKm = 100* Math.cos(Math.min(graph.getMaxLat() * Math.PI / 180, graph.getMinLat() * Math.PI / 180));
+        lonToKm = 100 * Math.cos(Math.min(graph.getMaxLat() * Math.PI / 180, graph.getMinLat() * Math.PI / 180));
     }
 
 	public void setTimeOut(int timeout)	{
@@ -51,18 +51,18 @@ public class Astar {
     
     /**
      * Returns the shortest route between nodes nd1 and nd2
-     * @param nd1_id Node 1's ID from the OSM XML file
-     * @param nd2_id Node 2s ID from the OSM XML file
+     * @param node1ID Node 1's ID from the OSM XML file
+     * @param node2ID Node 2s ID from the OSM XML file
      * @return A result object containing the results of the search
      * 
      * @see algorithm.Result
      */
-    public Result shortestPath(Long nd1_id, Long nd2_id)    {
-        if (nodes.get(nd1_id) == null || nodes.get(nd2_id) == null) {
+    public Result shortestPath(Long node1ID, Long node2ID)    {
+        if (nodes.get(node1ID) == null || nodes.get(node2ID) == null) {
             System.out.println("Node with given ID doesn't exist in graph");
             return new Result(null, null, Double.MAX_VALUE);
         }
-        if (nd1_id.equals(nd2_id))   {
+        if (node1ID.equals(node2ID))   {
             return new Result(distance, previousNode, 0l);
         }
         
@@ -73,20 +73,16 @@ public class Astar {
             distance[i] = Double.MAX_VALUE;
         }
         previousNode = new int[nodeCount];
-        
-        Node start = nodes.get(nd1_id);
-        Node end = nodes.get(nd2_id);
-        
+        Node start = nodes.get(node1ID);
+        Node end = nodes.get(node2ID);
         DijkstraNode start2 = new DijkstraNode(start.getID2(), 0);
-        
         goalLat = end.getLat();
         goalLon = end.getLon();
-        
         heap.add(start2);
 
         long startTime = System.currentTimeMillis();
         
-        while(!heap.isEmpty())  {
+        while (!heap.isEmpty())  {
             if (System.currentTimeMillis() - startTime > timeOut)	{
                 System.out.println("timed out");
                 Result result = new Result(null, null, Double.MAX_VALUE);
@@ -114,8 +110,7 @@ public class Astar {
             }
         }
         
-        Result result = new Result(distance, previousNode, distance[end.getID2()]); 
-        
+        Result result = new Result(distance, previousNode, distance[end.getID2()]);
         return result;
     }
     

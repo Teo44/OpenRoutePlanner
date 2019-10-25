@@ -1,11 +1,11 @@
 package algorithm;
 
-import data_structure.ArrayList;
-import data_structure.BinaryHeap;
+import datastructure.ArrayList;
+import datastructure.BinaryHeap;
 import graph.Arc;
 import graph.Graph;
 import graph.Node;
-import data_structure.HashMap;
+import datastructure.HashMap;
 
 /**
  * IDA*  shortest path algorithm with direct distance from n to target node 
@@ -50,19 +50,19 @@ public class IDAStar {
         this.timeOut = timeout * 1000;
     }
     
-    public Result shortestPath(Long nd1_id, Long nd2_id)    {
-        if (nodes.get(nd1_id) == null || nodes.get(nd2_id) == null) {
+    public Result shortestPath(Long node1ID, Long node2ID)    {
+        if (nodes.get(node1ID) == null || nodes.get(node2ID) == null) {
             System.out.println("Node with given ID doesn't exist in graph");
             Result result = new Result(null, null, Double.MAX_VALUE);
             result.setTimedOut(true);
             return result;
         }
-        if (nd1_id.equals(nd2_id))   {
+        if (node1ID.equals(node2ID))   {
             return new Result(null, previousNode, 0l);
         }
         
-        Node start = nodes.get(nd1_id);
-        Node end = nodes.get(nd2_id);
+        Node start = nodes.get(node1ID);
+        Node end = nodes.get(node2ID);
         goalNode = end.getID2();
         goalLat = end.getLat();
         goalLon = end.getLon();
@@ -78,7 +78,7 @@ public class IDAStar {
 
         startTime = System.currentTimeMillis();
         
-        while(true) {
+        while (true) {
             if (System.currentTimeMillis() - startTime > timeOut)   {
                 System.out.println("timed out");
                 Result result = new Result(null, null, Double.MAX_VALUE);
@@ -87,7 +87,7 @@ public class IDAStar {
             }
             double t = search(path, 0, bound, 0);
             if (t == -1)    {
-                if(timedOut)    {
+                if (timedOut)    {
                     Result result = new Result(null, null, Double.MAX_VALUE);
                     result.setTimedOut(true);
                     return result;
@@ -107,12 +107,12 @@ public class IDAStar {
     private double search(ArrayList<DijkstraNode> path, double g, double bound, int d) {
         DijkstraNode node = path.getLast();
         if (System.currentTimeMillis() - startTime > timeOut)   {
-                System.out.println("timed out");
-                resultNode = node;
-                resultNode.setDist(Double.MAX_VALUE);
-                timedOut = true;
-                return -1;
-            }
+            System.out.println("timed out");
+            resultNode = node;
+            resultNode.setDist(Double.MAX_VALUE);
+            timedOut = true;
+            return -1;
+        }
         
         double f = g + directDistance(node);
         if (f > bound || d > 10000000) {
@@ -130,9 +130,7 @@ public class IDAStar {
             if (!(nodeInPath[succ.getID()]))    {
                 path.add(succ);
                 nodeInPath[succ.getID()] = true;
-                if (g == 0) {
-                }
-                double t = search(path, g + succ.getDist(), bound, d+1);
+                double t = search(path, g + succ.getDist(), bound, d + 1);
                 if (t == -1)    {
                     return -1;
                 }
@@ -143,9 +141,7 @@ public class IDAStar {
                 path.removeLast();
             }
         }
-        
         return min;
-        
     }
     
     private BinaryHeap successors(DijkstraNode node)  {
@@ -184,5 +180,4 @@ public class IDAStar {
         double dist = Math.sqrt(latKm * latKm + lonKm * lonKm);
         return dist;
     }
-
 }

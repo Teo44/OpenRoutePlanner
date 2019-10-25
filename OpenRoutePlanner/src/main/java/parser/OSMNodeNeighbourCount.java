@@ -1,7 +1,7 @@
 package parser;
 
-import data_structure.ArrayList;
-import data_structure.HashMap;
+import datastructure.ArrayList;
+import datastructure.HashMap;
 import graph.Arc;
 import graph.Node;
 import org.xml.sax.Attributes;
@@ -12,7 +12,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * Extended saxhandler to count the neighbours of each node. Used for 
  * optimising the results of the actual parser.
  */
-public class OSMNodeNeighbourCount extends DefaultHandler{
+public class OSMNodeNeighbourCount extends DefaultHandler {
 
     private int nodeCount;
     final private HashMap<Long, Node> nodes;
@@ -36,7 +36,7 @@ public class OSMNodeNeighbourCount extends DefaultHandler{
     }
     
     @Override
-    public void startElement( String uri, String localName, String qName, Attributes attributes) throws SAXException {
+    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         if (qName.equals("node"))   {
             String id = attributes.getValue("id");
             String lat = attributes.getValue("lat");
@@ -48,20 +48,19 @@ public class OSMNodeNeighbourCount extends DefaultHandler{
                 nodes.put(node.getID(), node);
             }
         } else if (qName.equals("way")) {
-                currentWayID = Long.parseLong(attributes.getValue("id"));
-                if (neighbours == null) {
-                    neighbours = new int[nodeCount];
-                }
-                arcs = new ArrayList<>();
-                
+            currentWayID = Long.parseLong(attributes.getValue("id"));
+            if (neighbours == null) {
+                neighbours = new int[nodeCount];
+            }
+            arcs = new ArrayList<>();
         } else if (qName.equals("nd"))  {
-                Node newNode = nodes.get(Long.parseLong(attributes.getValue("ref")));
-                if (lastNode != null)   {
-                    arcs.add(new Arc(lastNode, newNode, 0));
-                    arcs.add(new Arc(newNode, lastNode, 0));
-                } else  {
-                    lastNode = newNode;
-                }
+            Node newNode = nodes.get(Long.parseLong(attributes.getValue("ref")));
+            if (lastNode != null)   {
+                arcs.add(new Arc(lastNode, newNode, 0));
+                arcs.add(new Arc(newNode, lastNode, 0));
+            } else {
+                lastNode = newNode;
+            }
         } else if (qName.equals("tag")) { // check if the way has an approved tag and should be added to graph
             String k = attributes.getValue("k");
             if (!noTagFiltering) {
@@ -77,7 +76,6 @@ public class OSMNodeNeighbourCount extends DefaultHandler{
         
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        
         if (noTagFiltering) {
             wayApproved = true;
         }
