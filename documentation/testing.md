@@ -80,7 +80,7 @@ denser graphs with more arcs to examine per node.
 
 In these tests 50 paths in 50 random graphs were searched, all with 4 arcs per node, node count increasing 
 from 1000 to 10 000 and timeout limit of 5 seconds. IDA* was again orders of magnitude slower, and thus represented 
-in its own graph. It also failed a signigant portion of the searches, which is also visualised below.
+in its own graph. It also failed a significant portion of the searches, which is also visualised below.
 
 | Dijkstra's and A* total times | IDA* total times |
 | --- | --- | 
@@ -164,8 +164,6 @@ Even in a graph this large the difference of the averages was small:
 | --- | --- | --- |
 | Total | 65min | 65min |
 | Average | 7.79s | 7.83s |
-
-Total times for the 500 paths were both ~65 minutes.
 
 [Image credit and map download](https://download.geofabrik.de/asia/japan/kanto.html)
 
