@@ -112,6 +112,11 @@ Dijktra and A* were still very close, with average time to find a path at 492 an
 IDA* only managed to find 7 out of the 500 paths within 10 seconds, which makes IDA* pretty much unusable at this 
 scale, unless memory usage is very constrained. 
 
+| | Dijkstra's | A* |
+| --- | --- | --- |
+| Total | 529ms | 492ms |
+| Average | ~1ms | ~1ms |
+
 [Map download](https://download.bbbike.org/osm/bbbike/Helsinki/)
 
 ### Random routes in an OSM map of Tokyo
@@ -121,10 +126,12 @@ scale, unless memory usage is very constrained.
 Again searching 500 shortest paths between random notes, now in a graph parsed from a 
 24km by 30km OpenStreetMap extract of Tokyo.
 
-Dijstra: 187 seconds in total, average 373 milliseconds
-A*: 183 seconds total, average 365 milliseconds
-
 Interestingly Dijkstra failed in exactly one path with the 5 second timeout, even though it performed very close to A* on average.
+
+| | Dijkstra's | A* |
+| --- | --- | --- |
+| Total | 187s | 183ms |
+| Average | 373ms | 365ms |
 
 [Map download](https://download.bbbike.org/osm/bbbike/Tokyo/)
 
@@ -135,7 +142,11 @@ Interestingly Dijkstra failed in exactly one path with the 5 second timeout, eve
 The area of Kanto, Japan. The largest map I could reasonably parse for testing, around 9-10 gigabytes of RAM is required. Timeout was set to 20 seconds, since some paths in this graphs can take very long to find.
 
 Even in a graph this large the difference of the averages was small:
-Dijkstra's average was 7.794 seconds, A*'s 7.831 seconds.
+
+| | Dijkstra's | A* |
+| --- | --- | --- |
+| Total | 65min | 65min |
+| Average | 7.79s | 7.83s |
 
 Total times for the 500 paths were both ~65 minutes.
 
