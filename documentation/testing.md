@@ -95,6 +95,7 @@ these 353 paths was 383 milliseconds. We can calculate the total time to find al
 29 minutes, making IDA* over 1400 times slower than Dijkstra in this graph.
 
 | | Dijkstra's | A* | IDA* |
+| --- | --- | --- | --- |
 | Total | 598ms | 540ms | 135s (353/500) | 
 | Average | ~1ms | ~1ms | 383ms |
 
