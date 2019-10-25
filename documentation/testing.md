@@ -85,6 +85,7 @@ in its own graph. It also failed a signigant portion of the searches, which is a
 | Dijkstra's and A* total times | IDA* total times |
 | --- | --- | 
 | ![Dijkstra's and A* total times](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test4_total_times_1.png) | ![IDA* total times](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test4_total_times_2.png) |
+
 | IDA* timeouts | 
 | ![IDA* timeouts](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test4_ida_timeouts.png) |
 
