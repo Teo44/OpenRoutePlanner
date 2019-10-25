@@ -75,6 +75,21 @@ denser graphs with more arcs to examine per node.
 | --- | --- | 
 | ![IDA* success averages](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test3_ida_avg.png) | ![IDA* minimum actual averages](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test3_ida_real_avg.png) |
 	  
+	  
+### The effect of graph size with same density.
+
+In these tests 50 paths in 50 random graphs were searched, all with 4 arcs per node, node count increasing 
+from 1000 to 10 000 and timeout limit of 5 seconds. IDA* was again orders of magnitude slower, and thus represented 
+in its own graph. It also failed a signigant portion of the searches, which is also visualised below.
+
+| Dijkstra's and A* total times | IDA* total times |
+| --- | --- | 
+| ![Dijkstra's and A* total times](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test4_total_times_1.png) | ![IDA* total times](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test4_total_times_2.png) |
+| IDA* timeouts | 
+| ![IDA* timeouts](https://raw.githubusercontent.com/Teo44/OpenRoutePlanner/master/documentation/pictures/test4_ida_timeouts.png) |
+
+
+
 
 ## Performance tests in OSM maps
 
@@ -159,7 +174,7 @@ except the UI which is not very feasible to test.
 All implemented data structures and algorithms are tested. The algorithm tests 
 also require the data structures and graph representation classes to function 
 correctly. 88% or more of coverage for all classes is achieved. 
-Most missed instructions are in one's very difficult to test, mostly the timing out of 
+Most missed instructions are ones rather difficult to test, mostly the timing out of 
 algorithms. 
 
 Jacoco coverage report:
